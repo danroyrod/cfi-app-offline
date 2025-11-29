@@ -1,0 +1,2073 @@
+{
+  "summary": {
+    "total_lessons": 85,
+    "total_generic": 34,
+    "total_custom": 98,
+    "total_improvements": 0
+  },
+  "by_area": {
+    "I": {
+      "lessons": [
+        {
+          "lesson_id": "LP-I-A",
+          "title": "Effects of Human Behavior and Communication on the Learning Process",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-I-B",
+          "title": "Learning Process",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-I-C",
+          "title": "Course Development, Lesson Plans, and Classroom Training Techniques",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-I-D",
+          "title": "Student Evaluation, Assessment, and Testing",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-I-E",
+          "title": "Elements of Effective Teaching in a Professional Environment",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-I-F",
+          "title": "Elements of Effective Teaching that Include Risk Management and Accident Prevention",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 6,
+      "total_custom": 0,
+      "total_improvements": 0
+    },
+    "VII": {
+      "lessons": [
+        {
+          "lesson_id": "LP-VII-A",
+          "title": "Normal Takeoff and Climb",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Normal Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-B",
+          "title": "Normal Approach and Landing",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Normal Landing Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-E",
+          "title": "Short-Field Takeoff and Maximum Performance Climb",
+          "total_diagrams": 3,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Short-Field Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Short Field Takeoff",
+              "type": "flightPath",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 2,
+              "title": "Short Field Takeoff",
+              "type": "flightPath",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-F",
+          "title": "Short-Field Approach and Landing",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Short-Field Landing Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-N",
+          "title": "Go-Around / Rejected Landing",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Go-Around Procedure",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-C",
+          "title": "Soft-Field Takeoff and Climb",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Short-Field Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-D",
+          "title": "Soft-Field Approach and Landing",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Short-Field Landing Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-G",
+          "title": "Confined Area Takeoff and Maximum Performance Climb",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-H",
+          "title": "Confined Area Approach and Landing",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-I",
+          "title": "Glassy Water Takeoff and Climb",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-J",
+          "title": "Glassy Water Approach and Landing",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-K",
+          "title": "Rough Water Takeoff and Climb",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-L",
+          "title": "Rough Water Approach and Landing",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-M",
+          "title": "Slip to a Landing",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VII-O",
+          "title": "Power-Off 180\u00b0 Accuracy Approach and Landing",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 0,
+      "total_custom": 25,
+      "total_improvements": 0
+    },
+    "X": {
+      "lessons": [
+        {
+          "lesson_id": "LP-X-A",
+          "title": "Maneuvering During Slow Flight",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Slow Flight Configuration",
+              "type": "performance",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Power Curve",
+              "type": "performance",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-X-C",
+          "title": "Power-Off Stalls",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Stall Progression",
+              "type": "stall-characteristics",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Power-Off Stall",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-X-D",
+          "title": "Power-On Stalls",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Stall Progression",
+              "type": "stall-characteristics",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Power-On Stall",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-X-B",
+          "title": "Demonstration of Flight Characteristics at Various Configurations and Airspeeds (ASEL and",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-X-E",
+          "title": "Accelerated Stalls",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Stall Progression",
+              "type": "stall-characteristics",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-X-F",
+          "title": "Cross-Controlled Stall Demonstration",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Stall Progression",
+              "type": "stall-characteristics",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-X-G",
+          "title": "Elevator Trim Stall Demonstration",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Stall Progression",
+              "type": "stall-characteristics",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-X-H",
+          "title": "Secondary Stall Demonstration",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Stall Progression",
+              "type": "stall-characteristics",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-X-I",
+          "title": "Spin Awareness and Spins",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 2,
+      "total_custom": 10,
+      "total_improvements": 0
+    },
+    "IX": {
+      "lessons": [
+        {
+          "lesson_id": "LP-IX-A",
+          "title": "Steep Turns",
+          "total_diagrams": 10,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Steep Turn - Attitude Indicator",
+              "type": "attitude",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Steep Turn - Flight Path",
+              "type": "flightPath",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 2,
+              "title": "Load Factor vs. Bank Angle Chart",
+              "type": "performance",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 3,
+              "title": "Horizontal and Vertical Components of Lift",
+              "type": "basic",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 4,
+              "title": "Coordinated vs. Skidding vs. Slipping Turns",
+              "type": "basic",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 5,
+              "title": "Horizontal and Vertical Components of Lift",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 6,
+              "title": "Load Factor vs. Bank Angle",
+              "type": "performance",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 7,
+              "title": "Skidding Turn",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 8,
+              "title": "Slipping Turn",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 9,
+              "title": "Path of Wing Tips in Turn",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-IX-B",
+          "title": "Steep Spiral",
+          "total_diagrams": 3,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Steep Spiral - Step-by-Step",
+              "type": "flightPath",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Steep Spiral Maneuver",
+              "type": "flightPath",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 2,
+              "title": "Rolling Out - Bank and Turn",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-IX-C",
+          "title": "Chandelles",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Chandelle - Step-by-Step",
+              "type": "flightPath",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Chandelle Maneuver",
+              "type": "flightPath",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-IX-D",
+          "title": "Lazy Eights",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Lazy Eight - Step-by-Step",
+              "type": "flightPath",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Lazy Eight Maneuver",
+              "type": "flightPath",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-IX-E",
+          "title": "Ground Reference Maneuvers",
+          "total_diagrams": 5,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Turns Around a Point",
+              "type": "ground-reference",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "S-Turns Across a Road",
+              "type": "ground-reference",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 2,
+              "title": "Turns Around a Point",
+              "type": "ground-reference",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 3,
+              "title": "Turns Around a Point",
+              "type": "ground-reference",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 4,
+              "title": "S-Turns Across a Road",
+              "type": "ground-reference",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-IX-F",
+          "title": "Eights on Pylons",
+          "total_diagrams": 5,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Eights on Pylons - Step-by-Step",
+              "type": "ground-reference",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Eights on Pylons",
+              "type": "ground-reference",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 2,
+              "title": "Pivotal Altitudes",
+              "type": "performance",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 3,
+              "title": "Eights on Pylons",
+              "type": "ground-reference",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 4,
+              "title": "Eights on Pylons",
+              "type": "ground-reference",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 0,
+      "total_custom": 27,
+      "total_improvements": 0
+    },
+    "VIII": {
+      "lessons": [
+        {
+          "lesson_id": "LP-VIII-A",
+          "title": "Straight-and-Level Flight",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VIII-B",
+          "title": "Level Turns",
+          "total_diagrams": 4,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Turn Forces",
+              "type": "turn-forces",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Level Turn Forces",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 2,
+              "title": "Adverse Yaw",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 3,
+              "title": "Overbanking Tendency",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VIII-C",
+          "title": "Straight Climbs and Climbing Turns",
+          "total_diagrams": 3,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Turn Forces",
+              "type": "turn-forces",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Forces in a Climb",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            },
+            {
+              "index": 2,
+              "title": "Vx vs. Vy",
+              "type": "performance",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VIII-D",
+          "title": "Straight Descents and Descending Turns",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Turn Forces",
+              "type": "turn-forces",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Descent Profile",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 1,
+      "total_custom": 9,
+      "total_improvements": 0
+    },
+    "II": {
+      "lessons": [
+        {
+          "lesson_id": "LP-II-D",
+          "title": "Principles of Flight",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-A",
+          "title": "Human Factors",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-B",
+          "title": "Visual Scanning and Collision Avoidance",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-C",
+          "title": "Runway Incursion Avoidance",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-E",
+          "title": "Aircraft Flight Controls and Operation of Systems",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-F",
+          "title": "Performance and Limitations",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-G",
+          "title": "National Airspace System",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-H",
+          "title": "Navigation Systems and Radar Services",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-I",
+          "title": "Navigation and Cross-Country Flight Planning",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-J",
+          "title": "14 CFR and Publications",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-K",
+          "title": "Endorsements and Logbook Entries",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-L",
+          "title": "Water and Seaplane Characteristics, Seaplane Bases, Maritime Rules, and Aids to Marine",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Water Surface Conditions",
+              "type": "water-conditions",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-M",
+          "title": "Night Operations",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Night Vision Considerations",
+              "type": "night-vision",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-N",
+          "title": "High Altitude Operations - Supplemental Oxygen",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Altitude Effects on Performance",
+              "type": "altitude-effects",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-O",
+          "title": "High Altitude Operations - Pressurization",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Altitude Effects on Performance",
+              "type": "altitude-effects",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-II-P",
+          "title": "One Engine Inoperative (OEI) Performance",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Engine Failure Effects",
+              "type": "engine-failure",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 11,
+      "total_custom": 5,
+      "total_improvements": 0
+    },
+    "XII": {
+      "lessons": [
+        {
+          "lesson_id": "LP-XII-A",
+          "title": "Emergency Descent",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Climb Performance",
+              "type": "climb-performance",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XII-B",
+          "title": "Emergency Approach and Landing (Simulated)",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XII-C",
+          "title": "Systems and Equipment Malfunctions",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XII-D",
+          "title": "Emergency Equipment and Survival Gear",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Emergency Checklist Flow",
+              "type": "emergency-flow",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XII-E",
+          "title": "Engine Failure During Takeoff Before VMC (Simulated)",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XII-F",
+          "title": "Engine Failure After Liftoff (Simulated)",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Engine Failure Effects",
+              "type": "engine-failure",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XII-G",
+          "title": "Approach and Landing with an Inoperative Engine (Simulated)",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 1,
+      "total_custom": 9,
+      "total_improvements": 0
+    },
+    "III": {
+      "lessons": [
+        {
+          "lesson_id": "LP-III-A",
+          "title": "Pilot Qualifications",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-III-B",
+          "title": "Airworthiness Requirements",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-III-C",
+          "title": "Weather Information",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 3,
+      "total_custom": 0,
+      "total_improvements": 0
+    },
+    "IV": {
+      "lessons": [
+        {
+          "lesson_id": "LP-IV-A",
+          "title": "Maneuver Lesson",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 1,
+      "total_custom": 0,
+      "total_improvements": 0
+    },
+    "V": {
+      "lessons": [
+        {
+          "lesson_id": "LP-V-A",
+          "title": "Preflight Assessment",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-V-B",
+          "title": "Flight Deck Management",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-V-C",
+          "title": "Engine Starting",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Engine Failure Effects",
+              "type": "engine-failure",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-V-D",
+          "title": "Taxiing, Airport Signs, and Lighting",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-V-E",
+          "title": "Taxiing and Sailing",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-V-F",
+          "title": "Before Takeoff Check",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 4,
+      "total_custom": 3,
+      "total_improvements": 0
+    },
+    "VI": {
+      "lessons": [
+        {
+          "lesson_id": "LP-VI-A",
+          "title": "Communications, Light Signals, and Runway Lighting Systems",
+          "total_diagrams": 2,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [
+            {
+              "index": 1,
+              "title": "ATC Light Signals",
+              "type": "basic",
+              "has_imageUrl": true,
+              "has_svg": false
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-VI-B",
+          "title": "Traffic Patterns",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 2,
+      "total_custom": 1,
+      "total_improvements": 0
+    },
+    "XI": {
+      "lessons": [
+        {
+          "lesson_id": "LP-XI-A",
+          "title": "Straight-and-Level Flight",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XI-B",
+          "title": "Constant Airspeed Climbs",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Climb Performance",
+              "type": "climb-performance",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XI-C",
+          "title": "Constant Airspeed Descents",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Climb Performance",
+              "type": "climb-performance",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XI-D",
+          "title": "Turns to Headings",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Turn Forces",
+              "type": "turn-forces",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XI-E",
+          "title": "Recovery from Unusual Flight Attitudes",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 2,
+      "total_custom": 3,
+      "total_improvements": 0
+    },
+    "XIII": {
+      "lessons": [
+        {
+          "lesson_id": "LP-XIII-A",
+          "title": "Maneuvering with One Engine Inoperative",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Engine Failure Effects",
+              "type": "engine-failure",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XIII-B",
+          "title": "VMC Demonstration",
+          "total_diagrams": 1,
+          "generic_diagrams": [
+            {
+              "index": 0,
+              "title": "Lesson Overview",
+              "type": "overview",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "custom_diagrams": [],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XIII-C",
+          "title": "Demonstration of Effects of Various Airspeeds and Configurations during Engine Inoperative",
+          "total_diagrams": 1,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Engine Failure Effects",
+              "type": "engine-failure",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 1,
+      "total_custom": 2,
+      "total_improvements": 0
+    },
+    "XIV": {
+      "lessons": [
+        {
+          "lesson_id": "LP-XIV-A",
+          "title": "After Landing, Parking, and Securing",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        },
+        {
+          "lesson_id": "LP-XIV-B",
+          "title": "Seaplane Post-Landing Procedures",
+          "total_diagrams": 2,
+          "generic_diagrams": [],
+          "custom_diagrams": [
+            {
+              "index": 0,
+              "title": "Takeoff Profile",
+              "type": "takeoff-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            },
+            {
+              "index": 1,
+              "title": "Landing Approach Profile",
+              "type": "landing-profile",
+              "has_imageUrl": false,
+              "has_svg": true
+            }
+          ],
+          "needs_improvement": []
+        }
+      ],
+      "total_generic": 0,
+      "total_custom": 4,
+      "total_improvements": 0
+    }
+  },
+  "generic_diagrams": [
+    {
+      "lesson_id": "LP-I-A",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-VIII-A",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-I-B",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-II-D",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-I-C",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-I-D",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-I-E",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-I-F",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-II-A",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-II-B",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-II-C",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-II-E",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-II-F",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-II-G",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-II-H",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-II-I",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-II-J",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-II-K",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-III-A",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-III-B",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-III-C",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-IV-A",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-V-A",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-V-B",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-V-D",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-V-E",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-VI-A",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-VI-B",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-X-B",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-X-I",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-XI-A",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-XI-E",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-XII-C",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    },
+    {
+      "lesson_id": "LP-XIII-B",
+      "index": 0,
+      "title": "Lesson Overview",
+      "type": "overview",
+      "has_imageUrl": false,
+      "has_svg": true
+    }
+  ],
+  "improvements_needed": []
+}

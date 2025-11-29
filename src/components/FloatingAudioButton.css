@@ -1,0 +1,175 @@
+/* Floating Audio Button - Minimized Player */
+
+.floating-audio-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 998;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  border-radius: 3rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  max-width: 320px;
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-audio-button:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.5);
+}
+
+.floating-audio-button:active {
+  transform: translateY(-2px);
+}
+
+.floating-audio-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.floating-audio-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.floating-audio-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.floating-audio-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.floating-audio-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+}
+
+.floating-audio-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* Pulsing animation on the edge */
+.floating-audio-pulse {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 3rem;
+  border: 3px solid rgba(255, 255, 255, 0.6);
+  animation: pulse-ring 2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+}
+
+/* Dark Mode */
+[data-theme="dark"] .floating-audio-button {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  box-shadow: 0 8px 24px rgba(96, 165, 250, 0.4);
+}
+
+[data-theme="dark"] .floating-audio-button:hover {
+  box-shadow: 0 12px 32px rgba(96, 165, 250, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .floating-audio-button {
+    bottom: 80px; /* Above mobile nav if present */
+    right: 15px;
+    padding: 0.875rem 1.25rem;
+    max-width: 280px;
+  }
+
+  .floating-audio-icon {
+    font-size: 1.5rem;
+  }
+
+  .floating-audio-label {
+    font-size: 0.5625rem;
+  }
+
+  .floating-audio-title {
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-audio-button {
+    bottom: 70px;
+    right: 10px;
+    max-width: 240px;
+    padding: 0.75rem 1rem;
+  }
+
+  .floating-audio-title {
+    font-size: 0.75rem;
+  }
+}
+
+/* Hide when printing */
+@media print {
+  .floating-audio-button {
+    display: none !important;
+  }
+}
+
+
+
+
+

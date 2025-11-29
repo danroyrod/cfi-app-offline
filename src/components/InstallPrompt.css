@@ -1,0 +1,122 @@
+/* Install Prompt Styles */
+
+.install-prompt {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 400px;
+  width: calc(100% - 2rem);
+  background: var(--bg-card);
+  border: 2px solid var(--primary-color);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  animation: slideUp 0.3s ease;
+}
+
+.install-prompt-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.install-prompt-icon {
+  font-size: 3rem;
+}
+
+.install-prompt-text h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.install-prompt-text p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.install-prompt-actions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.install-prompt-button {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 44px;
+}
+
+.install-prompt-button.install {
+  background: var(--primary-color);
+  color: white;
+}
+
+.install-prompt-button.install:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.install-prompt-button.dismiss {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.install-prompt-button.dismiss:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--text-secondary);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .install-prompt {
+    bottom: 80px; /* Above mobile navigation if present */
+    max-width: calc(100% - 1rem);
+  }
+
+  .install-prompt-content {
+    padding: 1.25rem;
+  }
+
+  .install-prompt-actions {
+    flex-direction: column;
+  }
+
+  .install-prompt-button {
+    width: 100%;
+  }
+}
+
+/* Dark mode support */
+[data-theme="dark"] .install-prompt {
+  background: var(--bg-card);
+  border-color: var(--primary-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+

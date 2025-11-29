@@ -1,0 +1,94 @@
+/* Bookmark Button Styles */
+
+.bookmark-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 0.5rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px; /* iOS touch target */
+  min-width: 44px;
+}
+
+.bookmark-button:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.bookmark-button:active {
+  transform: translateY(0);
+}
+
+.bookmark-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bookmark-button.bookmarked {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  border-color: #f59e0b;
+  color: white;
+}
+
+.bookmark-button.bookmarked:hover {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  border-color: #d97706;
+}
+
+.bookmark-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+
+.bookmark-button:hover .bookmark-icon {
+  transform: scale(1.1);
+}
+
+.bookmark-text {
+  font-weight: 600;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .bookmark-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+  
+  .bookmark-text {
+    display: none;
+  }
+  
+  .bookmark-button {
+    min-width: 44px;
+    justify-content: center;
+  }
+}
+
+/* Dark mode support */
+[data-theme="dark"] .bookmark-button {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .bookmark-button:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .bookmark-button.bookmarked {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #1e293b;
+  font-weight: 700;
+}
+

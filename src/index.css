@@ -1,0 +1,75 @@
+/* Reset and base styles are in App.css */
+
+/* Theme CSS Variables */
+:root, [data-theme="light"] {
+  /* Colors */
+  --primary-color: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary-color: #10b981;
+  --accent-color: #8b5cf6;
+  
+  /* Backgrounds - Soft grey shades instead of white */
+  --bg-primary: #f8fafc;        /* Light grey instead of white */
+  --bg-secondary: #f1f5f9;      /* Slightly darker grey */
+  --bg-tertiary: #e2e8f0;       /* Medium grey */
+  --bg-card: #f8fafc;           /* Light grey card background */
+  --bg-card-hover: #f1f5f9;     /* Slightly darker on hover */
+  
+  /* Text */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  
+  /* Borders */
+  --border-color: #e2e8f0;
+  --border-hover: #cbd5e1;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  
+  /* Specific elements */
+  --header-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --code-bg: #f1f5f9;
+  --code-text: #1e293b;
+}
+
+[data-theme="dark"] {
+  /* Colors */
+  --primary-color: #60a5fa;
+  --primary-dark: #3b82f6;
+  --secondary-color: #34d399;
+  --accent-color: #a78bfa;
+  
+  /* DARK Backgrounds */
+  --bg-primary: #0a0f1e;
+  --bg-secondary: #1a1f2e;
+  --bg-tertiary: #2a2f3e;
+  --bg-card: #1e293b;
+  --bg-card-hover: #334155;
+  
+  /* BRIGHT Text - Maximum Contrast */
+  --text-primary: #ffffff;        /* Pure white */
+  --text-secondary: #e2e8f0;      /* Very light */
+  --text-muted: #cbd5e1;          /* Light gray */
+  
+  /* VISIBLE Borders */
+  --border-color: #475569;
+  --border-hover: #64748b;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+  
+  /* Specific elements */
+  --header-bg: linear-gradient(135deg, #4c1d95 0%, #5b21b6 100%);
+  --code-bg: #2a2f3e;
+  --code-text: #ffffff;           /* Bright white */
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

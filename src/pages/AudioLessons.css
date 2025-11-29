@@ -1,0 +1,393 @@
+/* Audio Lessons Page */
+
+.audio-lessons-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding: 2rem 0;
+  padding-bottom: 320px; /* Space for audio player */
+}
+
+/* Header */
+.audio-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.audio-page-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.audio-title-icon {
+  font-size: 3rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.audio-page-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Stats Cards */
+.audio-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.audio-stat-card {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.2s;
+}
+
+.audio-stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.audio-stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.audio-stat-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Controls */
+.audio-controls {
+  background: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+}
+
+.audio-search-section {
+  margin-bottom: 1rem;
+}
+
+.audio-search-input {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  border: 2px solid var(--border-color);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: all 0.2s;
+}
+
+.audio-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.audio-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.audio-filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.audio-filter-select {
+  flex: 1;
+  min-width: 150px;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 0.75rem;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.audio-filter-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.audio-play-all-btn {
+  padding: 0.75rem 2rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.audio-play-all-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.audio-playlist-btn {
+  padding: 0.75rem 2rem;
+  background: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.audio-playlist-btn:hover {
+  background: #7c3aed;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+/* Lessons Grid */
+.audio-lessons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.audio-lesson-card {
+  background: var(--bg-card);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.audio-lesson-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-color);
+}
+
+.audio-lesson-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.audio-lesson-icon {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.audio-lesson-meta {
+  flex: 1;
+}
+
+.audio-lesson-area {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.25rem;
+}
+
+.audio-lesson-duration {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.audio-lesson-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.audio-lesson-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.audio-lesson-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.audio-play-btn-card {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.audio-play-btn-card:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.audio-view-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.audio-view-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--primary-color);
+}
+
+/* No Results */
+.audio-no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+}
+
+.audio-no-results-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.audio-no-results h3 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.audio-no-results p {
+  font-size: 1rem;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .audio-stat-card {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+[data-theme="dark"] .audio-lesson-card {
+  background: var(--bg-card);
+  border-color: transparent;
+}
+
+[data-theme="dark"] .audio-lesson-card:hover {
+  border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .audio-search-input,
+[data-theme="dark"] .audio-filter-select {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .audio-lessons-page {
+    padding-bottom: 360px;
+  }
+
+  .audio-page-title {
+    font-size: 2rem;
+  }
+
+  .audio-title-icon {
+    font-size: 2.5rem;
+  }
+
+  .audio-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .audio-filters {
+    flex-direction: column;
+  }
+
+  .audio-filter-select,
+  .audio-play-all-btn {
+    width: 100%;
+  }
+
+  .audio-lessons-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .audio-lessons-page {
+    padding: 1rem 0;
+  }
+
+  .audio-page-title {
+    font-size: 1.75rem;
+  }
+
+  .audio-lesson-actions {
+    flex-direction: column;
+  }
+
+  .audio-view-btn {
+    width: 100%;
+  }
+}
+
+/* Print: Hide audio lessons page */
+@media print {
+  .audio-lessons-page {
+    display: none !important;
+  }
+}
+
+

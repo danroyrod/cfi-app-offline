@@ -1,0 +1,65 @@
+.breadcrumbs {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.875rem;
+}
+
+.breadcrumbs-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.25rem;
+}
+
+.breadcrumbs-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.breadcrumbs-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumbs-link:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.breadcrumbs-current {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.breadcrumbs-text {
+  color: var(--text-secondary);
+}
+
+.breadcrumbs-separator {
+  color: var(--text-muted);
+  margin: 0 0.25rem;
+  user-select: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .breadcrumbs {
+    font-size: 0.8125rem;
+  }
+  
+  .breadcrumbs-list {
+    gap: 0.125rem;
+  }
+  
+  .breadcrumbs-separator {
+    margin: 0 0.125rem;
+  }
+}
+
+/* Dark mode adjustments are handled by CSS variables */
+
+

@@ -1,0 +1,407 @@
+/* Dark Mode Text Visibility Overrides */
+/* Ensure ALL text is visible in dark mode */
+
+[data-theme="dark"] {
+  /* Force all text elements to use bright colors */
+  p, li, span, div, label, td, th {
+    color: var(--text-primary) !important;
+  }
+  
+  /* Headings bright white */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+  }
+  
+  /* Links visible - BRIGHT in dark mode */
+  a {
+    color: #60a5fa !important; /* Bright blue */
+  }
+  
+  a:hover {
+    color: #93c5fd !important; /* Even brighter blue */
+  }
+  
+  /* Specific link overrides - IMPROVED CONTRAST */
+  .back-link,
+  .lp-breadcrumb a,
+  .lp-acs-link {
+    color: #ffffff !important; /* Pure white for navigation */
+    background-color: rgba(255, 255, 255, 0.1) !important; /* Subtle background */
+    padding: 0.5rem 1rem !important;
+    border-radius: 0.375rem !important;
+    transition: background-color 0.2s !important;
+  }
+  
+  .back-link:hover,
+  .lp-breadcrumb a:hover,
+  .lp-acs-link:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important; /* Brighter on hover */
+  }
+  
+  /* Content links should be very visible */
+  .lp-section a,
+  .task-detail-content a,
+  .area-card a,
+  .lesson-plan-card a {
+    color: #93c5fd !important; /* Bright blue */
+    text-decoration: underline;
+  }
+  
+  .lp-section a:hover,
+  .task-detail-content a:hover {
+    color: #bfdbfe !important; /* Even brighter on hover */
+  }
+  
+  /* List items */
+  ul li, ol li {
+    color: var(--text-primary) !important;
+  }
+  
+  /* Lesson plan specific elements */
+  .lp-instructor-actions li,
+  .lp-student-actions li,
+  .lp-key-points li {
+    color: var(--text-primary) !important;
+  }
+  
+  /* Override any remaining hardcoded text */
+  .lp-overview,
+  .lp-objectives li,
+  .lp-completion-standard,
+  .lp-note {
+    color: var(--text-primary) !important;
+  }
+  
+  /* TEACHING SCRIPT PHASES - CRITICAL FIX */
+  .lp-script-phase {
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-script-phase * {
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-phase {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-phase-header {
+    background: transparent !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-phase-content {
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-phase-section {
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-phase-section * {
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-phase-title {
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-phase-duration {
+    color: var(--text-secondary) !important;
+    background: var(--bg-tertiary) !important;
+  }
+  
+  /* Diagrams - ensure readability */
+  .lp-diagram {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+  }
+  
+  .lp-diagram-title {
+    color: var(--text-primary);
+  }
+  
+  .lp-diagram-description {
+    color: var(--text-secondary);
+  }
+  
+  .lp-diagram pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+  }
+  
+  /* ACS items */
+  .acs-item {
+    color: var(--text-primary) !important;
+  }
+  
+  .acs-item-code {
+    color: var(--primary-color) !important;
+  }
+  
+  .acs-item-content {
+    color: var(--text-primary) !important;
+  }
+  
+  /* SAFETY, NOTES, INSTRUCTOR NOTES - CRITICAL FIX */
+  .lp-safety-section,
+  .lp-notes-section {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-safety-item,
+  .lp-note-item {
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-safety-item *,
+  .lp-note-item * {
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-safety-item p,
+  .lp-note-item p {
+    color: var(--text-primary) !important;
+  }
+  
+  /* TOLERANCES BOX - IMPROVED CONTRAST */
+  .tolerance {
+    background-color: #1e3a8a !important; /* Dark blue background */
+    color: #ffffff !important; /* White text */
+    border: 1px solid #3b82f6 !important; /* Blue border */
+    padding: 0.125rem 0.375rem !important;
+    border-radius: 0.25rem !important;
+    font-weight: 600 !important;
+  }
+  
+  /* NOTES BOX - IMPROVED CONTRAST */
+  .note-item {
+    background-color: #1e293b !important; /* Dark background */
+    color: #ffffff !important; /* White text */
+    border-left: 4px solid #f59e0b !important; /* Orange border */
+    padding: 0.75rem 1rem !important;
+    margin-bottom: 0.5rem !important;
+    border-radius: 0.375rem !important;
+    font-size: 0.9375rem !important;
+  }
+  
+  /* AREA AND TASK BOXES - IMPROVED CONTRAST */
+  .area-card,
+  .task-card {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+  }
+  
+  .area-card:hover,
+  .task-card:hover {
+    background-color: var(--bg-card-hover) !important;
+    border-color: var(--border-hover) !important;
+  }
+  
+  .area-name,
+  .task-name {
+    color: var(--text-primary) !important;
+  }
+  
+  .area-task-count {
+    color: var(--text-secondary) !important;
+  }
+  
+  /* TASK CARDS ON AREA PAGE - CRITICAL CONTRAST FIX */
+  .task-card {
+    background: #1e293b !important; /* Dark background */
+    border: 2px solid #475569 !important; /* Visible border */
+    border-left: 4px solid #3b82f6 !important; /* Bright blue accent */
+    color: #ffffff !important; /* Pure white text */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important; /* Visible shadow */
+  }
+  
+  .task-card:hover {
+    background: #334155 !important; /* Lighter on hover */
+    border-color: #64748b !important; /* Brighter border on hover */
+    border-left-color: #60a5fa !important; /* Brighter blue accent */
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4) !important; /* Blue glow on hover */
+    transform: translateX(4px) !important;
+  }
+  
+  .task-header {
+    color: #ffffff !important; /* White text */
+  }
+  
+  .task-letter {
+    background: #3b82f6 !important; /* Bright blue background */
+    color: #ffffff !important; /* White text */
+    font-weight: 700 !important; /* Bold */
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.5) !important; /* Blue shadow */
+  }
+  
+  .task-name {
+    color: #ffffff !important; /* Pure white */
+    font-weight: 600 !important; /* Bold for readability */
+  }
+  
+  .task-info {
+    color: #ffffff !important; /* White text */
+  }
+  
+  .task-references {
+    color: #cbd5e1 !important; /* Light gray for references */
+    font-weight: 500 !important; /* Medium weight */
+  }
+  
+  .task-card * {
+    color: inherit !important; /* Inherit white color */
+  }
+  
+  /* LESSON PLAN CARD BADGE (Task A, Task B, etc.) - CRITICAL CONTRAST FIX */
+  .lp-card-badge {
+    background: #1e40af !important; /* Dark blue background */
+    color: #ffffff !important; /* Pure white text */
+    border: 1px solid #3b82f6 !important; /* Bright blue border */
+    font-weight: 700 !important; /* Bold for visibility */
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3) !important; /* Blue shadow */
+  }
+  
+  /* Ensure lesson plan cards have good contrast */
+  .lp-card {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+  }
+  
+  .lp-card:hover {
+    background: var(--bg-card-hover) !important;
+    border-color: var(--border-hover) !important;
+  }
+  
+  /* Search and filters */
+  input,
+  select,
+  textarea {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+  }
+  
+  input::placeholder {
+    color: var(--text-muted);
+  }
+  
+  /* Cards */
+  .lesson-plan-card,
+  .area-card,
+  .task-card {
+    background: var(--bg-card);
+    color: var(--text-primary);
+  }
+  
+  /* Stats and progress */
+  .stat-number,
+  .progress-percentage {
+    color: var(--text-primary);
+  }
+  
+  .stat-label {
+    color: var(--text-secondary);
+  }
+  
+  /* COMPLETION STANDARDS BOXES - CRITICAL CONTRAST FIX */
+  .lp-standard-item {
+    background: #1e293b !important; /* Darker background for better contrast */
+    border: 1px solid #475569 !important; /* Visible border */
+    border-left: 4px solid #3b82f6 !important; /* Bright blue accent */
+    color: #ffffff !important; /* Pure white text */
+  }
+  
+  .lp-standard-item * {
+    color: #ffffff !important; /* Force all text to white */
+  }
+  
+  .lp-standard-code {
+    background: #1e40af !important; /* Bright blue background */
+    color: #ffffff !important; /* White text on blue */
+    border: 1px solid #3b82f6 !important; /* Blue border */
+    font-weight: 700 !important; /* Bold for visibility */
+  }
+  
+  .lp-standard-text {
+    color: #ffffff !important; /* Pure white text */
+    font-weight: 500 !important; /* Slightly bold for readability */
+  }
+  
+  .lp-standard-tolerance {
+    background: #065f46 !important; /* Dark green background */
+    color: #34d399 !important; /* Bright green text */
+    border: 1px solid #10b981 !important; /* Green border */
+    font-weight: 700 !important; /* Bold */
+  }
+  
+  /* Ensure all text in standard items is visible */
+  .lp-standard-item strong {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+  
+  /* EQUIPMENT ITEMS - IMPROVED CONTRAST */
+  .lp-equipment-item {
+    background: #1e293b !important; /* Dark background */
+    color: #ffffff !important; /* White text */
+    border-left: 3px solid #10b981 !important; /* Green accent */
+    border: 1px solid #475569 !important; /* Visible border */
+  }
+  
+  .lp-equipment-item * {
+    color: #ffffff !important;
+  }
+  
+  /* KEY POINT CARDS - IMPROVED CONTRAST */
+  .lp-key-point-card {
+    background: #1e293b !important; /* Dark background */
+    color: #ffffff !important; /* White text */
+    border-left: 4px solid #10b981 !important; /* Green accent */
+    border: 1px solid #475569 !important; /* Visible border */
+  }
+  
+  .lp-key-point-card * {
+    color: #ffffff !important;
+  }
+  
+  .lp-key-point-number {
+    background: #10b981 !important; /* Bright green */
+    color: #ffffff !important; /* White text */
+    font-weight: 700 !important;
+  }
+  
+  /* ERROR ITEMS - ALREADY GOOD BUT ENSURE CONTRAST */
+  .lp-error-item {
+    background: #1e293b !important; /* Dark background */
+    color: #ffffff !important; /* White text */
+    border-left: 3px solid #ef4444 !important; /* Red accent */
+    border: 1px solid #475569 !important; /* Visible border */
+  }
+  
+  .lp-error-item * {
+    color: #ffffff !important;
+  }
+  
+  /* BACK TO ACS TASK BUTTON - IMPROVED CONTRAST */
+  .lp-footer-link {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%) !important; /* Blue gradient instead of green */
+    color: #ffffff !important; /* Pure white text */
+    border: 2px solid #60a5fa !important; /* Bright blue border */
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5) !important; /* Blue shadow */
+    font-weight: 700 !important; /* Bold for visibility */
+  }
+  
+  .lp-footer-link:hover {
+    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%) !important; /* Brighter blue on hover */
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6) !important; /* Stronger blue glow */
+    border-color: #93c5fd !important; /* Brighter border on hover */
+  }
+}
+
