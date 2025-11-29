@@ -101,7 +101,7 @@ function App() {
   return (
     <ErrorBoundary>
       <AudioProvider>
-        <Router>
+        <Router basename="/cfi-app-offline">
           <OfflineIndicator />
           {updateAvailable && (
             <div className="update-notification">
