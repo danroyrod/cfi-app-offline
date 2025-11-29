@@ -16,8 +16,8 @@ class OfflineService {
       try {
         // vite-plugin-pwa generates the service worker at build time
         // In dev mode, it may not be available, so we check first
-        const registration = await navigator.serviceWorker.register('/sw.js', {
-          scope: '/',
+        const registration = await navigator.serviceWorker.register('/cfi-app-offline/sw.js', {
+          scope: '/cfi-app-offline/',
           updateViaCache: 'none'
         });
 

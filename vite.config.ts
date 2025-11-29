@@ -4,9 +4,11 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Base path: Use '/' for web deployment (required for PWA offline functionality)
-  // Note: For Capacitor builds, change to './' and rebuild
-  base: '/',
+  // Base path: Use repository name for GitHub Pages
+  // For GitHub Pages: '/cfi-app-offline/'
+  // For custom domain: '/'
+  // For Capacitor: './'
+  base: '/cfi-app-offline/',
   plugins: [
     react(),
     VitePWA({
@@ -20,8 +22,8 @@ export default defineConfig({
         background_color: '#f8fafc',
         display: 'standalone',
         orientation: 'portrait',
-        scope: '/',
-        start_url: '/',
+        scope: '/cfi-app-offline/',
+        start_url: '/cfi-app-offline/',
         icons: [
           {
             src: '/icons/icon-192x192.png',
