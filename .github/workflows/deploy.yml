@@ -1,20 +1,17 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Trigger deployment on push to main branch
   push:
     branches:
       - main
-  # Allow manual triggering
+      - master
   workflow_dispatch:
 
-# Set permissions for GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -23,7 +20,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -35,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build app
+      - name: Build
         run: npm run build
 
       - name: Setup Pages
@@ -44,7 +41,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: ./dist
 
   deploy:
     environment:
@@ -56,6 +53,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          enablement: true
-

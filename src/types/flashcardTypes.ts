@@ -10,7 +10,7 @@ export interface Flashcard {
   lessonTitle: string;
   front: string;
   back: string;
-  category: 'objective' | 'teaching-point' | 'error' | 'standard' | 'custom';
+  category: 'objective' | 'teaching-point' | 'key-teaching-point' | 'error' | 'standard' | 'custom';
   status: FlashcardStatus;
   
   // Spaced Repetition Data

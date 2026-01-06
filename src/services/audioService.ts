@@ -206,6 +206,29 @@ export class AudioLessonService {
       });
     }
 
+    // KEY TEACHING POINTS (from improved lesson plans)
+    if (lesson.keyTeachingPoints && lesson.keyTeachingPoints.length > 0) {
+      segments.push({
+        text: 'Key Teaching Points.',
+        type: 'transition',
+        pauseAfter: 500
+      });
+
+      lesson.keyTeachingPoints.forEach((point) => {
+        segments.push({
+          text: `${this.cleanTextForSpeech(point)}`,
+          type: 'content',
+          pauseAfter: 500
+        });
+      });
+
+      segments.push({
+        text: '',
+        type: 'content',
+        pauseAfter: 1000
+      });
+    }
+
     // COMMON ERRORS
     if (lesson.commonErrors && lesson.commonErrors.length > 0) {
       segments.push({
@@ -215,8 +238,10 @@ export class AudioLessonService {
       });
 
       lesson.commonErrors.forEach((error, idx) => {
+        // Handle both string and object formats
+        const errorText = typeof error === 'string' ? error : (error as any)?.error || String(error);
         segments.push({
-          text: `Error ${idx + 1}: ${this.cleanTextForSpeech(error)}`,
+          text: `Error ${idx + 1}: ${this.cleanTextForSpeech(errorText)}`,
           type: 'content',
           pauseAfter: 600
         });

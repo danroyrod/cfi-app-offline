@@ -159,6 +159,32 @@ body {
   max-width: 600px;
 }
 
+/* Mobile: Single column layout for buttons */
+@media (max-width: 768px) {
+  .landing-buttons {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 1rem;
+  }
+  
+  .btn-primary {
+    padding: 1.25rem;
+    font-size: 1rem;
+  }
+  
+  .btn-icon {
+    font-size: 2rem;
+  }
+  
+  .btn-title {
+    font-size: 1.125rem;
+  }
+  
+  .btn-description {
+    font-size: 0.8125rem;
+  }
+}
+
 .btn-primary {
   display: flex;
   align-items: center;
@@ -628,6 +654,94 @@ body {
   margin-top: 1rem;
 }
 
+
+/* Operational Requirements, Limitations, & Task Information */
+.appendix-operational-areas {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.appendix-operational-area {
+  background-color: var(--bg-secondary);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border-left: 4px solid var(--primary-color);
+}
+
+.appendix-area-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.appendix-general-notes {
+  margin-bottom: 1.5rem;
+}
+
+.appendix-general-notes .appendix-note {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-tertiary);
+  border-radius: 0.5rem;
+  border-left: 3px solid var(--warning-color);
+}
+
+.appendix-general-notes .appendix-note:last-child {
+  margin-bottom: 0;
+}
+
+.appendix-operational-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.appendix-operational-task {
+  background-color: var(--bg-card);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+.appendix-task-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.appendix-task-notes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.appendix-task-note {
+  line-height: 1.7;
+  color: var(--text-secondary);
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.appendix-task-note::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
 .appendix-requirements h4,
 .appendix-guidelines h4,
 .appendix-responsibilities h4,
@@ -641,30 +755,39 @@ body {
 }
 
 .requirement-category,
+.responsibility-category,
 .guideline-category {
   margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+  border-radius: 0.5rem;
+  border-left: 3px solid var(--primary-color);
 }
 
 .requirement-category strong,
+.responsibility-category strong,
 .guideline-category strong {
   display: block;
   font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
 }
 
 .requirement-category ul,
+.responsibility-category ul,
 .guideline-category ul {
   margin-left: 1.5rem;
   margin-top: 0.5rem;
+  list-style: disc;
 }
 
 .requirement-category li,
+.responsibility-category li,
 .guideline-category li {
   margin-bottom: 0.5rem;
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .appendix-guidelines ul,

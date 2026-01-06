@@ -86,11 +86,24 @@ export default function AppendixDetail() {
         {content.responsibilities && content.responsibilities.length > 0 && (
           <div className="appendix-responsibilities">
             <h4>Responsibilities</h4>
-            <ul>
-              {content.responsibilities.map((responsibility, idx) => (
-                <li key={idx}>{responsibility}</li>
-              ))}
-            </ul>
+            {typeof content.responsibilities[0] === 'string' ? (
+              <ul>
+                {(content.responsibilities as string[]).map((responsibility, idx) => (
+                  <li key={idx}>{responsibility}</li>
+                ))}
+              </ul>
+            ) : (
+              (content.responsibilities as Array<{ category: string; details: string[] }>).map((responsibility, idx) => (
+                <div key={idx} className="responsibility-category">
+                  <strong>{responsibility.category}:</strong>
+                  <ul>
+                    {responsibility.details.map((detail, detailIdx) => (
+                      <li key={detailIdx}>{detail}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            )}
           </div>
         )}
 
@@ -132,6 +145,45 @@ export default function AppendixDetail() {
                 <li key={idx}>{ref}</li>
               ))}
             </ul>
+          </div>
+        )}
+
+        {content.areas && content.areas.length > 0 && (
+          <div className="appendix-operational-areas">
+            {content.areas.map((area: any, areaIdx: number) => (
+              <div key={areaIdx} className="appendix-operational-area">
+                <h4 className="appendix-area-title">
+                  Area {area.area}: {area.name}
+                </h4>
+                
+                {area.general_notes && area.general_notes.length > 0 && (
+                  <div className="appendix-general-notes">
+                    {area.general_notes.map((note: string, noteIdx: number) => (
+                      <p key={noteIdx} className="appendix-note">{note}</p>
+                    ))}
+                  </div>
+                )}
+
+                {area.tasks && area.tasks.length > 0 && (
+                  <div className="appendix-operational-tasks">
+                    {area.tasks.map((task: any, taskIdx: number) => (
+                      <div key={taskIdx} className="appendix-operational-task">
+                        <h5 className="appendix-task-title">
+                          Task {task.task}: {task.name}
+                        </h5>
+                        {task.notes && task.notes.length > 0 && (
+                          <ul className="appendix-task-notes">
+                            {task.notes.map((note: string, noteIdx: number) => (
+                              <li key={noteIdx} className="appendix-task-note">{note}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         )}
       </div>

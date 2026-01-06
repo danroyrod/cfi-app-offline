@@ -26,7 +26,23 @@ class FlashcardGenerator {
       });
     }
 
-    // 2. Generate cards from teaching script key points
+    // 2. Generate cards from key teaching points (top-level, from improved lesson plans)
+    if (lesson.keyTeachingPoints && lesson.keyTeachingPoints.length > 0) {
+      lesson.keyTeachingPoints.forEach((point) => {
+        const question = this.convertToQuestion(point, lesson.title);
+        const card = flashcardService.createCard(
+          lesson.id,
+          lesson.title,
+          question,
+          point,
+          'key-teaching-point' as 'teaching-point', // Use teaching-point category
+          ['key-teaching-point', 'teaching-point', this.getAreaTag(lesson.id)]
+        );
+        cards.push(card);
+      });
+    }
+
+    // 3. Generate cards from teaching script key points (phase-specific)
     if (lesson.teachingScript && lesson.teachingScript.length > 0) {
       lesson.teachingScript.forEach((script) => {
         if (script.keyPoints && script.keyPoints.length > 0) {
@@ -47,7 +63,7 @@ class FlashcardGenerator {
       });
     }
 
-    // 3. Generate cards from common errors
+    // 4. Generate cards from common errors
     if (lesson.commonErrors && lesson.commonErrors.length > 0) {
       lesson.commonErrors.forEach((error) => {
         const card = flashcardService.createCard(
@@ -62,7 +78,7 @@ class FlashcardGenerator {
       });
     }
 
-    // 4. Generate cards from completion standards
+    // 5. Generate cards from completion standards
     if (lesson.completionStandards && lesson.completionStandards.length > 0) {
       lesson.completionStandards.forEach((standard) => {
         const card = flashcardService.createCard(
@@ -152,6 +168,8 @@ class FlashcardGenerator {
     
     if (lesson.objectives) count += lesson.objectives.length;
     
+    if (lesson.keyTeachingPoints) count += lesson.keyTeachingPoints.length;
+    
     if (lesson.teachingScript) {
       lesson.teachingScript.forEach(script => {
         if (script.keyPoints) count += script.keyPoints.length;
@@ -179,7 +197,16 @@ class FlashcardGenerator {
       });
     }
 
-    // Sample from key points
+    // Sample from key teaching points (top-level, preferred)
+    if (lesson.keyTeachingPoints && lesson.keyTeachingPoints.length > 0 && samples.length < limit) {
+      samples.push({
+        front: this.convertToQuestion(lesson.keyTeachingPoints[0], lesson.title),
+        back: lesson.keyTeachingPoints[0],
+        category: 'key-teaching-point'
+      });
+    }
+
+    // Sample from key points (phase-specific, fallback)
     if (lesson.teachingScript && lesson.teachingScript.length > 0 && samples.length < limit) {
       const firstScript = lesson.teachingScript[0];
       if (firstScript.keyPoints && firstScript.keyPoints.length > 0) {

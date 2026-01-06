@@ -59,7 +59,18 @@ class OfflineService {
     }
 
     try {
-      const registration = await navigator.serviceWorker.ready;
+      // Add timeout to prevent hanging (5 seconds)
+      const readyPromise = navigator.serviceWorker.ready;
+      const timeoutPromise = new Promise<ServiceWorkerRegistration | null>((resolve) => {
+        setTimeout(() => resolve(null), 5000);
+      });
+
+      const registration = await Promise.race([readyPromise, timeoutPromise]);
+      
+      if (!registration) {
+        return false;
+      }
+
       return registration.active !== null;
     } catch {
       return false;

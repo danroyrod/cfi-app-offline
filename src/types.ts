@@ -27,7 +27,7 @@ export interface AppendixSection {
     overview?: string;
     requirements?: Array<{ category: string; details: string[] }>;
     guidelines?: string[] | Array<{ category: string; details: string[] }>;
-    responsibilities?: string[];
+    responsibilities?: string[] | Array<{ category: string; details: string[] }>;
     limitations?: Array<{ limitation: string; description: string; details: string[] }>;
     recent_experience?: string[];
     references?: string[];

@@ -47,10 +47,11 @@ export default function LessonPlanDetail() {
       sections.push({ id: 'completion-standards', title: 'Completion Standards (ACS)', level: 1 });
     }
 
-    sections.push(
-      { id: 'safety-considerations', title: 'Safety Considerations', level: 1 },
-      { id: 'instructor-notes', title: 'Instructor Notes', level: 1 }
-    );
+    if (lessonPlan.safetyConsiderations && lessonPlan.safetyConsiderations.length > 0) {
+      sections.push({ id: 'safety-considerations', title: 'Safety Considerations', level: 1 });
+    }
+
+    sections.push({ id: 'instructor-notes', title: 'Instructor Notes', level: 1 });
 
     if (lessonPlan.suggestedHomework && lessonPlan.suggestedHomework.length > 0) {
       sections.push({ id: 'suggested-homework', title: 'Suggested Homework', level: 1 });
@@ -108,6 +109,13 @@ export default function LessonPlanDetail() {
               )}
               <div className="lp-meta">
                 <span className="lp-time">⏱️ {lessonPlan.estimatedTime}</span>
+                <button
+                  onClick={() => window.print()}
+                  className="lp-print-button"
+                  title="Print this lesson plan"
+                >
+                  🖨️ Print Lesson
+                </button>
                 <BookmarkButton
                   type="lesson-plan"
                   resourceId={lessonPlan.id}
@@ -288,18 +296,20 @@ export default function LessonPlanDetail() {
               </div>
             )}
 
-            {/* Safety Considerations */}
-            <div className="lp-section lp-safety-section">
-              <h2 className="lp-section-title" id="safety-considerations">🔴 Safety Considerations</h2>
-              <div className="lp-safety-list">
-                {lessonPlan.safetyConsiderations.map((safety, index) => (
-                  <div key={index} className="lp-safety-item">
-                    <span className="lp-safety-icon">🔴</span>
-                    <p>{safety}</p>
-                  </div>
-                ))}
+            {/* Safety Considerations - Only show for flight lessons */}
+            {lessonPlan.safetyConsiderations && lessonPlan.safetyConsiderations.length > 0 && (
+              <div className="lp-section lp-safety-section">
+                <h2 className="lp-section-title" id="safety-considerations">🔴 Safety Considerations</h2>
+                <div className="lp-safety-list">
+                  {lessonPlan.safetyConsiderations.map((safety, index) => (
+                    <div key={index} className="lp-safety-item">
+                      <span className="lp-safety-icon">🔴</span>
+                      <p>{safety}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Instructor Notes */}
             <div className="lp-section lp-notes-section">
@@ -351,16 +361,6 @@ export default function LessonPlanDetail() {
           </div>
         </div>
       </div>
-
-      {/* Print Button */}
-      <button 
-        className="print-button" 
-        onClick={() => window.print()}
-        title="Print this lesson plan"
-      >
-        <span>🖨️</span>
-        <span>Print Lesson</span>
-      </button>
 
       {/* Notes Panel */}
       <NotesPanel

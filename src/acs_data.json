@@ -9871,84 +9871,123 @@
         {
           "title": "Operational Requirements, Limitations, & Task Information",
           "content": {
-            "overview": "Operational requirements and limitations for practical tests.",
-            "requirements": [
+            "overview": "Specific operational requirements, limitations, and task information for practical tests.",
+            "areas": [
               {
-                "category": "Weather Requirements",
-                "details": [
-                  "Weather must be suitable for the operations conducted",
-                  "Weather must meet minimum requirements",
-                  "Weather must be appropriate for the rating sought",
-                  "Weather must allow safe completion of all tasks"
+                "area": "VIII",
+                "name": "Takeoffs, Landings, and Go-Arounds",
+                "tasks": [
+                  {
+                    "task": "M",
+                    "name": "Power-Off 180° Accuracy Approach and Landing (ASEL, ASES)",
+                    "notes": [
+                      "Note that certain single-engine turboprop airplanes experience an excessive rate of descent if the power is set to flight idle.",
+                      "In some cases, if the powerplant failed, the manufacturer's checklist calls for feathering the propeller during a power-off glide. During flight training in these airplanes, the propeller is not feathered as would be the case in an emergency or true power-off glide. During training and pilot certification, where the manufacturer's checklist calls for propeller feathering in a power-off situation, the pilot should set sufficient power to provide the performance that would be expected with the propeller feathered.",
+                      "Initiating a go-around as a result of an applicant's inability to complete this Task within the tolerances specified in the skill elements is considered unsatisfactory. Runway safety concerns beyond the control of the applicant or evaluator that necessitate a go-around would not be considered unsatisfactory. The applicant and evaluator must not sacrifice the safety of flight and force a landing to complete this Task."
+                    ]
+                  }
                 ]
               },
               {
-                "category": "Airspace Requirements",
-                "details": [
-                  "Operations must be conducted in appropriate airspace",
-                  "Airspace must allow completion of all required tasks",
-                  "Airspace must meet safety requirements",
-                  "Airspace must be appropriate for the operations"
+                "area": "X",
+                "name": "Slow Flight, Stalls, and Spins (Spins apply to ASEL)",
+                "general_notes": [
+                  "Some stall Tasks allow for demonstration or teaching of full stalls. With the exception of Task H - Secondary Stalls (where a full stall occurs) and Task E - Accelerated Stall (where the recovery occurs at the first indication), the evaluator has discretion to ask for recovery at the first indication of a stall or after a full stall occurs. Applicants should train and prepare to demonstrate or teach full stalls where appropriate; however, the applicant and the evaluator must review this area of operation during the preflight briefing.",
+                  "The flight instructor normally demonstrates stall Tasks F, G, and H to learners for the purposes of familiarization and stall/spin awareness. Private and commercial pilot certification does not include these Tasks."
+                ],
+                "tasks": [
+                  {
+                    "task": "A and B",
+                    "name": "Maneuvering During Slow Flight and Demonstration of Flight Characteristics at Various Configurations and Airspeeds",
+                    "notes": [
+                      "Evaluation criteria for this Task should recognize that environmental factors (e.g., turbulence) may result in a momentary activation of stall warning indicators such as the stall horn. If the applicant recognizes the stall warning indication and promptly makes an appropriate correction, a momentary activation does not constitute unsatisfactory performance on this Task. As with other Tasks, unsatisfactory performance would arise from an applicant's continual deviation from the standard, lack of correction, and/or lack of recognition."
+                    ]
+                  },
+                  {
+                    "task": "C",
+                    "name": "Power-Off Stalls",
+                    "notes": [
+                      "Evaluation criteria for a recovery from an approach to stall should not mandate a predetermined value for altitude loss and should not mandate maintaining altitude during recovery. Proper evaluation criteria should consider the multitude of external and internal variables that affect the recovery altitude."
+                    ]
+                  },
+                  {
+                    "task": "D",
+                    "name": "Power-On Stalls",
+                    "notes": [
+                      "In some high-performance airplanes, the power setting may have to be reduced below the ACS guidelines power setting to prevent pitch attitudes greater than 30° nose up. Evaluation criteria for a recovery from an approach to stall does not mandate a predetermined value for altitude loss and does not mandate maintaining altitude during recovery. Proper evaluation criteria considers the multitude of external and internal variables that affect the recovery altitude."
+                    ]
+                  },
+                  {
+                    "task": "E",
+                    "name": "Accelerated Stalls",
+                    "notes": [
+                      "Pilots must set power for airspeed at or below the design maneuvering speed (VA) for the airplane. In a multiengine airplane a successful recovery occurs at the first indication of a stall. Delaying application of power until the airplane reaches a wings level altitude, attains a speed that exceeds VMC, and responds normally to control inputs is acceptable. A pilot should delay application of high power if the aircraft is not above VMC and responding as expected.",
+                      "Evaluation criteria for a recovery from an approach to stall should not mandate a predetermined value for altitude loss and should not mandate maintaining altitude during recovery. Proper evaluation criteria should consider the multitude of external and internal variables that affect the recovery altitude."
+                    ]
+                  },
+                  {
+                    "task": "G",
+                    "name": "Elevator Trim Stalls",
+                    "notes": [
+                      "The applicant and evaluator must brief the recovery prior to stall execution. A realistic scenario includes a simulated short-field approach at altitude trimmed for approach airspeed, low power, and full flaps."
+                    ]
+                  },
+                  {
+                    "task": "H",
+                    "name": "Secondary Stalls",
+                    "notes": [
+                      "Secondary stalls include a full stall."
+                    ]
+                  }
                 ]
               },
               {
-                "category": "Airport Requirements",
-                "details": [
-                  "Airport must be suitable for the operations conducted",
-                  "Airport must meet minimum requirements",
-                  "Airport must be appropriate for the rating sought",
-                  "Airport must allow safe completion of all tasks"
+                "area": "XII",
+                "name": "Emergency Operations",
+                "tasks": [
+                  {
+                    "task": "B",
+                    "name": "Emergency Approach and Landing (Simulated) (ASEL, ASES)",
+                    "notes": [
+                      "Execution must allow for a safe landing in the event of an actual engine failure."
+                    ]
+                  },
+                  {
+                    "task": "D",
+                    "name": "Emergency Equipment and Survival Gear",
+                    "notes": [
+                      "For airplanes that include a ballistic parachute, applicants must follow the manufacturer's procedures for arming and disarming the system before and after flight. Testing of an applicant's knowledge regarding how and when to use the system and how to manage associated risks may include simulation and briefing of procedures but not actual deployment of the system."
+                    ]
+                  },
+                  {
+                    "task": "E",
+                    "name": "Engine Failure During Takeoff Before VMC (Simulated) [Airplane, Multiengine Land (AMEL); Airplane, Multiengine Sea (AMES)]",
+                    "notes": [
+                      "Engine failure (simulated) during takeoff should be accomplished prior to reaching 50 percent of the calculated VMC."
+                    ]
+                  },
+                  {
+                    "task": "F",
+                    "name": "Engine Failure After Liftoff (Simulated) (AMEL, AMES)",
+                    "notes": [
+                      "The evaluator must not simulate failure of an engine until attaining an altitude of at least 400 feet AGL and at least minimum single-engine speed (VSSE), best single-engine angle-of-climb speed (VXSE), or best single-engine rate-of-climb (VYSE)."
+                    ]
+                  },
+                  {
+                    "task": "G",
+                    "name": "Approach and Landing with an Inoperative Engine (Simulated) [Airplane, Multiengine Land (AMEL); Airplane, Multiengine See (AMES)]",
+                    "notes": [
+                      "For tests conducted in a propeller-driven airplane (other than those that require a type rating), the evaluator shall require the instructor applicant to simultaneously demonstrate and explain procedures for landing with a simulated feathered propeller with the engine set to zero thrust.",
+                      "The applicant must simultaneously demonstrate and explain at least one landing with a simulated feathered propeller with the powerplant set to zero thrust. For all other airplanes, follow the manufacturer's recommended procedures."
+                    ]
+                  }
                 ]
               },
               {
-                "category": "Task Requirements",
-                "details": [
-                  "All required tasks must be completed",
-                  "Tasks must be completed to completion standards",
-                  "Tasks must be completed safely",
-                  "Tasks must be completed within time limits"
-                ]
-              }
-            ],
-            "limitations": [
-              {
-                "limitation": "Time Limitations",
-                "description": "Practical tests must be completed within specified time limits.",
-                "details": [
-                  "Tests must be completed in single session",
-                  "Tests cannot be extended beyond time limits",
-                  "Tests must be completed within validity period",
-                  "Tests must be completed within experience requirements"
-                ]
-              },
-              {
-                "limitation": "Equipment Limitations",
-                "description": "Equipment limitations must be understood and respected.",
-                "details": [
-                  "Equipment must be used within its limitations",
-                  "Equipment limitations must be communicated",
-                  "Equipment must be properly maintained",
-                  "Equipment must meet certification standards"
-                ]
-              },
-              {
-                "limitation": "Aircraft Limitations",
-                "description": "Aircraft limitations must be understood and respected.",
-                "details": [
-                  "Aircraft must be used within its limitations",
-                  "Aircraft limitations must be communicated",
-                  "Aircraft must be properly maintained",
-                  "Aircraft must meet certification standards"
-                ]
-              },
-              {
-                "limitation": "Operational Limitations",
-                "description": "Operational limitations must be understood and respected.",
-                "details": [
-                  "Operations must be conducted within limitations",
-                  "Limitations must be communicated",
-                  "Limitations must be respected",
-                  "Limitations must be properly documented"
+                "area": "XIII",
+                "name": "Multiengine Operations",
+                "general_notes": [
+                  "Airplanes with normally aspirated engines will lose power as altitude increases because of the reduced density of the air entering the induction system of the engine. This loss of power will result in a VMC lower than the stall speed at higher altitudes. Therefore, recovery should be made at the first indication of loss of directional control, stall warning, or buffet. Do not perform this maneuver by increasing the pitch attitude to a high angle with both engines operating and then reducing power on the critical engine. This technique is hazardous and may result in loss of airplane control."
                 ]
               }
             ]
