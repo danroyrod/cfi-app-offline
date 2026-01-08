@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import './LoginPage.css';
 
@@ -42,6 +42,7 @@ export default function LoginPage({ returnTo }: LoginPageProps) {
     <div className="login-page">
       <div className="login-container">
         <div className="login-card">
+          <Link to="/" className="login-back-link">← Back to Home</Link>
           <div className="login-header">
             <div className="login-icon">🔒</div>
             <h1 className="login-title">Protected Content</h1>
@@ -82,7 +83,11 @@ export default function LoginPage({ returnTo }: LoginPageProps) {
 
           <div className="login-footer">
             <p className="login-footer-text">
-              This password protects lesson plans and audio lessons.
+              This password protects lesson plans, audio lessons, flashcards, and quizzes.
+              <br />
+              <span style={{ fontSize: '0.8rem', opacity: 0.8 }}>
+                ACS content is still accessible from the home page.
+              </span>
             </p>
           </div>
         </div>
