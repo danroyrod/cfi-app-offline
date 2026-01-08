@@ -48,6 +48,10 @@ export default function LoginPage({ returnTo }: LoginPageProps) {
             <h1 className="login-title">Protected Content</h1>
             <p className="login-subtitle">
               This section requires a password to access
+              <br />
+              <span style={{ fontSize: '0.85rem', opacity: 0.9, fontWeight: 'normal' }}>
+                ACS content is the only material accessible without a password
+              </span>
             </p>
           </div>
 
@@ -86,7 +90,7 @@ export default function LoginPage({ returnTo }: LoginPageProps) {
               This password protects lesson plans, audio lessons, flashcards, and quizzes.
               <br />
               <span style={{ fontSize: '0.8rem', opacity: 0.8 }}>
-                ACS content is still accessible from the home page.
+                Only ACS content is accessible without a password.
               </span>
             </p>
           </div>

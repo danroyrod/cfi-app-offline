@@ -270,6 +270,10 @@ export default function AudioPlayer({
         }
       }, 1000);
 
+      // Set initial voice and rate in audio service
+      audioService.setCurrentVoice(voiceToUse);
+      audioService.setCurrentRate(currentPreset.rate);
+
       try {
         console.log('▶️ Calling audioService.speakPodcastScript...');
         await audioService.speakPodcastScript(podcastScript, {
@@ -350,12 +354,13 @@ export default function AudioPlayer({
     setCurrentPreset(preset);
     savePresetPreference(preset.id);
     setShowPresetSelector(false);
+    setVolume(preset.volume);
     
-    // Restart if playing
-    if (isPlaying) {
-      stop();
-      setTimeout(() => togglePlayPause(), 100);
-    }
+    // Update rate in audio service for mid-playback changes
+    audioService.setCurrentRate(preset.rate);
+    
+    // If playing, the new rate will apply to the next segment automatically
+    // No need to restart - changes apply immediately to future segments
   };
 
   // Change voice
@@ -366,11 +371,11 @@ export default function AudioPlayer({
       localStorage.setItem('audio-preferred-voice', voice.name);
       setShowVoiceSelector(false);
       
-      // Restart if playing
-      if (isPlaying) {
-        stop();
-        setTimeout(() => togglePlayPause(), 100);
-      }
+      // Update voice in audio service for mid-playback changes
+      audioService.setCurrentVoice(voice);
+      
+      // If playing, the new voice will apply to the next segment automatically
+      // No need to restart - changes apply immediately to future segments
     }
   };
 

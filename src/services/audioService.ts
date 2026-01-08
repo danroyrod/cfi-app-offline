@@ -19,6 +19,9 @@ export interface PodcastScript {
 export class AudioLessonService {
   private synthesis: SpeechSynthesis;
   private defaultVoice: SpeechSynthesisVoice | null = null;
+  private currentVoice: SpeechSynthesisVoice | null = null;
+  private currentRate: number = 1.0;
+  private isPlaying: boolean = false;
   
   constructor() {
     this.synthesis = window.speechSynthesis;
@@ -164,22 +167,8 @@ export class AudioLessonService {
           });
         }
 
-        // Student actions
-        if (script.studentActions && script.studentActions.length > 0) {
-          segments.push({
-            text: 'Student actions.',
-            type: 'transition',
-            pauseAfter: 200
-          });
-
-          script.studentActions.forEach(action => {
-            segments.push({
-              text: this.cleanTextForSpeech(action),
-              type: 'content',
-              pauseAfter: 400
-            });
-          });
-        }
+        // Student actions - EXCLUDED from audio lessons per requirements
+        // Audio lessons focus on instructor content only
 
         // Key points
         if (script.keyPoints && script.keyPoints.length > 0) {
@@ -229,78 +218,8 @@ export class AudioLessonService {
       });
     }
 
-    // COMMON ERRORS
-    if (lesson.commonErrors && lesson.commonErrors.length > 0) {
-      segments.push({
-        text: 'Common Errors to Avoid.',
-        type: 'transition',
-        pauseAfter: 500
-      });
-
-      lesson.commonErrors.forEach((error, idx) => {
-        // Handle both string and object formats
-        const errorText = typeof error === 'string' ? error : (error as any)?.error || String(error);
-        segments.push({
-          text: `Error ${idx + 1}: ${this.cleanTextForSpeech(errorText)}`,
-          type: 'content',
-          pauseAfter: 600
-        });
-      });
-
-      segments.push({
-        text: '',
-        type: 'content',
-        pauseAfter: 1000
-      });
-    }
-
-    // SAFETY CONSIDERATIONS
-    if (lesson.safetyConsiderations && lesson.safetyConsiderations.length > 0) {
-      segments.push({
-        text: 'Safety Considerations.',
-        type: 'transition',
-        pauseAfter: 500
-      });
-
-      lesson.safetyConsiderations.forEach(consideration => {
-        segments.push({
-          text: this.cleanTextForSpeech(consideration),
-          type: 'content',
-          pauseAfter: 400
-        });
-      });
-
-      segments.push({
-        text: '',
-        type: 'content',
-        pauseAfter: 1000
-      });
-    }
-
-    // COMPLETION STANDARDS
-    if (lesson.completionStandards && lesson.completionStandards.length > 0) {
-      segments.push({
-        text: 'Completion Standards.',
-        type: 'transition',
-        pauseAfter: 500
-      });
-
-      lesson.completionStandards.forEach(standard => {
-        // Handle both string and object formats
-        const standardText = typeof standard === 'string' ? standard : standard.standard || String(standard);
-        segments.push({
-          text: this.cleanTextForSpeech(standardText),
-          type: 'content',
-          pauseAfter: 400
-        });
-      });
-
-      segments.push({
-        text: '',
-        type: 'content',
-        pauseAfter: 1000
-      });
-    }
+    // COMMON ERRORS, SAFETY CONSIDERATIONS, and COMPLETION STANDARDS
+    // Excluded from audio lessons - focus on overview, objectives, teaching script, and key points only
 
     // OUTRO
     segments.push({
@@ -404,6 +323,34 @@ export class AudioLessonService {
   }
 
   /**
+   * Set current voice (for mid-playback changes)
+   */
+  setCurrentVoice(voice: SpeechSynthesisVoice | null): void {
+    this.currentVoice = voice;
+  }
+
+  /**
+   * Set current rate (for mid-playback changes)
+   */
+  setCurrentRate(rate: number): void {
+    this.currentRate = rate;
+  }
+
+  /**
+   * Get current voice
+   */
+  getCurrentVoice(): SpeechSynthesisVoice | null {
+    return this.currentVoice;
+  }
+
+  /**
+   * Get current rate
+   */
+  getCurrentRate(): number {
+    return this.currentRate;
+  }
+
+  /**
    * Speak an entire podcast script
    */
   async speakPodcastScript(
@@ -420,7 +367,26 @@ export class AudioLessonService {
     // Cancel any existing speech to prevent queue issues
     this.synthesis.cancel();
     
+    // Initialize current voice and rate from options
+    if (options?.voice) {
+      this.currentVoice = options.voice;
+    } else if (!this.currentVoice) {
+      this.currentVoice = this.defaultVoice;
+    }
+    
+    if (options?.rate !== undefined) {
+      this.currentRate = options.rate;
+    }
+    
+    this.isPlaying = true;
+    
     for (let i = 0; i < script.segments.length; i++) {
+      // Check if stopped
+      if (!this.isPlaying) {
+        console.log('🛑 Playback stopped');
+        break;
+      }
+
       const segment = script.segments[i];
       
       console.log(`📜 Processing segment ${i + 1}/${script.segments.length}: "${segment.text?.substring(0, 50)}..."`);
@@ -430,9 +396,10 @@ export class AudioLessonService {
       }
 
       if (segment.text) {
+        // Use current voice and rate (which can be updated mid-playback)
         await this.textToSpeech(segment.text, {
-          voice: options?.voice,
-          rate: options?.rate
+          voice: this.currentVoice || undefined,
+          rate: this.currentRate
         });
       }
 
@@ -449,6 +416,7 @@ export class AudioLessonService {
       }
     }
     
+    this.isPlaying = false;
     console.log('📜 speakPodcastScript completed');
   }
 
@@ -464,6 +432,7 @@ export class AudioLessonService {
    */
   stop(): void {
     this.synthesis.cancel();
+    this.isPlaying = false;
   }
 
   /**
