@@ -38,7 +38,9 @@ class EnhancedFlashcardService {
             console.warn('Cache lookup failed:', cacheError);
           }
         }
-        console.warn('Enhanced flashcards not found, using default cards');
+        // Enhanced flashcards file not found - this is expected if not provided
+        // App will use default flashcards instead
+        console.debug('Enhanced flashcards not found, using default cards');
         return;
       }
 
@@ -65,11 +67,12 @@ class EnhancedFlashcardService {
               return;
             }
           } catch (cacheError) {
-            console.warn('Cache lookup failed:', cacheError);
+            console.debug('Cache lookup failed:', cacheError);
           }
         }
       }
-      console.warn('Failed to load enhanced flashcards:', error);
+      // Enhanced flashcards failed to load - app will use default cards
+      console.debug('Failed to load enhanced flashcards:', error);
     }
   }
 

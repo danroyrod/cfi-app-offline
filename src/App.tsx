@@ -8,6 +8,8 @@ import QuickAccessPanel from './components/QuickAccessPanel';
 import OfflineIndicator from './components/OfflineIndicator';
 import InstallPrompt from './components/InstallPrompt';
 import { AudioProvider } from './contexts/AudioContext';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 import { offlineService } from './services/offlineService';
 import { initializeNativeFeatures, setupAppStateListeners } from './utils/capacitor';
 import './App.css';
@@ -100,8 +102,9 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <AudioProvider>
-        <Router basename="/cfi-app-offline">
+      <AuthProvider>
+        <AudioProvider>
+          <Router basename="/cfi-app-offline">
           <OfflineIndicator />
           {updateAvailable && (
             <div className="update-notification">
@@ -134,15 +137,15 @@ function App() {
               <Route path="/areas" element={<AreasIndex />} />
               <Route path="/area/:areaNumber" element={<AreaDetail />} />
               <Route path="/area/:areaNumber/task/:taskLetter" element={<TaskDetail />} />
-              <Route path="/lesson-plans" element={<LessonPlansIndex />} />
-              <Route path="/lesson-plans/area/:areaNumber" element={<LessonPlansByArea />} />
-              <Route path="/lesson-plans/all" element={<LessonPlansAll />} />
-              <Route path="/lesson-plan/:lessonPlanId" element={<LessonPlanDetail />} />
-              <Route path="/audio-lessons" element={<AudioLessons />} />
-              <Route path="/flashcards" element={<Flashcards />} />
-              <Route path="/flashcards/study" element={<FlashcardsStudy />} />
-              <Route path="/quizzes" element={<Quizzes />} />
-              <Route path="/quizzes/take" element={<QuizTake />} />
+              <Route path="/lesson-plans" element={<ProtectedRoute><LessonPlansIndex /></ProtectedRoute>} />
+              <Route path="/lesson-plans/area/:areaNumber" element={<ProtectedRoute><LessonPlansByArea /></ProtectedRoute>} />
+              <Route path="/lesson-plans/all" element={<ProtectedRoute><LessonPlansAll /></ProtectedRoute>} />
+              <Route path="/lesson-plan/:lessonPlanId" element={<ProtectedRoute><LessonPlanDetail /></ProtectedRoute>} />
+              <Route path="/audio-lessons" element={<ProtectedRoute><AudioLessons /></ProtectedRoute>} />
+              <Route path="/flashcards" element={<ProtectedRoute><Flashcards /></ProtectedRoute>} />
+              <Route path="/flashcards/study" element={<ProtectedRoute><FlashcardsStudy /></ProtectedRoute>} />
+              <Route path="/quizzes" element={<ProtectedRoute><Quizzes /></ProtectedRoute>} />
+              <Route path="/quizzes/take" element={<ProtectedRoute><QuizTake /></ProtectedRoute>} />
               <Route path="/bookmarks" element={<Bookmarks />} />
               <Route path="/notes" element={<Notes />} />
               <Route path="/search" element={<SearchResults />} />
@@ -152,6 +155,7 @@ function App() {
           <GlobalAudioPlayer />
         </Router>
       </AudioProvider>
+      </AuthProvider>
     </ErrorBoundary>
   );
 }

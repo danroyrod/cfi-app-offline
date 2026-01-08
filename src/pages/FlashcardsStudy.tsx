@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { flashcardService } from '../services/flashcardService';
 import FlashcardFlip from '../components/FlashcardFlip';
@@ -58,7 +58,89 @@ export default function FlashcardsStudy() {
     }
   }, [deckId, currentIndex, stats, cards.length, isComplete]);
 
-  // Keyboard shortcuts
+  const loadCards = () => {
+    try {
+      let studyCards: Flashcard[];
+
+      if (deckId) {
+        // Load cards from specific deck
+        const deck = flashcardService.getAllDecks().find(d => d.id === deckId);
+        if (deck) {
+          studyCards = deck.cardIds
+            .map(id => flashcardService.getCard(id))
+            .filter((c): c is Flashcard => c !== null);
+        } else {
+          studyCards = [];
+        }
+      } else {
+        // Load due cards
+        studyCards = flashcardService.getDueCards(20);
+        
+        // If no due cards, get new cards
+        if (studyCards.length === 0) {
+          studyCards = flashcardService.getNewCards(10);
+        }
+      }
+
+      setCards(studyCards);
+      
+      if (studyCards.length > 0) {
+        const newSession = flashcardService.startSession(deckId || 'daily-review');
+        setSession(newSession);
+      }
+    } catch (error) {
+      console.error('Error loading flashcards:', error);
+      setCards([]);
+    }
+  };
+
+  const handleRate = useCallback((difficulty: FlashcardDifficulty) => {
+    if (cards.length === 0 || currentIndex >= cards.length) return;
+
+    const currentCard = cards[currentIndex];
+    if (!currentCard) return;
+
+    try {
+      const startTime = Date.now();
+      
+      // Update card with spaced repetition
+      const responseTime = startTime - (session?.startTime || startTime);
+      flashcardService.reviewCard(currentCard.id, difficulty, responseTime);
+
+      // Update session stats
+      if (session) {
+        const isCorrect = difficulty !== 'again';
+        flashcardService.updateSessionStats(session.id, isCorrect, responseTime);
+        
+        setStats(prev => ({
+          studied: prev.studied + 1,
+          correct: prev.correct + (isCorrect ? 1 : 0),
+          wrong: prev.wrong + (isCorrect ? 0 : 1)
+        }));
+      }
+
+      // Move to next card automatically
+      if (currentIndex < cards.length - 1) {
+        setCurrentIndex(currentIndex + 1);
+      } else {
+        // Study session complete
+        if (session) {
+          flashcardService.endSession(session.id);
+        }
+        setIsComplete(true);
+      }
+    } catch (error) {
+      console.error('Error rating flashcard:', error);
+      // Still move to next card even if there's an error
+      if (currentIndex < cards.length - 1) {
+        setCurrentIndex(currentIndex + 1);
+      } else {
+        setIsComplete(true);
+      }
+    }
+  }, [cards, currentIndex, session]);
+
+  // Keyboard shortcuts - must be after handleRate is defined
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       // Don't trigger if typing in an input
@@ -89,72 +171,7 @@ export default function FlashcardsStudy() {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [isComplete, cards.length, currentIndex]);
-
-  const loadCards = () => {
-    let studyCards: Flashcard[];
-
-    if (deckId) {
-      // Load cards from specific deck
-      const deck = flashcardService.getAllDecks().find(d => d.id === deckId);
-      if (deck) {
-        studyCards = deck.cardIds
-          .map(id => flashcardService.getCard(id))
-          .filter((c): c is Flashcard => c !== null);
-      } else {
-        studyCards = [];
-      }
-    } else {
-      // Load due cards
-      studyCards = flashcardService.getDueCards(20);
-      
-      // If no due cards, get new cards
-      if (studyCards.length === 0) {
-        studyCards = flashcardService.getNewCards(10);
-      }
-    }
-
-    setCards(studyCards);
-    
-    if (studyCards.length > 0) {
-      const newSession = flashcardService.startSession(deckId || 'daily-review');
-      setSession(newSession);
-    }
-  };
-
-  const handleRate = (difficulty: FlashcardDifficulty) => {
-    if (cards.length === 0) return;
-
-    const currentCard = cards[currentIndex];
-    const startTime = Date.now();
-    
-    // Update card with spaced repetition
-    const responseTime = startTime - (session?.startTime || startTime);
-    flashcardService.reviewCard(currentCard.id, difficulty, responseTime);
-
-    // Update session stats
-    if (session) {
-      const isCorrect = difficulty !== 'again';
-      flashcardService.updateSessionStats(session.id, isCorrect, responseTime);
-      
-      setStats(prev => ({
-        studied: prev.studied + 1,
-        correct: prev.correct + (isCorrect ? 1 : 0),
-        wrong: prev.wrong + (isCorrect ? 0 : 1)
-      }));
-    }
-
-    // Move to next card
-    if (currentIndex < cards.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      // Study session complete
-      if (session) {
-        flashcardService.endSession(session.id);
-      }
-      setIsComplete(true);
-    }
-  };
+  }, [isComplete, cards.length, handleRate]);
 
   const handleRestart = () => {
     setCurrentIndex(0);
@@ -247,8 +264,23 @@ export default function FlashcardsStudy() {
     );
   }
 
+  // Safety check - ensure currentIndex is valid
+  if (cards.length > 0 && currentIndex >= cards.length) {
+    setCurrentIndex(0);
+  }
+
   const currentCard = cards[currentIndex];
-  const progress = ((currentIndex + 1) / cards.length) * 100;
+  const progress = cards.length > 0 ? ((currentIndex + 1) / cards.length) * 100 : 0;
+
+  // Safety check - if no current card but we have cards, reset index
+  if (!currentCard && cards.length > 0) {
+    setCurrentIndex(0);
+    return null; // Will re-render with correct index
+  }
+
+  if (!currentCard) {
+    return null;
+  }
 
   return (
     <div className="flashcards-study-page">
@@ -283,12 +315,15 @@ export default function FlashcardsStudy() {
           </div>
         </div>
 
-        <FlashcardFlip
-          card={currentCard}
-          onRate={handleRate}
-          cardNumber={currentIndex + 1}
-          totalCards={cards.length}
-        />
+        {currentCard && (
+          <FlashcardFlip
+            key={currentCard.id}
+            card={currentCard}
+            onRate={handleRate}
+            cardNumber={currentIndex + 1}
+            totalCards={cards.length}
+          />
+        )}
 
         <div className="study-hints">
           <div className="hint-box hint-tip">

@@ -211,8 +211,8 @@ class FlashcardService {
   getDueCards(limit?: number): Flashcard[] {
     const now = Date.now();
     const cards = this.getAllCards()
-      .filter(c => c.nextReviewDate <= now)
-      .sort((a, b) => a.nextReviewDate - b.nextReviewDate);
+      .filter(c => c && typeof c.nextReviewDate === 'number' && c.nextReviewDate <= now)
+      .sort((a, b) => (a.nextReviewDate || 0) - (b.nextReviewDate || 0));
     
     return limit ? cards.slice(0, limit) : cards;
   }
@@ -222,7 +222,7 @@ class FlashcardService {
    */
   getNewCards(limit: number = 20): Flashcard[] {
     return this.getAllCards()
-      .filter(c => c.status === 'new')
+      .filter(c => c && c.status === 'new')
       .slice(0, limit);
   }
 

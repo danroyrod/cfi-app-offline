@@ -24,17 +24,24 @@ export default function QuizCard({
   answerMode = 'individual'
 }: QuizCardProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(userAnswer !== undefined ? userAnswer : null);
-  const [startTime] = useState(Date.now());
+  const [startTime, setStartTime] = useState(Date.now());
   const [hasAnswered, setHasAnswered] = useState(isReview);
   const [showExplanation, setShowExplanation] = useState(false);
 
+  // Reset state when question changes
   useEffect(() => {
     if (isReview && userAnswer !== undefined) {
       setSelectedIndex(userAnswer);
       setHasAnswered(true);
       setShowExplanation(true);
+    } else {
+      // Reset state for new question
+      setSelectedIndex(null);
+      setHasAnswered(false);
+      setShowExplanation(false);
+      setStartTime(Date.now());
     }
-  }, [isReview, userAnswer]);
+  }, [question.id, isReview, userAnswer]);
 
   // Keyboard shortcuts
   const handleKeyPress = useCallback((e: KeyboardEvent) => {
@@ -43,7 +50,11 @@ export default function QuizCard({
       return;
     }
 
-    if (hasAnswered && !isReview) return;
+    // In "Check each answer" mode, disable keyboard after answering
+    // In "Check at end" mode, keyboard is always enabled (state resets on next question)
+    if (hasAnswered && !isReview && answerMode === 'individual') {
+      return;
+    }
 
     // Number keys for options (1-4)
     if (e.key >= '1' && e.key <= '4') {
@@ -63,7 +74,7 @@ export default function QuizCard({
       e.preventDefault();
       handleSubmit();
     }
-  }, [hasAnswered, selectedIndex, isReview, question.options.length]);
+  }, [hasAnswered, selectedIndex, isReview, answerMode, question.options.length]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
@@ -71,7 +82,11 @@ export default function QuizCard({
   }, [handleKeyPress]);
 
   const handleOptionSelect = (index: number) => {
-    if (hasAnswered && !isReview) return;  // Can't change answer in test mode
+    // In "Check at end" mode, allow changing selection before submitting
+    // In "Check each answer" mode, disable after answering
+    if (hasAnswered && !isReview && answerMode === 'individual') {
+      return;  // Can't change answer after submission in individual mode
+    }
     setSelectedIndex(index);
   };
 
@@ -80,21 +95,28 @@ export default function QuizCard({
     if (hasAnswered && !isReview) return;
 
     const timeSpent = Math.floor((Date.now() - startTime) / 1000);
-    setHasAnswered(true);
-
-    // Show feedback based on answer mode
-    if (answerMode === 'individual' && showFeedback) {
-      setShowExplanation(true);
-    }
-
-    if (!isReview) {
-      onAnswer(selectedIndex, timeSpent);
+    
+    // In "Check at end" mode, submit and move to next question immediately
+    // In "Check each answer" mode, show feedback first
+    if (answerMode === 'end') {
+      // Submit immediately and move to next question
+      if (!isReview) {
+        onAnswer(selectedIndex, timeSpent);
+      }
+    } else {
+      // "Check each answer" mode - show feedback first
+      setHasAnswered(true);
+      if (showFeedback) {
+        setShowExplanation(true);
+      }
+      // Don't call onAnswer here - wait for user to click "Next Question"
     }
   };
 
   const handleNext = () => {
-    if (!isReview) {
-      onAnswer(selectedIndex!, Math.floor((Date.now() - startTime) / 1000));
+    if (!isReview && selectedIndex !== null) {
+      const timeSpent = Math.floor((Date.now() - startTime) / 1000);
+      onAnswer(selectedIndex, timeSpent);
     }
   };
 
@@ -153,7 +175,7 @@ export default function QuizCard({
               key={index}
               className={`quiz-option ${getOptionClass(index)}`}
               onClick={() => handleOptionSelect(index)}
-              disabled={hasAnswered && !isReview}
+              disabled={hasAnswered && !isReview && answerMode === 'individual'}
             >
               <span className="option-letter">
                 {String.fromCharCode(65 + index)}.
@@ -210,7 +232,7 @@ export default function QuizCard({
           </div>
         )}
 
-        {hasAnswered && !showFeedback && !isReview && (
+        {hasAnswered && answerMode === 'individual' && !isReview && !showFeedback && (
           <button className="quiz-next-btn" onClick={handleNext}>
             Next Question →
           </button>

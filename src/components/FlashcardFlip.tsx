@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Flashcard, FlashcardDifficulty } from '../types/flashcardTypes';
 import './FlashcardFlip.css';
 
@@ -19,12 +19,20 @@ export default function FlashcardFlip({
 }: FlashcardFlipProps) {
   const [isFlipped, setIsFlipped] = useState(showAnswer);
 
+  // Reset flip state when card changes
+  useEffect(() => {
+    setIsFlipped(showAnswer);
+  }, [card.id, showAnswer]);
+
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
 
   const handleRate = (difficulty: FlashcardDifficulty) => {
+    // Call the parent's onRate handler
     onRate(difficulty);
+    // Note: The parent component will handle moving to the next card
+    // and resetting the flip state via the useEffect above
   };
 
   const getCategoryIcon = (category: string): string => {
