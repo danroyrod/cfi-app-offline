@@ -72,6 +72,169 @@ export class AudioLessonService {
   }
 
   /**
+   * Generate a lite podcast-style script from a lesson plan (summary version)
+   * Includes: Objectives, Key Points (no full teaching scripts), Key Teaching Points, Completion Standards
+   */
+  generateLitePodcastScript(lesson: LessonPlan, areaName: string, lessonNumber: number, totalLessons: number): PodcastScript {
+    const segments: AudioSegment[] = [];
+
+    // INTRO
+    segments.push({
+      text: 'Welcome to CFI Training Audio - Lite Version.',
+      type: 'intro',
+      pauseAfter: 500
+    });
+
+    segments.push({
+      text: `Today's lesson: ${lesson.title}.`,
+      type: 'title',
+      pauseAfter: 700
+    });
+
+    segments.push({
+      text: `This is lesson ${lessonNumber} of ${totalLessons} in the ${areaName} series.`,
+      type: 'intro',
+      pauseAfter: 1000
+    });
+
+    // OBJECTIVES
+    if (lesson.objectives && lesson.objectives.length > 0) {
+      segments.push({
+        text: 'Learning Objectives.',
+        type: 'transition',
+        pauseAfter: 300
+      });
+
+      lesson.objectives.forEach((obj) => {
+        segments.push({
+          text: this.cleanTextForSpeech(obj),
+          type: 'content',
+          pauseAfter: 500
+        });
+      });
+
+      segments.push({
+        text: '',
+        type: 'content',
+        pauseAfter: 1000
+      });
+    }
+
+    // KEY POINTS FROM EACH LESSON COMPONENT (no full teaching scripts)
+    if (lesson.teachingScript && lesson.teachingScript.length > 0) {
+      segments.push({
+        text: 'Key Points.',
+        type: 'transition',
+        pauseAfter: 500
+      });
+
+      // Process each phase but only include key points
+      lesson.teachingScript.forEach(script => {
+        if (script.keyPoints && script.keyPoints.length > 0) {
+          // Remove time durations from phase names (e.g., "Introduction (10 minutes)" -> "Introduction")
+          const phaseName = script.phase.replace(/\s*\([^)]*\)\s*/g, '').trim();
+          segments.push({
+            text: `${phaseName} - Key Points.`,
+            type: 'transition',
+            pauseAfter: 300
+          });
+
+          script.keyPoints.forEach(point => {
+            segments.push({
+              text: this.cleanTextForSpeech(point),
+              type: 'content',
+              pauseAfter: 400
+            });
+          });
+
+          segments.push({
+            text: '',
+            type: 'content',
+            pauseAfter: 500
+          });
+        }
+      });
+    }
+
+    // KEY TEACHING POINTS
+    if (lesson.keyTeachingPoints && lesson.keyTeachingPoints.length > 0) {
+      segments.push({
+        text: 'Key Teaching Points.',
+        type: 'transition',
+        pauseAfter: 500
+      });
+
+      lesson.keyTeachingPoints.forEach((point) => {
+        segments.push({
+          text: `${this.cleanTextForSpeech(point)}`,
+          type: 'content',
+          pauseAfter: 500
+        });
+      });
+
+      segments.push({
+        text: '',
+        type: 'content',
+        pauseAfter: 1000
+      });
+    }
+
+    // COMPLETION STANDARDS
+    if (lesson.completionStandards && lesson.completionStandards.length > 0) {
+      segments.push({
+        text: 'Completion Standards.',
+        type: 'transition',
+        pauseAfter: 500
+      });
+
+      lesson.completionStandards.forEach((standard) => {
+        let standardText = this.cleanTextForSpeech(standard.standard);
+        if (standard.tolerance) {
+          standardText += ` Tolerance: ${standard.tolerance}.`;
+        }
+        if (standard.acsReference) {
+          standardText += ` ACS Reference: ${standard.acsReference}.`;
+        }
+        segments.push({
+          text: standardText,
+          type: 'content',
+          pauseAfter: 500
+        });
+      });
+
+      segments.push({
+        text: '',
+        type: 'content',
+        pauseAfter: 1000
+      });
+    }
+
+    // OUTRO
+    segments.push({
+      text: `That concludes the lite version of ${lesson.title}.`,
+      type: 'outro',
+      pauseAfter: 700
+    });
+
+    segments.push({
+      text: 'Thank you for learning with CFI Training Audio.',
+      type: 'outro',
+      pauseAfter: 500
+    });
+
+    // Estimate duration (rough calculation: ~150 words per minute)
+    const totalWords = segments.reduce((sum, seg) => sum + seg.text.split(' ').length, 0);
+    const estimatedDuration = Math.ceil((totalWords / 150) * 60) + 20; // Add buffer
+
+    return {
+      segments,
+      estimatedDuration,
+      lessonId: lesson.id,
+      lessonTitle: lesson.title
+    };
+  }
+
+  /**
    * Generate a podcast-style script from a lesson plan
    */
   generatePodcastScript(lesson: LessonPlan, areaName: string, lessonNumber: number, totalLessons: number): PodcastScript {
@@ -144,8 +307,10 @@ export class AudioLessonService {
 
       // Process each phase
       lesson.teachingScript.forEach(script => {
+        // Remove time durations from phase names (e.g., "Introduction (10 minutes)" -> "Introduction")
+        const phaseName = script.phase.replace(/\s*\([^)]*\)\s*/g, '').trim();
         segments.push({
-          text: `${script.phase}.`,
+          text: `${phaseName}.`,
           type: 'transition',
           pauseAfter: 500
         });

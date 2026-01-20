@@ -2,13 +2,16 @@ import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { LessonPlan } from '../lessonPlanTypes';
 
+export type AudioMode = 'full' | 'lite';
+
 interface AudioContextType {
   currentLesson: LessonPlan | null;
   playlist: LessonPlan[];
   currentIndex: number;
   isPlaying: boolean;
   showPlayer: boolean;
-  startPlaylist: (lessons: LessonPlan[], startIndex: number) => void;
+  audioMode: AudioMode;
+  startPlaylist: (lessons: LessonPlan[], startIndex: number, mode?: AudioMode) => void;
   setShowPlayer: (show: boolean) => void;
   goToNext: () => void;
   goToPrevious: () => void;
@@ -23,11 +26,13 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
+  const [audioMode, setAudioMode] = useState<AudioMode>('full');
 
-  const startPlaylist = (lessons: LessonPlan[], startIndex: number) => {
+  const startPlaylist = (lessons: LessonPlan[], startIndex: number, mode: AudioMode = 'full') => {
     setPlaylist(lessons);
     setCurrentIndex(startIndex);
     setCurrentLesson(lessons[startIndex]);
+    setAudioMode(mode);
     setShowPlayer(true);
     setIsPlaying(true);
   };
@@ -64,6 +69,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
         currentIndex,
         isPlaying,
         showPlayer,
+        audioMode,
         startPlaylist,
         setShowPlayer,
         goToNext,

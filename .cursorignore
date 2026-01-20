@@ -1,0 +1,128 @@
+# Exclude ALL JSON data files from indexing (major memory saver)
+# But allow config files (tsconfig.json, package.json, etc.)
+src/**/*.json
+public/**/*.json
+*.json
+!tsconfig*.json
+!package*.json
+!eslint*.json
+!vite.config.ts
+
+# Allow .vscode settings for editing
+!.vscode/settings.json
+
+# Exclude TypeScript build artifacts
+**/*.tsbuildinfo
+node_modules/.tmp/
+
+# Exclude all service files that import JSON (they cause memory issues)
+src/services/searchIndexService.ts
+src/services/enhancedFlashcardService.ts
+src/utils/breadcrumbs.ts
+
+# Exclude large data files specifically
+src/lessonPlansData.json
+src/acs_data.json
+public/enhancedFlashcards.json
+dist/enhancedFlashcards.json
+
+# Exclude build outputs
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Exclude archive directory (old docs and scripts)
+archive/
+
+# Exclude Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Exclude status/documentation markdown files (keep only essential ones)
+✅_*.md
+🎉_*.md
+🎊_*.md
+🎯_*.md
+🏆_*.md
+📊_*.md
+📋_*.md
+📍_*.md
+📻_*.md
+🔍_*.md
+🔵_*.md
+🧹_*.md
+🚀_*.md
+🌙_*.md
+🎧_*.md
+🎨_*.md
+
+# Exclude Python scripts (they're mostly one-off processing scripts)
+*.py
+
+# Exclude iOS build files
+ios/
+*.xcworkspace
+*.xcodeproj
+
+# Exclude logs
+*.log
+logs/
+
+# Exclude temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Exclude TypeScript build info
+*.tsbuildinfo
+node_modules/.tmp/
+
+# Exclude ALL service files that import JSON (causes TypeScript to parse JSON)
+src/services/searchIndexService.ts
+src/services/enhancedFlashcardService.ts
+src/utils/breadcrumbs.ts
+
+# Exclude pages that import JSON directly (16 files total)
+src/pages/LessonPlanDetail.tsx
+src/pages/AppendixDetail.tsx
+src/pages/AreasIndex.tsx
+src/pages/TaskDetail.tsx
+src/pages/AreaDetail.tsx
+src/pages/AudioLessons.tsx
+src/pages/Flashcards.tsx
+src/pages/LessonPlansByArea.tsx
+src/pages/Quizzes.tsx
+src/pages/LessonPlansIndex.tsx
+src/pages/LessonPlansAll.tsx
+src/components/GlobalAudioPlayer.tsx
+src/pages/LandingPage.tsx
+src/components/FlashcardCreator.tsx
+
+# Exclude package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Exclude large media files
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+*.mp3
+*.wav
+*.flac
+*.aac
+
+# Exclude large image files
+*.psd
+*.ai
+*.sketch
+

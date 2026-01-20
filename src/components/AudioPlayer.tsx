@@ -6,6 +6,7 @@ import { audioPresets, loadPresetPreference, savePresetPreference } from '../ser
 import type { AudioPreset } from '../services/audioPresets';
 import { bookmarkService } from '../services/bookmarkService';
 import type { Bookmark } from '../services/bookmarkService';
+import { useAudio } from '../contexts/AudioContext';
 import './AudioPlayer.css';
 
 interface AudioPlayerProps {
@@ -27,6 +28,7 @@ export default function AudioPlayer({
   onClose,
   onStopAudio
 }: AudioPlayerProps) {
+  const { audioMode } = useAudio();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -45,14 +47,33 @@ export default function AudioPlayer({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [volume, setVolume] = useState(currentPreset.volume);
+  const [playbackRate, setPlaybackRate] = useState(1.0);
+  const [showSpeedSelector, setShowSpeedSelector] = useState(false);
   
   const timerRef = useRef<number | null>(null);
   const isPlayingRef = useRef(false);
+  
+  // Available speed options
+  const speedOptions = [0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
 
   // Update volume when preset changes
   useEffect(() => {
     setVolume(currentPreset.volume);
+    // Reset speed to 1.0 when preset changes (preset rate is separate)
+    setPlaybackRate(1.0);
   }, [currentPreset]);
+  
+  // Handle speed change
+  const handleSpeedChange = (speed: number) => {
+    setPlaybackRate(speed);
+    audioService.setCurrentRate(speed);
+    setShowSpeedSelector(false);
+    // If currently playing, update rate immediately
+    if (isPlaying) {
+      // The rate will be used for the next segment in speakPodcastScript
+      console.log(`Speed changed to ${speed}x`);
+    }
+  };
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -135,12 +156,19 @@ export default function AudioPlayer({
   // Generate podcast script when lesson changes
   useEffect(() => {
     const lessonIndex = playlist.findIndex(l => l.id === currentLesson.id);
-    const script = audioService.generatePodcastScript(
-      currentLesson,
-      areaName,
-      lessonIndex + 1,
-      playlist.length
-    );
+    const script = audioMode === 'lite'
+      ? audioService.generateLitePodcastScript(
+          currentLesson,
+          areaName,
+          lessonIndex + 1,
+          playlist.length
+        )
+      : audioService.generatePodcastScript(
+          currentLesson,
+          areaName,
+          lessonIndex + 1,
+          playlist.length
+        );
     setPodcastScript(script);
     setDuration(script.estimatedDuration);
     setTotalSegments(script.segments.length);
@@ -157,7 +185,8 @@ export default function AudioPlayer({
 
     // Load bookmarks
     setBookmarks(bookmarkService.getLessonBookmarks(currentLesson.id));
-  }, [currentLesson, playlist, areaName]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentLesson, playlist, areaName, audioMode]);
 
   // Save progress periodically
   useEffect(() => {
@@ -255,7 +284,7 @@ export default function AudioPlayer({
       console.log('🎧 Starting audio playback...');
       console.log('Voice:', voiceToUse.name);
       console.log('Preset:', currentPreset.name);
-      console.log('Rate:', currentPreset.rate);
+      console.log('Rate:', playbackRate);
       console.log('Volume:', volume);
       console.log('Podcast script segments:', podcastScript.segments.length);
 
@@ -272,12 +301,12 @@ export default function AudioPlayer({
 
       // Set initial voice and rate in audio service
       audioService.setCurrentVoice(voiceToUse);
-      audioService.setCurrentRate(currentPreset.rate);
+      audioService.setCurrentRate(playbackRate);
 
       try {
         console.log('▶️ Calling audioService.speakPodcastScript...');
         await audioService.speakPodcastScript(podcastScript, {
-          rate: currentPreset.rate,
+          rate: playbackRate,
           voice: voiceToUse || undefined,
           onProgress: (segment, total) => {
             console.log(`Segment ${segment} of ${total}`);
@@ -575,6 +604,35 @@ export default function AudioPlayer({
           >
             🎙️
           </button>
+        </div>
+
+        <div className="audio-setting audio-speed-setting">
+          <label className="audio-setting-label">Speed</label>
+          <div className="audio-speed-control">
+            <button
+              className="audio-speed-btn"
+              onClick={() => setShowSpeedSelector(!showSpeedSelector)}
+              title="Playback speed"
+            >
+              {playbackRate}x
+            </button>
+            {showSpeedSelector && (
+              <>
+                <div className="audio-preset-backdrop" onClick={() => setShowSpeedSelector(false)} />
+                <div className="audio-speed-selector">
+                  {speedOptions.map((speed) => (
+                    <button
+                      key={speed}
+                      className={`audio-speed-option ${playbackRate === speed ? 'active' : ''}`}
+                      onClick={() => handleSpeedChange(speed)}
+                    >
+                      {speed}x
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         </div>
 
         <div className="audio-setting audio-volume-setting">

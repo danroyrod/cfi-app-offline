@@ -24,7 +24,9 @@ const LessonPlansIndex = lazy(() => import('./pages/LessonPlansIndex'));
 const LessonPlansByArea = lazy(() => import('./pages/LessonPlansByArea'));
 const LessonPlansAll = lazy(() => import('./pages/LessonPlansAll'));
 const LessonPlanDetail = lazy(() => import('./pages/LessonPlanDetail'));
-const AudioLessons = lazy(() => import('./pages/AudioLessons'));
+const AudioLessonsIndex = lazy(() => import('./pages/AudioLessonsIndex'));
+const AudioLessonsFull = lazy(() => import('./pages/AudioLessonsFull'));
+const AudioLessonsLite = lazy(() => import('./pages/AudioLessonsLite'));
 const Flashcards = lazy(() => import('./pages/Flashcards'));
 const FlashcardsStudy = lazy(() => import('./pages/FlashcardsStudy'));
 const Quizzes = lazy(() => import('./pages/Quizzes'));
@@ -141,7 +143,9 @@ function App() {
               <Route path="/lesson-plans/area/:areaNumber" element={<ProtectedRoute><LessonPlansByArea /></ProtectedRoute>} />
               <Route path="/lesson-plans/all" element={<ProtectedRoute><LessonPlansAll /></ProtectedRoute>} />
               <Route path="/lesson-plan/:lessonPlanId" element={<ProtectedRoute><LessonPlanDetail /></ProtectedRoute>} />
-              <Route path="/audio-lessons" element={<ProtectedRoute><AudioLessons /></ProtectedRoute>} />
+              <Route path="/audio-lessons" element={<ProtectedRoute><AudioLessonsIndex /></ProtectedRoute>} />
+              <Route path="/audio-lessons/full" element={<ProtectedRoute><AudioLessonsFull /></ProtectedRoute>} />
+              <Route path="/audio-lessons/lite" element={<ProtectedRoute><AudioLessonsLite /></ProtectedRoute>} />
               <Route path="/flashcards" element={<ProtectedRoute><Flashcards /></ProtectedRoute>} />
               <Route path="/flashcards/study" element={<ProtectedRoute><FlashcardsStudy /></ProtectedRoute>} />
               <Route path="/quizzes" element={<ProtectedRoute><Quizzes /></ProtectedRoute>} />
