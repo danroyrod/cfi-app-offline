@@ -4,7 +4,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 998;
+  z-index: 1000;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
   border: none;
@@ -19,6 +19,18 @@
   max-width: 320px;
   position: relative;
   overflow: hidden;
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .floating-audio-button:hover {
@@ -130,10 +142,11 @@
 /* Responsive */
 @media (max-width: 768px) {
   .floating-audio-button {
-    bottom: 80px; /* Above mobile nav if present */
+    bottom: 20px; /* Keep it visible at bottom */
     right: 15px;
     padding: 0.875rem 1.25rem;
     max-width: 280px;
+    z-index: 1001; /* Ensure it's above everything on mobile */
   }
 
   .floating-audio-icon {
@@ -151,10 +164,11 @@
 
 @media (max-width: 480px) {
   .floating-audio-button {
-    bottom: 70px;
+    bottom: 15px;
     right: 10px;
-    max-width: 240px;
+    max-width: calc(100vw - 20px);
     padding: 0.75rem 1rem;
+    z-index: 1001; /* Ensure it's above everything on small mobile */
   }
 
   .floating-audio-title {

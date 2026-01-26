@@ -7,6 +7,7 @@ import type { AudioPreset } from '../services/audioPresets';
 import { bookmarkService } from '../services/bookmarkService';
 import type { Bookmark } from '../services/bookmarkService';
 import { useAudio } from '../contexts/AudioContext';
+import { backgroundAudioManager } from '../utils/backgroundAudio';
 import './AudioPlayer.css';
 
 interface AudioPlayerProps {
@@ -75,6 +76,37 @@ export default function AudioPlayer({
     }
   };
 
+  // Setup visibility change handling to maintain playback
+  useEffect(() => {
+    const cleanup = backgroundAudioManager.setupVisibilityHandling((isVisible) => {
+      // When page becomes visible again, check if playback was interrupted
+      // Note: Web Speech API will pause when browser loses focus, but we maintain state
+      if (isVisible && isPlayingRef.current) {
+        // Check if speech synthesis actually stopped
+        if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
+          console.log('⚠️ Playback was interrupted (browser minimized/locked). Web Speech API limitation.');
+          console.log('💡 Tip: Keep the browser tab active for best playback experience.');
+          // Update our state to reflect reality
+          setIsPlaying(false);
+          isPlayingRef.current = false;
+          backgroundAudioManager.updatePlaybackState('paused');
+        }
+      }
+    });
+
+    return cleanup;
+  }, []);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      console.log('AudioPlayer unmounting, cleaning up...');
+      backgroundAudioManager.cleanup().catch(err => {
+        console.warn('Error during cleanup:', err);
+      });
+    };
+  }, []);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -98,11 +130,19 @@ export default function AudioPlayer({
           break;
         case 'ArrowUp': // Up arrow - volume up
           e.preventDefault();
-          setVolume(prev => Math.min(prev + 0.1, 1));
+          setVolume(prev => {
+            const newVolume = Math.min(prev + 0.1, 1);
+            audioService.setCurrentVolume(newVolume);
+            return newVolume;
+          });
           break;
         case 'ArrowDown': // Down arrow - volume down
           e.preventDefault();
-          setVolume(prev => Math.max(prev - 0.1, 0));
+          setVolume(prev => {
+            const newVolume = Math.max(prev - 0.1, 0);
+            audioService.setCurrentVolume(newVolume);
+            return newVolume;
+          });
           break;
         case 'n': // N - next
           if (onNext && e.shiftKey) {
@@ -185,6 +225,38 @@ export default function AudioPlayer({
 
     // Load bookmarks
     setBookmarks(bookmarkService.getLessonBookmarks(currentLesson.id));
+    
+    // Update Media Session metadata when lesson changes
+    if ('mediaSession' in navigator) {
+      backgroundAudioManager.initializeMediaSession(
+        {
+          title: currentLesson.title,
+          artist: `CFI Training - ${areaName}`,
+          album: 'Audio Lessons'
+        },
+        {
+          onPlay: () => {
+            if (!isPlaying) {
+              togglePlayPause();
+            }
+          },
+          onPause: () => {
+            if (isPlaying) {
+              togglePlayPause();
+            }
+          },
+          onPreviousTrack: onPrevious,
+          onNextTrack: onNext,
+          onSeekBackward: () => {
+            setCurrentTime(prev => Math.max(0, prev - 15));
+          },
+          onSeekForward: () => {
+            setCurrentTime(prev => Math.min(duration, prev + 30));
+          }
+        }
+      );
+    }
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLesson, playlist, areaName, audioMode]);
 
@@ -218,6 +290,15 @@ export default function AudioPlayer({
       audioService.pauseSpeech();
       setIsPlaying(false);
       isPlayingRef.current = false;
+      
+      // Update Media Session playback state
+      backgroundAudioManager.updatePlaybackState('paused');
+      
+      // Release wake lock when paused
+      backgroundAudioManager.releaseWakeLock().catch(err => {
+        console.warn('Error releasing wake lock:', err);
+      });
+      
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
@@ -292,6 +373,45 @@ export default function AudioPlayer({
       isPlayingRef.current = true;
       setIsLoading(false);
       
+      // Initialize background audio support
+      backgroundAudioManager.initializeMediaSession(
+        {
+          title: currentLesson.title,
+          artist: `CFI Training - ${areaName}`,
+          album: 'Audio Lessons'
+        },
+        {
+          onPlay: () => {
+            if (!isPlaying) {
+              togglePlayPause();
+            }
+          },
+          onPause: () => {
+            if (isPlaying) {
+              togglePlayPause();
+            }
+          },
+          onPreviousTrack: onPrevious,
+          onNextTrack: onNext,
+          onSeekBackward: () => {
+            // Skip backward 15 seconds
+            setCurrentTime(prev => Math.max(0, prev - 15));
+          },
+          onSeekForward: () => {
+            // Skip forward 30 seconds
+            setCurrentTime(prev => Math.min(duration, prev + 30));
+          }
+        }
+      );
+
+      // Request wake lock to prevent screen from sleeping
+      backgroundAudioManager.requestWakeLock().catch(err => {
+        console.warn('Wake lock not available:', err);
+      });
+
+      // Update Media Session playback state
+      backgroundAudioManager.updatePlaybackState('playing');
+      
       // Start timer
       timerRef.current = window.setInterval(() => {
         if (isPlayingRef.current) {
@@ -299,15 +419,17 @@ export default function AudioPlayer({
         }
       }, 1000);
 
-      // Set initial voice and rate in audio service
+      // Set initial voice, rate, and volume in audio service
       audioService.setCurrentVoice(voiceToUse);
       audioService.setCurrentRate(playbackRate);
+      audioService.setCurrentVolume(volume);
 
       try {
         console.log('▶️ Calling audioService.speakPodcastScript...');
         await audioService.speakPodcastScript(podcastScript, {
           rate: playbackRate,
           voice: voiceToUse || undefined,
+          volume: volume,
           onProgress: (segment, total) => {
             console.log(`Segment ${segment} of ${total}`);
             setCurrentSegment(segment);
@@ -317,13 +439,28 @@ export default function AudioPlayer({
             console.log('⏸️ Playback paused');
             setIsPlaying(false);
             isPlayingRef.current = false;
+            backgroundAudioManager.updatePlaybackState('paused');
+            backgroundAudioManager.releaseWakeLock().catch(err => {
+              console.warn('Error releasing wake lock:', err);
+            });
           }
         });
         console.log('✅ Audio playback completed successfully');
+        
+        // Update Media Session when playback completes
+        backgroundAudioManager.updatePlaybackState('paused');
+        backgroundAudioManager.releaseWakeLock().catch(err => {
+          console.warn('Error releasing wake lock:', err);
+        });
 
         // Finished playing
         setIsPlaying(false);
         isPlayingRef.current = false;
+        backgroundAudioManager.updatePlaybackState('paused');
+        backgroundAudioManager.releaseWakeLock().catch(err => {
+          console.warn('Error releasing wake lock:', err);
+        });
+        
         if (timerRef.current) {
           clearInterval(timerRef.current);
         }
@@ -340,6 +477,10 @@ export default function AudioPlayer({
         setIsPlaying(false);
         isPlayingRef.current = false;
         setIsLoading(false);
+        backgroundAudioManager.updatePlaybackState('paused');
+        backgroundAudioManager.releaseWakeLock().catch(err => {
+          console.warn('Error releasing wake lock:', err);
+        });
         if (timerRef.current) {
           clearInterval(timerRef.current);
         }
@@ -355,6 +496,13 @@ export default function AudioPlayer({
     isPlayingRef.current = false;
     setCurrentTime(0);
     setCurrentSegment(0);
+    
+    // Update Media Session and release wake lock
+    backgroundAudioManager.updatePlaybackState('paused');
+    backgroundAudioManager.releaseWakeLock().catch(err => {
+      console.warn('Error releasing wake lock:', err);
+    });
+    
     if (timerRef.current) {
       clearInterval(timerRef.current);
     }
@@ -643,7 +791,12 @@ export default function AudioPlayer({
             max="1"
             step="0.1"
             value={volume}
-            onChange={(e) => setVolume(parseFloat(e.target.value))}
+            onChange={(e) => {
+              const newVolume = parseFloat(e.target.value);
+              setVolume(newVolume);
+              // Update volume in audio service for mid-playback changes
+              audioService.setCurrentVolume(newVolume);
+            }}
             className="audio-volume-slider"
             title={`Volume: ${Math.round(volume * 100)}%`}
           />

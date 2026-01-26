@@ -21,11 +21,60 @@ export class AudioLessonService {
   private defaultVoice: SpeechSynthesisVoice | null = null;
   private currentVoice: SpeechSynthesisVoice | null = null;
   private currentRate: number = 1.0;
+  private currentVolume: number = 1.0;
   private isPlaying: boolean = false;
   
   constructor() {
     this.synthesis = window.speechSynthesis;
     this.loadVoices();
+  }
+
+  /**
+   * Score a voice for quality (higher is better)
+   */
+  private scoreVoiceQuality(voice: SpeechSynthesisVoice): number {
+    let score = 0;
+    const name = voice.name.toLowerCase();
+    const lang = voice.lang.toLowerCase();
+
+    // Language quality (prefer en-US over generic en)
+    if (lang === 'en-us') score += 100;
+    else if (lang.startsWith('en')) score += 50;
+
+    // Premium/Neural voice indicators (highest quality)
+    if (name.includes('neural')) score += 200;
+    if (name.includes('premium')) score += 150;
+    if (name.includes('enhanced')) score += 100;
+
+    // Known high-quality voice providers
+    if (name.includes('google')) {
+      score += 80;
+      if (name.includes('us english')) score += 50;
+      if (name.includes('neural')) score += 100;
+    }
+    if (name.includes('microsoft')) {
+      score += 70;
+      // Microsoft Neural voices are excellent
+      if (name.includes('aria') || name.includes('jenny') || name.includes('guy')) score += 100;
+      if (name.includes('david') || name.includes('zira')) score += 60;
+    }
+    if (name.includes('amazon') || name.includes('polly')) {
+      score += 90;
+      if (name.includes('neural')) score += 100;
+    }
+    if (name.includes('apple')) {
+      score += 75;
+      // macOS premium voices
+      if (name.includes('samantha') || name.includes('alex') || name.includes('daniel')) score += 80;
+    }
+
+    // Voice type indicators
+    if (name.includes('female') || name.includes('male')) score += 10;
+    
+    // Avoid system/default voices (usually lower quality)
+    if (name.includes('system') || name.includes('default')) score -= 50;
+
+    return score;
   }
 
   /**
@@ -35,25 +84,67 @@ export class AudioLessonService {
     const setVoice = () => {
       const voices = this.synthesis.getVoices();
       
-      // Prefer high-quality English voices
+      if (voices.length === 0) {
+        return;
+      }
+
+      // Enhanced list of preferred high-quality voices (in priority order)
       const preferredVoices = [
+        // Google Neural voices (highest quality)
+        'Google US English (Neural)',
         'Google US English',
+        'Google en-US Neural',
+        // Microsoft Neural voices
+        'Microsoft Aria',
+        'Microsoft Jenny',
+        'Microsoft Guy',
         'Microsoft David',
         'Microsoft Zira',
-        'Alex', // macOS
-        'Samantha', // macOS
+        // Amazon/Polly voices
+        'Amazon Polly',
+        'Polly Neural',
+        // Apple/macOS premium voices
+        'Samantha',
+        'Alex',
+        'Daniel',
+        'Victoria',
+        // Other known quality voices
+        'Karen', // macOS
+        'Moira', // macOS
+        'Tessa', // macOS
       ];
 
+      // First, try exact or partial matches from preferred list
       for (const preferred of preferredVoices) {
-        const voice = voices.find(v => v.name.includes(preferred));
+        const voice = voices.find(v => 
+          v.name.toLowerCase().includes(preferred.toLowerCase())
+        );
         if (voice) {
           this.defaultVoice = voice;
+          console.log('🎤 Selected preferred voice:', voice.name);
           return;
         }
       }
 
-      // Fallback to any English voice
-      this.defaultVoice = voices.find(v => v.lang.startsWith('en')) || voices[0];
+      // If no preferred voice found, score all English voices and pick the best
+      const englishVoices = voices.filter(v => v.lang.startsWith('en'));
+      if (englishVoices.length > 0) {
+        // Sort by quality score (highest first)
+        englishVoices.sort((a, b) => {
+          const scoreA = this.scoreVoiceQuality(a);
+          const scoreB = this.scoreVoiceQuality(b);
+          return scoreB - scoreA; // Descending order
+        });
+
+        this.defaultVoice = englishVoices[0];
+        console.log('🎤 Selected highest-scored voice:', this.defaultVoice.name, 
+          `(score: ${this.scoreVoiceQuality(this.defaultVoice)})`);
+        return;
+      }
+
+      // Final fallback: any available voice
+      this.defaultVoice = voices[0];
+      console.log('🎤 Using fallback voice:', this.defaultVoice?.name);
     };
 
     setVoice();
@@ -65,10 +156,17 @@ export class AudioLessonService {
   }
 
   /**
-   * Get all available voices
+   * Get all available voices, sorted by quality (best first)
    */
   getAvailableVoices(): SpeechSynthesisVoice[] {
-    return this.synthesis.getVoices().filter(v => v.lang.startsWith('en'));
+    const voices = this.synthesis.getVoices().filter(v => v.lang.startsWith('en'));
+    
+    // Sort by quality score (highest first) so users see best voices at the top
+    return voices.sort((a, b) => {
+      const scoreA = this.scoreVoiceQuality(a);
+      const scoreB = this.scoreVoiceQuality(b);
+      return scoreB - scoreA; // Descending order
+    });
   }
 
   /**
@@ -82,19 +180,19 @@ export class AudioLessonService {
     segments.push({
       text: 'Welcome to CFI Training Audio - Lite Version.',
       type: 'intro',
-      pauseAfter: 500
+      pauseAfter: 800
     });
 
     segments.push({
       text: `Today's lesson: ${lesson.title}.`,
       type: 'title',
-      pauseAfter: 700
+      pauseAfter: 1000
     });
 
     segments.push({
       text: `This is lesson ${lessonNumber} of ${totalLessons} in the ${areaName} series.`,
       type: 'intro',
-      pauseAfter: 1000
+      pauseAfter: 1200
     });
 
     // OBJECTIVES
@@ -125,32 +223,32 @@ export class AudioLessonService {
       segments.push({
         text: 'Key Points.',
         type: 'transition',
-        pauseAfter: 500
+        pauseAfter: 700
       });
 
       // Process each phase but only include key points
-      lesson.teachingScript.forEach(script => {
+      lesson.teachingScript.forEach((script, scriptIndex) => {
         if (script.keyPoints && script.keyPoints.length > 0) {
           // Remove time durations from phase names (e.g., "Introduction (10 minutes)" -> "Introduction")
           const phaseName = script.phase.replace(/\s*\([^)]*\)\s*/g, '').trim();
           segments.push({
             text: `${phaseName} - Key Points.`,
             type: 'transition',
-            pauseAfter: 300
+            pauseAfter: 500
           });
 
-          script.keyPoints.forEach(point => {
+          script.keyPoints.forEach((point, pointIndex) => {
             segments.push({
               text: this.cleanTextForSpeech(point),
               type: 'content',
-              pauseAfter: 400
+              pauseAfter: pointIndex === script.keyPoints.length - 1 ? 700 : 500
             });
           });
 
           segments.push({
             text: '',
             type: 'content',
-            pauseAfter: 500
+            pauseAfter: scriptIndex === lesson.teachingScript.length - 1 ? 1000 : 700
           });
         }
       });
@@ -161,21 +259,21 @@ export class AudioLessonService {
       segments.push({
         text: 'Key Teaching Points.',
         type: 'transition',
-        pauseAfter: 500
+        pauseAfter: 700
       });
 
-      lesson.keyTeachingPoints.forEach((point) => {
+      lesson.keyTeachingPoints.forEach((point, index) => {
         segments.push({
           text: `${this.cleanTextForSpeech(point)}`,
           type: 'content',
-          pauseAfter: 500
+          pauseAfter: index === lesson.keyTeachingPoints.length - 1 ? 800 : 600
         });
       });
 
       segments.push({
         text: '',
         type: 'content',
-        pauseAfter: 1000
+        pauseAfter: 1200
       });
     }
 
@@ -184,28 +282,26 @@ export class AudioLessonService {
       segments.push({
         text: 'Completion Standards.',
         type: 'transition',
-        pauseAfter: 500
+        pauseAfter: 700
       });
 
-      lesson.completionStandards.forEach((standard) => {
+      lesson.completionStandards.forEach((standard, index) => {
         let standardText = this.cleanTextForSpeech(standard.standard);
         if (standard.tolerance) {
           standardText += ` Tolerance: ${standard.tolerance}.`;
         }
-        if (standard.acsReference) {
-          standardText += ` ACS Reference: ${standard.acsReference}.`;
-        }
+        // ACS Reference/task code excluded from audio - not needed for listening
         segments.push({
           text: standardText,
           type: 'content',
-          pauseAfter: 500
+          pauseAfter: index === lesson.completionStandards.length - 1 ? 800 : 600
         });
       });
 
       segments.push({
         text: '',
         type: 'content',
-        pauseAfter: 1000
+        pauseAfter: 1200
       });
     }
 
@@ -213,13 +309,7 @@ export class AudioLessonService {
     segments.push({
       text: `That concludes the lite version of ${lesson.title}.`,
       type: 'outro',
-      pauseAfter: 700
-    });
-
-    segments.push({
-      text: 'Thank you for learning with CFI Training Audio.',
-      type: 'outro',
-      pauseAfter: 500
+      pauseAfter: 1000
     });
 
     // Estimate duration (rough calculation: ~150 words per minute)
@@ -244,19 +334,19 @@ export class AudioLessonService {
     segments.push({
       text: 'Welcome to CFI Training Audio.',
       type: 'intro',
-      pauseAfter: 500
+      pauseAfter: 800
     });
 
     segments.push({
       text: `Today's lesson: ${lesson.title}.`,
       type: 'title',
-      pauseAfter: 700
+      pauseAfter: 1000
     });
 
     segments.push({
       text: `This is lesson ${lessonNumber} of ${totalLessons} in the ${areaName} series.`,
       type: 'intro',
-      pauseAfter: 1000
+      pauseAfter: 1200
     });
 
     // OVERVIEW
@@ -264,13 +354,13 @@ export class AudioLessonService {
       segments.push({
         text: 'Overview.',
         type: 'transition',
-        pauseAfter: 300
+        pauseAfter: 600
       });
       
       segments.push({
         text: this.cleanTextForSpeech(lesson.overview),
         type: 'content',
-        pauseAfter: 1000
+        pauseAfter: 1200
       });
     }
 
@@ -279,21 +369,21 @@ export class AudioLessonService {
       segments.push({
         text: 'Learning Objectives.',
         type: 'transition',
-        pauseAfter: 300
+        pauseAfter: 600
       });
 
-      lesson.objectives.forEach((obj) => {
+      lesson.objectives.forEach((obj, index) => {
         segments.push({
           text: this.cleanTextForSpeech(obj),
           type: 'content',
-          pauseAfter: 500
+          pauseAfter: index === lesson.objectives.length - 1 ? 800 : 600
         });
       });
 
       segments.push({
         text: '',
         type: 'content',
-        pauseAfter: 1000
+        pauseAfter: 1200
       });
     }
 
@@ -306,13 +396,13 @@ export class AudioLessonService {
       });
 
       // Process each phase
-      lesson.teachingScript.forEach(script => {
+      lesson.teachingScript.forEach((script, scriptIndex) => {
         // Remove time durations from phase names (e.g., "Introduction (10 minutes)" -> "Introduction")
         const phaseName = script.phase.replace(/\s*\([^)]*\)\s*/g, '').trim();
         segments.push({
           text: `${phaseName}.`,
           type: 'transition',
-          pauseAfter: 500
+          pauseAfter: 700
         });
 
         // Instructor actions
@@ -320,14 +410,14 @@ export class AudioLessonService {
           segments.push({
             text: 'Instructor actions.',
             type: 'transition',
-            pauseAfter: 200
+            pauseAfter: 500
           });
 
-          script.instructorActions.forEach(action => {
+          script.instructorActions.forEach((action, actionIndex) => {
             segments.push({
               text: this.cleanTextForSpeech(action),
               type: 'content',
-              pauseAfter: 400
+              pauseAfter: actionIndex === script.instructorActions.length - 1 ? 600 : 500
             });
           });
         }
@@ -340,14 +430,14 @@ export class AudioLessonService {
           segments.push({
             text: 'Key teaching points.',
             type: 'transition',
-            pauseAfter: 200
+            pauseAfter: 500
           });
 
-          script.keyPoints.forEach(point => {
+          script.keyPoints.forEach((point, pointIndex) => {
             segments.push({
               text: this.cleanTextForSpeech(point),
               type: 'content',
-              pauseAfter: 400
+              pauseAfter: pointIndex === script.keyPoints.length - 1 ? 700 : 500
             });
           });
         }
@@ -355,7 +445,7 @@ export class AudioLessonService {
         segments.push({
           text: '',
           type: 'content',
-          pauseAfter: 1000
+          pauseAfter: scriptIndex === lesson.teachingScript.length - 1 ? 1200 : 1000
         });
       });
     }
@@ -365,21 +455,21 @@ export class AudioLessonService {
       segments.push({
         text: 'Key Teaching Points.',
         type: 'transition',
-        pauseAfter: 500
+        pauseAfter: 700
       });
 
-      lesson.keyTeachingPoints.forEach((point) => {
+      lesson.keyTeachingPoints.forEach((point, index) => {
         segments.push({
           text: `${this.cleanTextForSpeech(point)}`,
           type: 'content',
-          pauseAfter: 500
+          pauseAfter: index === lesson.keyTeachingPoints.length - 1 ? 800 : 600
         });
       });
 
       segments.push({
         text: '',
         type: 'content',
-        pauseAfter: 1000
+        pauseAfter: 1200
       });
     }
 
@@ -390,13 +480,7 @@ export class AudioLessonService {
     segments.push({
       text: `That concludes ${lesson.title}.`,
       type: 'outro',
-      pauseAfter: 700
-    });
-
-    segments.push({
-      text: 'Thank you for learning with CFI Training Audio.',
-      type: 'outro',
-      pauseAfter: 500
+      pauseAfter: 1000
     });
 
     // Estimate duration (rough calculation: ~150 words per minute)
@@ -433,9 +517,77 @@ export class AudioLessonService {
       .replace(/\bkts\b/gi, 'knots')
       .replace(/\bft\b/gi, 'feet')
       .replace(/\balt\b/gi, 'altitude')
+      // Add natural pauses: add commas before conjunctions in long sentences
+      .replace(/\s+and\s+/gi, ', and ')
+      .replace(/\s+or\s+/gi, ', or ')
+      .replace(/\s+but\s+/gi, ', but ')
+      // Add pauses after introductory phrases (if sentence is long)
+      .replace(/(\w+),(\s+\w+\s+[A-Z])/g, '$1,$2') // Add comma before capitalized words (likely new clause)
       // Clean up extra spaces
       .replace(/\s+/g, ' ')
       .trim();
+  }
+
+  /**
+   * Split long sentences into more natural chunks for better speech flow
+   */
+  private chunkTextForNaturalSpeech(text: string): string[] {
+    // If text is short enough, return as single chunk
+    if (text.length <= 150) {
+      return [text];
+    }
+
+    const chunks: string[] = [];
+    const sentences = text.split(/([.!?]+\s+)/).filter(s => s.trim().length > 0);
+    
+    for (let i = 0; i < sentences.length; i++) {
+      let sentence = sentences[i];
+      
+      // If sentence is very long (>200 chars), try to split at natural break points
+      if (sentence.length > 200) {
+        // Split at commas, semicolons, or conjunctions
+        const breakPoints = [
+          /,\s+/g,
+          /;\s+/g,
+          /\s+and\s+/gi,
+          /\s+or\s+/gi,
+          /\s+but\s+/gi,
+          /\s+however\s+/gi,
+          /\s+therefore\s+/gi,
+        ];
+
+        let split = false;
+        for (const pattern of breakPoints) {
+          const matches = [...sentence.matchAll(pattern)];
+          if (matches.length > 0) {
+            // Find the middle break point for balanced chunks
+            const midPoint = Math.floor(matches.length / 2);
+            if (midPoint > 0) {
+              const splitIndex = matches[midPoint].index! + matches[midPoint][0].length;
+              chunks.push(sentence.substring(0, splitIndex).trim());
+              sentence = sentence.substring(splitIndex).trim();
+              split = true;
+              break;
+            }
+          }
+        }
+
+        if (!split) {
+          // If no natural break point, split at middle space
+          const midSpace = sentence.lastIndexOf(' ', Math.floor(sentence.length / 2));
+          if (midSpace > 0) {
+            chunks.push(sentence.substring(0, midSpace).trim() + ',');
+            sentence = sentence.substring(midSpace).trim();
+          }
+        }
+      }
+      
+      if (sentence.trim().length > 0) {
+        chunks.push(sentence.trim());
+      }
+    }
+
+    return chunks.length > 0 ? chunks : [text];
   }
 
   /**
@@ -453,7 +605,7 @@ export class AudioLessonService {
       
       utterance.voice = options?.voice || this.defaultVoice;
       utterance.rate = options?.rate || 1.0;
-      utterance.pitch = options?.pitch || 1.0;
+      utterance.pitch = options?.pitch !== undefined ? options.pitch : 0.95; // Slightly lower pitch for more natural sound
       utterance.volume = options?.volume || 1.0;
 
       console.log('🎤 Utterance config:', {
@@ -502,6 +654,13 @@ export class AudioLessonService {
   }
 
   /**
+   * Set current volume (for mid-playback changes)
+   */
+  setCurrentVolume(volume: number): void {
+    this.currentVolume = Math.max(0, Math.min(1, volume)); // Clamp between 0 and 1
+  }
+
+  /**
    * Get current voice
    */
   getCurrentVoice(): SpeechSynthesisVoice | null {
@@ -516,6 +675,13 @@ export class AudioLessonService {
   }
 
   /**
+   * Get current volume
+   */
+  getCurrentVolume(): number {
+    return this.currentVolume;
+  }
+
+  /**
    * Speak an entire podcast script
    */
   async speakPodcastScript(
@@ -523,6 +689,7 @@ export class AudioLessonService {
     options?: {
       voice?: SpeechSynthesisVoice;
       rate?: number;
+      volume?: number;
       onProgress?: (segment: number, total: number) => void;
       onPause?: () => void;
     }
@@ -532,7 +699,7 @@ export class AudioLessonService {
     // Cancel any existing speech to prevent queue issues
     this.synthesis.cancel();
     
-    // Initialize current voice and rate from options
+    // Initialize current voice, rate, and volume from options
     if (options?.voice) {
       this.currentVoice = options.voice;
     } else if (!this.currentVoice) {
@@ -541,6 +708,10 @@ export class AudioLessonService {
     
     if (options?.rate !== undefined) {
       this.currentRate = options.rate;
+    }
+    
+    if (options?.volume !== undefined) {
+      this.currentVolume = Math.max(0, Math.min(1, options.volume));
     }
     
     this.isPlaying = true;
@@ -561,11 +732,25 @@ export class AudioLessonService {
       }
 
       if (segment.text) {
-        // Use current voice and rate (which can be updated mid-playback)
-        await this.textToSpeech(segment.text, {
-          voice: this.currentVoice || undefined,
-          rate: this.currentRate
-        });
+        // Chunk long text for more natural speech flow
+        const textChunks = this.chunkTextForNaturalSpeech(segment.text);
+        
+        for (let j = 0; j < textChunks.length; j++) {
+          const chunk = textChunks[j];
+          
+          // Use current voice, rate, and volume (which can be updated mid-playback)
+          await this.textToSpeech(chunk, {
+            voice: this.currentVoice || undefined,
+            rate: this.currentRate,
+            pitch: 0.95, // Natural pitch
+            volume: this.currentVolume
+          });
+          
+          // Add brief pause between chunks (except for last chunk)
+          if (j < textChunks.length - 1) {
+            await this.pause(200); // Brief pause between chunks
+          }
+        }
       }
 
       if (segment.pauseAfter) {

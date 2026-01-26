@@ -4,6 +4,7 @@ import lessonPlansDataRaw from '../lessonPlansData.json';
 import acsDataRaw from '../acs_data.json';
 import type { LessonPlan } from '../lessonPlanTypes';
 import { useAudio } from '../contexts/AudioContext';
+import { audioService } from '../services/audioService';
 import PlaylistManager from '../components/PlaylistManager';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { getBreadcrumbsForRoute } from '../utils/breadcrumbs';
@@ -34,13 +35,23 @@ export default function AudioLessons() {
     return Array.from(areaSet).sort();
   }, [allLessons]);
 
-  // Helper to convert time string to minutes
-  const parseTime = (timeStr: string): number => {
-    const match = timeStr.match(/(\d+\.?\d*)\s*(hour|min)/);
-    if (!match) return 30; // default
-    const value = parseFloat(match[1]);
-    const unit = match[2];
-    return unit.startsWith('hour') ? value * 60 : value;
+  // Calculate actual audio duration for Lite lessons (in minutes, rounded)
+  const getLiteAudioDuration = (lesson: LessonPlan, allLessons: LessonPlan[]): number => {
+    const lessonIndex = allLessons.findIndex(l => l.id === lesson.id);
+    const areaMatch = lesson.id.match(/LP-([IVX]+)/);
+    const areaCode = areaMatch ? areaMatch[1] : '';
+    const area = acsData.areas.find(a => a.number === areaCode);
+    const areaName = area?.name || `Area ${areaCode}`;
+    
+    const script = audioService.generateLitePodcastScript(
+      lesson,
+      areaName,
+      lessonIndex + 1,
+      allLessons.length
+    );
+    
+    // Convert seconds to minutes and round to nearest minute
+    return Math.round(script.estimatedDuration / 60);
   };
 
   // Filter and sort lessons
@@ -67,7 +78,10 @@ export default function AudioLessons() {
         case 'title':
           return a.title.localeCompare(b.title);
         case 'duration':
-          return parseTime(a.estimatedTime) - parseTime(b.estimatedTime);
+          // Calculate durations on the fly for sorting
+          const aDuration = getLiteAudioDuration(a, allLessons);
+          const bDuration = getLiteAudioDuration(b, allLessons);
+          return aDuration - bDuration;
         case 'order':
         default:
           return a.id.localeCompare(b.id);
@@ -76,6 +90,15 @@ export default function AudioLessons() {
 
     return filtered;
   }, [allLessons, searchQuery, selectedArea, sortBy]);
+
+  // Memoize audio durations for filtered lessons (computed after filtering)
+  const lessonDurations = useMemo(() => {
+    const durations = new Map<string, number>();
+    filteredLessons.forEach(lesson => {
+      durations.set(lesson.id, getLiteAudioDuration(lesson, allLessons));
+    });
+    return durations;
+  }, [filteredLessons, allLessons]);
 
   // Start playing a lesson
   const playLesson = (lesson: LessonPlan) => {
@@ -110,12 +133,12 @@ export default function AudioLessons() {
     return area?.name || `Area ${areaCode}`;
   };
 
-  // Format duration
-  const formatDuration = (timeStr: string): string => {
-    const minutes = parseTime(timeStr);
-    if (minutes < 60) return `${Math.round(minutes)} min`;
+  // Format duration (for Lite lessons, use actual audio duration)
+  const formatDuration = (lesson: LessonPlan): string => {
+    const minutes = lessonDurations.get(lesson.id) || 0;
+    if (minutes < 60) return `${minutes} min`;
     const hours = Math.floor(minutes / 60);
-    const mins = Math.round(minutes % 60);
+    const mins = minutes % 60;
     return `${hours}h ${mins}m`;
   };
 
@@ -147,7 +170,7 @@ export default function AudioLessons() {
           </div>
           <div className="audio-stat-card">
             <div className="audio-stat-number">
-              {Math.round(filteredLessons.reduce((sum, l) => sum + parseTime(l.estimatedTime), 0) / 60)}h
+              {Math.round(filteredLessons.reduce((sum, l) => sum + (lessonDurations.get(l.id) || 0), 0) / 60)}h
             </div>
             <div className="audio-stat-label">Total Content</div>
           </div>
@@ -223,7 +246,7 @@ export default function AudioLessons() {
                 <div className="audio-lesson-meta">
                   <div className="audio-lesson-area">{getAreaName(lesson)}</div>
                   <div className="audio-lesson-duration">
-                    ⏱️ {formatDuration(lesson.estimatedTime)}
+                    ⏱️ {formatDuration(lesson)}
                   </div>
                 </div>
               </div>
