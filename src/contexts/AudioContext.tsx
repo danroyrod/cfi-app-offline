@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { LessonPlan } from '../lessonPlanTypes';
 
-export type AudioMode = 'full' | 'lite';
+export type AudioPlaylistMode = 'full' | 'lite';
 
 interface AudioContextType {
   currentLesson: LessonPlan | null;
@@ -10,8 +10,8 @@ interface AudioContextType {
   currentIndex: number;
   isPlaying: boolean;
   showPlayer: boolean;
-  audioMode: AudioMode;
-  startPlaylist: (lessons: LessonPlan[], startIndex: number, mode?: AudioMode) => void;
+  playlistMode: AudioPlaylistMode;
+  startPlaylist: (lessons: LessonPlan[], startIndex: number, mode?: AudioPlaylistMode) => void;
   setShowPlayer: (show: boolean) => void;
   goToNext: () => void;
   goToPrevious: () => void;
@@ -26,13 +26,13 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showPlayer, setShowPlayer] = useState(false);
-  const [audioMode, setAudioMode] = useState<AudioMode>('full');
+  const [playlistMode, setPlaylistMode] = useState<AudioPlaylistMode>('full');
 
-  const startPlaylist = (lessons: LessonPlan[], startIndex: number, mode: AudioMode = 'full') => {
+  const startPlaylist = (lessons: LessonPlan[], startIndex: number, mode: AudioPlaylistMode = 'full') => {
     setPlaylist(lessons);
     setCurrentIndex(startIndex);
     setCurrentLesson(lessons[startIndex]);
-    setAudioMode(mode);
+    setPlaylistMode(mode);
     setShowPlayer(true);
     setIsPlaying(true);
   };
@@ -69,7 +69,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
         currentIndex,
         isPlaying,
         showPlayer,
-        audioMode,
+        playlistMode,
         startPlaylist,
         setShowPlayer,
         goToNext,
@@ -82,6 +82,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   );
 }
 
+/* eslint-disable react-refresh/only-export-components -- useAudio is a hook, same file as provider */
 export function useAudio() {
   const context = useContext(AudioContext);
   if (context === undefined) {

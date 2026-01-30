@@ -10,10 +10,31 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import { getBreadcrumbsForRoute } from '../utils/breadcrumbs';
 import './AudioLessons.css';
 
-const lessonPlansData = lessonPlansDataRaw as { lessonPlans: LessonPlan[] };
-const acsData = acsDataRaw as { areas: Array<{ number: string; name: string; tasks: any[] }> };
+const lessonPlansData = lessonPlansDataRaw as { lessonPlans?: LessonPlan[] };
+const acsData = acsDataRaw as { areas?: Array<{ number: string; name: string; tasks: { id?: string; name?: string }[] }> };
 
-export default function AudioLessons() {
+const safeLessonPlans = lessonPlansData?.lessonPlans ?? [];
+const safeAreas = acsData?.areas ?? [];
+
+// Cache lite audio duration (seconds) per lesson id to avoid recomputing
+const liteDurationCache: Record<string, number> = {};
+function getLiteDurationSeconds(lesson: LessonPlan, areaName: string): number {
+  if (liteDurationCache[lesson.id] !== undefined) {
+    return liteDurationCache[lesson.id];
+  }
+  const script = audioService.generateLitePodcastScript(lesson, areaName, 1, 1);
+  liteDurationCache[lesson.id] = script.estimatedDuration;
+  return script.estimatedDuration;
+}
+function formatLiteDuration(seconds: number): string {
+  const mins = Math.round(seconds / 60);
+  if (mins < 60) return `~${mins} min`;
+  const hours = Math.floor(mins / 60);
+  const m = mins % 60;
+  return m > 0 ? `~${hours}h ${m}m` : `~${hours}h`;
+}
+
+export default function AudioLessonsLite() {
   const location = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedArea, setSelectedArea] = useState('all');
@@ -21,7 +42,7 @@ export default function AudioLessons() {
   const [showPlaylistManager, setShowPlaylistManager] = useState(false);
   const { startPlaylist } = useAudio();
 
-  const allLessons: LessonPlan[] = lessonPlansData.lessonPlans;
+  const allLessons: LessonPlan[] = safeLessonPlans;
 
   // Get unique areas
   const areas = useMemo(() => {
@@ -35,30 +56,19 @@ export default function AudioLessons() {
     return Array.from(areaSet).sort();
   }, [allLessons]);
 
-  // Calculate actual audio duration for Lite lessons (in minutes, rounded)
-  const getLiteAudioDuration = (lesson: LessonPlan, allLessons: LessonPlan[]): number => {
-    const lessonIndex = allLessons.findIndex(l => l.id === lesson.id);
+  // Get area name for a lesson
+  const getAreaName = (lesson: LessonPlan): string => {
     const areaMatch = lesson.id.match(/LP-([IVX]+)/);
-    const areaCode = areaMatch ? areaMatch[1] : '';
-    const area = acsData.areas.find(a => a.number === areaCode);
-    const areaName = area?.name || `Area ${areaCode}`;
-    
-    const script = audioService.generateLitePodcastScript(
-      lesson,
-      areaName,
-      lessonIndex + 1,
-      allLessons.length
-    );
-    
-    // Convert seconds to minutes and round to nearest minute
-    return Math.round(script.estimatedDuration / 60);
+    if (!areaMatch) return 'Unknown';
+    const areaCode = areaMatch[1];
+    const area = safeAreas.find(a => a.number === areaCode);
+    return area?.name || `Area ${areaCode}`;
   };
 
-  // Filter and sort lessons
+  // Filter and sort lessons (sort by lite audio duration when duration selected)
   const filteredLessons = useMemo(() => {
     let filtered = allLessons;
 
-    // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(lesson =>
@@ -67,21 +77,16 @@ export default function AudioLessons() {
       );
     }
 
-    // Filter by area
     if (selectedArea !== 'all') {
       filtered = filtered.filter(lesson => lesson.id.startsWith(`LP-${selectedArea}`));
     }
 
-    // Sort
     filtered = [...filtered].sort((a, b) => {
       switch (sortBy) {
         case 'title':
           return a.title.localeCompare(b.title);
         case 'duration':
-          // Calculate durations on the fly for sorting
-          const aDuration = getLiteAudioDuration(a, allLessons);
-          const bDuration = getLiteAudioDuration(b, allLessons);
-          return aDuration - bDuration;
+          return getLiteDurationSeconds(a, getAreaName(a)) - getLiteDurationSeconds(b, getAreaName(b));
         case 'order':
         default:
           return a.id.localeCompare(b.id);
@@ -91,61 +96,35 @@ export default function AudioLessons() {
     return filtered;
   }, [allLessons, searchQuery, selectedArea, sortBy]);
 
-  // Memoize audio durations for filtered lessons (computed after filtering)
-  const lessonDurations = useMemo(() => {
-    const durations = new Map<string, number>();
-    filteredLessons.forEach(lesson => {
-      durations.set(lesson.id, getLiteAudioDuration(lesson, allLessons));
-    });
-    return durations;
-  }, [filteredLessons, allLessons]);
+  // Total lite audio duration (seconds) for filtered lessons
+  const totalLiteSeconds = useMemo(() => {
+    return filteredLessons.reduce((sum, l) => sum + getLiteDurationSeconds(l, getAreaName(l)), 0);
+  }, [filteredLessons]);
 
-  // Start playing a lesson
   const playLesson = (lesson: LessonPlan) => {
     const index = filteredLessons.findIndex(l => l.id === lesson.id);
-    startPlaylist(filteredLessons, index, 'lite');
+    startPlaylist(filteredLessons, index >= 0 ? index : 0, 'lite');
   };
 
-  // Play all lessons
   const playAll = () => {
     startPlaylist(filteredLessons, 0, 'lite');
   };
 
-  // Play custom playlist
   const playCustomPlaylist = (lessonIds: string[]) => {
     const lessons = lessonIds
       .map(id => allLessons.find(l => l.id === id))
       .filter((l): l is LessonPlan => l !== undefined);
-    
+
     if (lessons.length > 0) {
       startPlaylist(lessons, 0, 'lite');
       setShowPlaylistManager(false);
     }
   };
 
-  // Get area name for display
-  const getAreaName = (lesson: LessonPlan): string => {
-    const areaMatch = lesson.id.match(/LP-([IVX]+)/);
-    if (!areaMatch) return 'Unknown';
-    
-    const areaCode = areaMatch[1];
-    const area = acsData.areas.find(a => a.number === areaCode);
-    return area?.name || `Area ${areaCode}`;
-  };
-
-  // Format duration (for Lite lessons, use actual audio duration)
-  const formatDuration = (lesson: LessonPlan): string => {
-    const minutes = lessonDurations.get(lesson.id) || 0;
-    if (minutes < 60) return `${minutes} min`;
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return `${hours}h ${mins}m`;
-  };
-
   return (
     <div className="audio-lessons-page">
       <div className="container">
-        <Breadcrumbs items={getBreadcrumbsForRoute(location.pathname)} />
+        <Breadcrumbs items={getBreadcrumbsForRoute(location.pathname) ?? []} />
         {/* Header */}
         <div className="audio-header">
           <Link to="/audio-lessons" className="back-link">← Back to Audio Lessons</Link>
@@ -154,7 +133,7 @@ export default function AudioLessons() {
             Lite Audio Lessons
           </h1>
           <p className="audio-page-subtitle">
-            Quick summaries with objectives, key points, and completion standards. Perfect for quick review.
+            Quick summaries with objectives, key points, and key teaching points. Perfect for quick review.
           </p>
         </div>
 
@@ -170,9 +149,9 @@ export default function AudioLessons() {
           </div>
           <div className="audio-stat-card">
             <div className="audio-stat-number">
-              {Math.round(filteredLessons.reduce((sum, l) => sum + (lessonDurations.get(l.id) || 0), 0) / 60)}h
+              {formatLiteDuration(totalLiteSeconds)}
             </div>
-            <div className="audio-stat-label">Total Content</div>
+            <div className="audio-stat-label">Total Content (1x)</div>
           </div>
         </div>
 
@@ -196,7 +175,7 @@ export default function AudioLessons() {
             >
               <option value="all">All Areas</option>
               {areas.map(area => {
-                const areaData = acsData.areas.find(a => a.number === area);
+                const areaData = safeAreas.find(a => a.number === area);
                 return (
                   <option key={area} value={area}>
                     Area {area}: {areaData?.name || 'Unknown'}
@@ -219,8 +198,8 @@ export default function AudioLessons() {
               ▶️ Play All ({filteredLessons.length})
             </button>
 
-            <button 
-              className="audio-playlist-btn" 
+            <button
+              className="audio-playlist-btn"
               onClick={() => setShowPlaylistManager(!showPlaylistManager)}
             >
               🎵 My Playlists
@@ -246,15 +225,16 @@ export default function AudioLessons() {
                 <div className="audio-lesson-meta">
                   <div className="audio-lesson-area">{getAreaName(lesson)}</div>
                   <div className="audio-lesson-duration">
-                    ⏱️ {formatDuration(lesson)}
+                    ⏱️ {formatLiteDuration(getLiteDurationSeconds(lesson, getAreaName(lesson)))}
                   </div>
                 </div>
               </div>
 
               <h3 className="audio-lesson-title">{lesson.title}</h3>
-              
+
               <p className="audio-lesson-description">
-                {lesson.overview?.slice(0, 150)}...
+                {(lesson.overview ?? '').slice(0, 150)}
+                {(lesson.overview ?? '').length > 150 ? '...' : ''}
               </p>
 
               <div className="audio-lesson-actions">
@@ -286,4 +266,3 @@ export default function AudioLessons() {
     </div>
   );
 }
-

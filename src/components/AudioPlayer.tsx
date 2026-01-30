@@ -2,18 +2,23 @@ import { useState, useEffect, useRef } from 'react';
 import { audioService } from '../services/audioService';
 import type { PodcastScript } from '../services/audioService';
 import type { LessonPlan } from '../lessonPlanTypes';
+import type { AudioPlaylistMode } from '../contexts/AudioContext';
+import { useAudio } from '../contexts/AudioContext';
 import { audioPresets, loadPresetPreference, savePresetPreference } from '../services/audioPresets';
 import type { AudioPreset } from '../services/audioPresets';
 import { bookmarkService } from '../services/bookmarkService';
 import type { Bookmark } from '../services/bookmarkService';
-import { useAudio } from '../contexts/AudioContext';
-import { backgroundAudioManager } from '../utils/backgroundAudio';
+import { requestTabAudioStream, releaseTabAudioStream, isTabAudioCaptureSupported } from '../services/audioCapture';
+import { BlobPlaybackController } from '../services/blobPlayback';
 import './AudioPlayer.css';
+
+const SPEED_OPTIONS = [0.75, 1, 1.25, 1.5, 1.75, 2] as const;
 
 interface AudioPlayerProps {
   currentLesson: LessonPlan;
   playlist: LessonPlan[];
   areaName: string;
+  playlistMode?: AudioPlaylistMode;
   onNext?: () => void;
   onPrevious?: () => void;
   onClose?: () => void;
@@ -24,16 +29,24 @@ export default function AudioPlayer({
   currentLesson,
   playlist,
   areaName,
+  playlistMode: playlistModeProp,
   onNext,
   onPrevious,
   onClose,
   onStopAudio
 }: AudioPlayerProps) {
-  const { audioMode } = useAudio();
+  const { playlistMode: contextPlaylistMode } = useAudio();
+  const playlistMode = playlistModeProp ?? contextPlaylistMode ?? 'full';
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentPreset, setCurrentPreset] = useState<AudioPreset>(loadPresetPreference());
+  const [playbackRate, setPlaybackRate] = useState<number>(() => {
+    const saved = localStorage.getItem('audio-speed-preference');
+    const num = saved ? parseFloat(saved) : 1;
+    return SPEED_OPTIONS.includes(num as typeof SPEED_OPTIONS[number]) ? num : 1;
+  });
   const [currentSegment, setCurrentSegment] = useState(0);
   const [totalSegments, setTotalSegments] = useState(0);
   const [autoplayEnabled, setAutoplayEnabled] = useState(true);
@@ -42,70 +55,76 @@ export default function AudioPlayer({
   const [selectedVoice, setSelectedVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [showVoiceSelector, setShowVoiceSelector] = useState(false);
   const [showPresetSelector, setShowPresetSelector] = useState(false);
+  const [showSpeedSelector, setShowSpeedSelector] = useState(false);
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const [showBookmarks, setShowBookmarks] = useState(false);
   const [bookmarkNote, setBookmarkNote] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [volume, setVolume] = useState(currentPreset.volume);
-  const [playbackRate, setPlaybackRate] = useState(1.0);
-  const [showSpeedSelector, setShowSpeedSelector] = useState(false);
-  
+  const [useBlobPlayback, setUseBlobPlayback] = useState(false);
+  const [isPreparing, setIsPreparing] = useState(false);
+  const [askBackgroundPermission, setAskBackgroundPermission] = useState(false);
+  const [preparingProgress, setPreparingProgress] = useState({ segment: 0, total: 0 });
+
   const timerRef = useRef<number | null>(null);
   const isPlayingRef = useRef(false);
-  
-  // Available speed options
-  const speedOptions = [0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
+  const togglePlayPauseRef = useRef<() => void>(() => {});
+  const blobControllerRef = useRef<BlobPlaybackController | null>(null);
+  const playbackModeRef = useRef<'tts' | 'blob'>('tts');
+  const blobProgressIntervalRef = useRef<number | null>(null);
+
+  // Media Session API: lock-screen / notification controls (behavior may vary by OS/browser)
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !navigator.mediaSession) return;
+
+    // MediaMetadata is not in all TS DOM libs; cast required for mediaSession.metadata
+    navigator.mediaSession.metadata = new (window as Window & { MediaMetadata: new (init: MediaMetadataInit) => MediaMetadata }).MediaMetadata({
+      title: currentLesson.title,
+      artist: `${areaName} • CFI Training Audio`,
+      album: playlist.length > 0 ? `Lesson ${playlist.findIndex(l => l.id === currentLesson.id) + 1} of ${playlist.length}` : ''
+    });
+
+    return () => {
+      navigator.mediaSession.metadata = null;
+      navigator.mediaSession.playbackState = 'none';
+    };
+  }, [currentLesson?.id, currentLesson?.title, areaName, playlist.length]);
+
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !navigator.mediaSession) return;
+    navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (typeof navigator === 'undefined' || !navigator.mediaSession) return;
+    navigator.mediaSession.setActionHandler('play', () => {
+      togglePlayPauseRef.current();
+    });
+    navigator.mediaSession.setActionHandler('pause', () => {
+      togglePlayPauseRef.current();
+    });
+    return () => {
+      navigator.mediaSession.setActionHandler('play', null);
+      navigator.mediaSession.setActionHandler('pause', null);
+    };
+  }, []);
+
+  // Keep ref updated so Media Session handlers call latest togglePlayPause
+  useEffect(() => {
+    togglePlayPauseRef.current = togglePlayPause;
+  });
 
   // Update volume when preset changes
   useEffect(() => {
     setVolume(currentPreset.volume);
-    // Reset speed to 1.0 when preset changes (preset rate is separate)
-    setPlaybackRate(1.0);
   }, [currentPreset]);
-  
-  // Handle speed change
-  const handleSpeedChange = (speed: number) => {
-    setPlaybackRate(speed);
-    audioService.setCurrentRate(speed);
-    setShowSpeedSelector(false);
-    // If currently playing, update rate immediately
-    if (isPlaying) {
-      // The rate will be used for the next segment in speakPodcastScript
-      console.log(`Speed changed to ${speed}x`);
-    }
-  };
 
-  // Setup visibility change handling to maintain playback
+  // Sync volume to service and blob controller so mid-playback slider changes apply
   useEffect(() => {
-    const cleanup = backgroundAudioManager.setupVisibilityHandling((isVisible) => {
-      // When page becomes visible again, check if playback was interrupted
-      // Note: Web Speech API will pause when browser loses focus, but we maintain state
-      if (isVisible && isPlayingRef.current) {
-        // Check if speech synthesis actually stopped
-        if (!window.speechSynthesis.speaking && !window.speechSynthesis.pending) {
-          console.log('⚠️ Playback was interrupted (browser minimized/locked). Web Speech API limitation.');
-          console.log('💡 Tip: Keep the browser tab active for best playback experience.');
-          // Update our state to reflect reality
-          setIsPlaying(false);
-          isPlayingRef.current = false;
-          backgroundAudioManager.updatePlaybackState('paused');
-        }
-      }
-    });
-
-    return cleanup;
-  }, []);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      console.log('AudioPlayer unmounting, cleaning up...');
-      backgroundAudioManager.cleanup().catch(err => {
-        console.warn('Error during cleanup:', err);
-      });
-    };
-  }, []);
+    audioService.setCurrentVolume(volume);
+    blobControllerRef.current?.setVolume(volume);
+  }, [volume]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -130,19 +149,11 @@ export default function AudioPlayer({
           break;
         case 'ArrowUp': // Up arrow - volume up
           e.preventDefault();
-          setVolume(prev => {
-            const newVolume = Math.min(prev + 0.1, 1);
-            audioService.setCurrentVolume(newVolume);
-            return newVolume;
-          });
+          setVolume(prev => Math.min(prev + 0.1, 1));
           break;
         case 'ArrowDown': // Down arrow - volume down
           e.preventDefault();
-          setVolume(prev => {
-            const newVolume = Math.max(prev - 0.1, 0);
-            audioService.setCurrentVolume(newVolume);
-            return newVolume;
-          });
+          setVolume(prev => Math.max(prev - 0.1, 0));
           break;
         case 'n': // N - next
           if (onNext && e.shiftKey) {
@@ -193,29 +204,25 @@ export default function AudioPlayer({
     }
   }, []);
 
-  // Generate podcast script when lesson changes
+  // Generate podcast script when lesson changes (full vs lite based on playlistMode)
   useEffect(() => {
+    if (blobControllerRef.current) {
+      blobControllerRef.current.stop();
+      blobControllerRef.current = null;
+    }
+    setUseBlobPlayback(false);
+    playbackModeRef.current = 'tts';
+
     const lessonIndex = playlist.findIndex(l => l.id === currentLesson.id);
-    const script = audioMode === 'lite'
-      ? audioService.generateLitePodcastScript(
-          currentLesson,
-          areaName,
-          lessonIndex + 1,
-          playlist.length
-        )
-      : audioService.generatePodcastScript(
-          currentLesson,
-          areaName,
-          lessonIndex + 1,
-          playlist.length
-        );
+    const script = playlistMode === 'lite'
+      ? audioService.generateLitePodcastScript(currentLesson, areaName, lessonIndex + 1, playlist.length)
+      : audioService.generatePodcastScript(currentLesson, areaName, lessonIndex + 1, playlist.length);
     setPodcastScript(script);
     setDuration(script.estimatedDuration);
     setTotalSegments(script.segments.length);
     setCurrentTime(0);
     setCurrentSegment(0);
-    
-    // Load saved progress
+
     const savedProgress = localStorage.getItem(`audio-progress-${currentLesson.id}`);
     if (savedProgress) {
       const progress = JSON.parse(savedProgress);
@@ -223,42 +230,8 @@ export default function AudioPlayer({
       setCurrentSegment(progress.segment || 0);
     }
 
-    // Load bookmarks
     setBookmarks(bookmarkService.getLessonBookmarks(currentLesson.id));
-    
-    // Update Media Session metadata when lesson changes
-    if ('mediaSession' in navigator) {
-      backgroundAudioManager.initializeMediaSession(
-        {
-          title: currentLesson.title,
-          artist: `CFI Training - ${areaName}`,
-          album: 'Audio Lessons'
-        },
-        {
-          onPlay: () => {
-            if (!isPlaying) {
-              togglePlayPause();
-            }
-          },
-          onPause: () => {
-            if (isPlaying) {
-              togglePlayPause();
-            }
-          },
-          onPreviousTrack: onPrevious,
-          onNextTrack: onNext,
-          onSeekBackward: () => {
-            setCurrentTime(prev => Math.max(0, prev - 15));
-          },
-          onSeekForward: () => {
-            setCurrentTime(prev => Math.min(duration, prev + 30));
-          }
-        }
-      );
-    }
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentLesson, playlist, areaName, audioMode]);
+  }, [currentLesson, playlist, areaName, playlistMode]);
 
   // Save progress periodically
   useEffect(() => {
@@ -275,236 +248,222 @@ export default function AudioPlayer({
     }
   }, [isPlaying, currentTime, currentSegment, currentLesson.id]);
 
-  // Play/Pause toggle
+  const clearBlobProgressInterval = () => {
+    if (blobProgressIntervalRef.current !== null) {
+      clearInterval(blobProgressIntervalRef.current);
+      blobProgressIntervalRef.current = null;
+    }
+  };
+
+  const startBlobPlayback = (entries: { blobUrl: string | null; pauseAfter: number }[]) => {
+    const controller = new BlobPlaybackController(podcastScript?.estimatedDuration ?? 0);
+    controller.setSegments(entries, podcastScript?.segments.length ?? 0);
+    controller.setVolume(volume);
+    controller.setPlaybackRate(playbackRate);
+    controller.setCallbacks({
+      onProgress: (seg, total) => {
+        setCurrentSegment(seg);
+        setTotalSegments(total);
+      },
+      onEnd: () => {
+        setIsPlaying(false);
+        isPlayingRef.current = false;
+        clearBlobProgressInterval();
+        if (autoplayEnabled && onNext) setTimeout(() => onNext(), 2000);
+      },
+      onPause: () => {
+        setIsPlaying(false);
+        isPlayingRef.current = false;
+        clearBlobProgressInterval();
+      }
+    });
+    blobControllerRef.current = controller;
+    playbackModeRef.current = 'blob';
+    setUseBlobPlayback(true);
+    setIsPlaying(true);
+    isPlayingRef.current = true;
+    controller.play();
+    blobProgressIntervalRef.current = window.setInterval(() => {
+      if (blobControllerRef.current?.isPlaybackActive()) {
+        setCurrentTime(blobControllerRef.current.getCurrentTime());
+        setDuration(blobControllerRef.current.getDuration());
+      }
+    }, 500) as unknown as number;
+  };
+
+  const startTTSPlayback = async (voiceToUse: SpeechSynthesisVoice) => {
+    if (!podcastScript) return;
+    setIsPlaying(true);
+    isPlayingRef.current = true;
+    setIsLoading(false);
+    timerRef.current = window.setInterval(() => {
+      if (isPlayingRef.current) setCurrentTime(prev => Math.min(prev + 1, duration));
+    }, 1000);
+    audioService.setCurrentVoice(voiceToUse);
+    audioService.setCurrentRate(playbackRate);
+    try {
+      await audioService.speakPodcastScript(podcastScript, {
+        rate: playbackRate,
+        voice: voiceToUse,
+        volume,
+        onProgress: (segment, total) => {
+          setCurrentSegment(segment);
+          setTotalSegments(total);
+        },
+        onPause: () => {
+          setIsPlaying(false);
+          isPlayingRef.current = false;
+        }
+      });
+      setIsPlaying(false);
+      isPlayingRef.current = false;
+      if (timerRef.current) clearInterval(timerRef.current);
+      if (autoplayEnabled && onNext) setTimeout(() => onNext(), 2000);
+    } catch (err) {
+      console.error('Audio playback error:', err);
+      setError('Audio playback failed. Please try again or select a different voice.');
+      setIsPlaying(false);
+      isPlayingRef.current = false;
+      if (timerRef.current) clearInterval(timerRef.current);
+    }
+  };
+
   const togglePlayPause = async () => {
-    console.log('🎮 togglePlayPause called, isPlaying:', isPlaying);
-    
     if (!podcastScript) {
-      console.error('❌ No podcast script available');
       setError('No audio script available. Please try reloading the lesson.');
       return;
     }
 
     if (isPlaying) {
-      console.log('⏸️ Pausing audio...');
-      audioService.pauseSpeech();
+      if (playbackModeRef.current === 'blob' && blobControllerRef.current) {
+        blobControllerRef.current.pause();
+        clearBlobProgressInterval();
+      } else {
+        audioService.pauseSpeech();
+      }
       setIsPlaying(false);
       isPlayingRef.current = false;
-      
-      // Update Media Session playback state
-      backgroundAudioManager.updatePlaybackState('paused');
-      
-      // Release wake lock when paused
-      backgroundAudioManager.releaseWakeLock().catch(err => {
-        console.warn('Error releasing wake lock:', err);
-      });
-      
       if (timerRef.current) {
         clearInterval(timerRef.current);
+        timerRef.current = null;
       }
-    } else {
-      // Clear any previous errors
-      setError(null);
-      setIsLoading(true);
-      console.log('▶️ Starting audio playback initialization...');
-      
-      // Check if speech synthesis is available
-      console.log('🔍 Checking speech synthesis availability...');
-      if (!window.speechSynthesis) {
-        console.error('❌ Speech synthesis not available');
-        setError('Speech synthesis is not supported in your browser. Please try Chrome, Edge, or Safari.');
-        setIsLoading(false);
-        return;
-      }
-      console.log('✅ Speech synthesis available');
+      return;
+    }
 
-      // Check if we need to wait for voices to load
-      if (availableVoices.length === 0) {
-        console.log('⏳ Waiting for voices to load...');
-        setError('Loading voices... Please wait a moment and try again.');
-        
-        // Try to load voices again
-        const loadVoices = () => {
-          const voices = audioService.getAvailableVoices();
-          setAvailableVoices(voices);
-          
-          if (voices.length > 0 && !selectedVoice) {
-            setSelectedVoice(voices[0]);
-            setError(null);
-            console.log('Voices loaded:', voices.length);
-          }
-        };
-        
-        // Wait a bit and try again
-        setTimeout(() => {
-          loadVoices();
-          if (window.speechSynthesis.onvoiceschanged) {
-            window.speechSynthesis.onvoiceschanged = loadVoices;
-          }
-        }, 1000);
-        
-        setIsLoading(false);
-        return;
-      }
-
-      // Check if voice is available
-      let voiceToUse = selectedVoice;
-      if (!voiceToUse) {
-        const defaultVoice = availableVoices[0];
-        if (defaultVoice) {
-          setSelectedVoice(defaultVoice);
-          voiceToUse = defaultVoice;
-          console.log('Using default voice:', defaultVoice.name);
-        } else {
-          setError('No voices available. Please wait a moment and try again.');
-          setIsLoading(false);
-          return;
-        }
-      }
-      
-      console.log('🎧 Starting audio playback...');
-      console.log('Voice:', voiceToUse.name);
-      console.log('Preset:', currentPreset.name);
-      console.log('Rate:', playbackRate);
-      console.log('Volume:', volume);
-      console.log('Podcast script segments:', podcastScript.segments.length);
-
+    if (useBlobPlayback && blobControllerRef.current && !blobControllerRef.current.isPlaybackActive()) {
+      blobControllerRef.current.play();
       setIsPlaying(true);
       isPlayingRef.current = true;
+      blobProgressIntervalRef.current = window.setInterval(() => {
+        if (blobControllerRef.current?.isPlaybackActive()) {
+          setCurrentTime(blobControllerRef.current.getCurrentTime());
+          setDuration(blobControllerRef.current.getDuration());
+        }
+      }, 500) as unknown as number;
+      return;
+    }
+
+    setError(null);
+    setIsLoading(true);
+
+    if (!window.speechSynthesis) {
+      setError('Speech synthesis is not supported in your browser. Please try Chrome, Edge, or Safari.');
       setIsLoading(false);
-      
-      // Initialize background audio support
-      backgroundAudioManager.initializeMediaSession(
-        {
-          title: currentLesson.title,
-          artist: `CFI Training - ${areaName}`,
-          album: 'Audio Lessons'
-        },
-        {
-          onPlay: () => {
-            if (!isPlaying) {
-              togglePlayPause();
-            }
-          },
-          onPause: () => {
-            if (isPlaying) {
-              togglePlayPause();
-            }
-          },
-          onPreviousTrack: onPrevious,
-          onNextTrack: onNext,
-          onSeekBackward: () => {
-            // Skip backward 15 seconds
-            setCurrentTime(prev => Math.max(0, prev - 15));
-          },
-          onSeekForward: () => {
-            // Skip forward 30 seconds
-            setCurrentTime(prev => Math.min(duration, prev + 30));
-          }
-        }
-      );
+      return;
+    }
+    if (availableVoices.length === 0) {
+      setError('Loading voices... Please wait a moment and try again.');
+      setIsLoading(false);
+      return;
+    }
 
-      // Request wake lock to prevent screen from sleeping
-      backgroundAudioManager.requestWakeLock().catch(err => {
-        console.warn('Wake lock not available:', err);
+    let voiceToUse = selectedVoice ?? availableVoices[0];
+    if (!voiceToUse) {
+      setSelectedVoice(availableVoices[0]);
+      voiceToUse = availableVoices[0];
+    }
+
+    const cached = audioService.getCachedBlobEntries(
+      currentLesson.id,
+      playlistMode,
+      voiceToUse.name,
+      playbackRate
+    );
+    if (cached && cached.length > 0) {
+      setIsLoading(false);
+      startBlobPlayback(cached);
+      return;
+    }
+
+    if (isTabAudioCaptureSupported()) {
+      setAskBackgroundPermission(true);
+      setIsLoading(false);
+      return;
+    }
+
+    playbackModeRef.current = 'tts';
+    await startTTSPlayback(voiceToUse);
+  };
+
+  const handleAllowBackgroundCapture = async () => {
+    if (!podcastScript || !selectedVoice) return;
+    setError(null);
+    setIsPreparing(true);
+    setAskBackgroundPermission(false);
+    try {
+      const stream = await requestTabAudioStream();
+      const entries = await audioService.prepareScriptToBlobs(podcastScript, {
+        voice: selectedVoice,
+        rate: playbackRate,
+        volume,
+        mode: playlistMode,
+        stream,
+        onSegmentProgress: (seg, total) => setPreparingProgress({ segment: seg, total })
       });
+      releaseTabAudioStream(stream);
+      setIsPreparing(false);
+      startBlobPlayback(entries);
+    } catch (err) {
+      console.error('Tab capture error:', err);
+      setError('Could not capture tab audio. Click "Skip" to play without background playback.');
+      setIsPreparing(false);
+      setAskBackgroundPermission(true);
+    }
+  };
 
-      // Update Media Session playback state
-      backgroundAudioManager.updatePlaybackState('playing');
-      
-      // Start timer
-      timerRef.current = window.setInterval(() => {
-        if (isPlayingRef.current) {
-          setCurrentTime(prev => Math.min(prev + 1, duration));
-        }
-      }, 1000);
-
-      // Set initial voice, rate, and volume in audio service
-      audioService.setCurrentVoice(voiceToUse);
-      audioService.setCurrentRate(playbackRate);
-      audioService.setCurrentVolume(volume);
-
-      try {
-        console.log('▶️ Calling audioService.speakPodcastScript...');
-        await audioService.speakPodcastScript(podcastScript, {
-          rate: playbackRate,
-          voice: voiceToUse || undefined,
-          volume: volume,
-          onProgress: (segment, total) => {
-            console.log(`Segment ${segment} of ${total}`);
-            setCurrentSegment(segment);
-            setTotalSegments(total);
-          },
-          onPause: () => {
-            console.log('⏸️ Playback paused');
-            setIsPlaying(false);
-            isPlayingRef.current = false;
-            backgroundAudioManager.updatePlaybackState('paused');
-            backgroundAudioManager.releaseWakeLock().catch(err => {
-              console.warn('Error releasing wake lock:', err);
-            });
-          }
-        });
-        console.log('✅ Audio playback completed successfully');
-        
-        // Update Media Session when playback completes
-        backgroundAudioManager.updatePlaybackState('paused');
-        backgroundAudioManager.releaseWakeLock().catch(err => {
-          console.warn('Error releasing wake lock:', err);
-        });
-
-        // Finished playing
-        setIsPlaying(false);
-        isPlayingRef.current = false;
-        backgroundAudioManager.updatePlaybackState('paused');
-        backgroundAudioManager.releaseWakeLock().catch(err => {
-          console.warn('Error releasing wake lock:', err);
-        });
-        
-        if (timerRef.current) {
-          clearInterval(timerRef.current);
-        }
-
-        // Auto-play next if enabled
-        if (autoplayEnabled && onNext) {
-          setTimeout(() => {
-            onNext();
-          }, 2000);
-        }
-      } catch (error) {
-        console.error('Audio playback error:', error);
-        setError('Audio playback failed. Please try again or select a different voice.');
-        setIsPlaying(false);
-        isPlayingRef.current = false;
-        setIsLoading(false);
-        backgroundAudioManager.updatePlaybackState('paused');
-        backgroundAudioManager.releaseWakeLock().catch(err => {
-          console.warn('Error releasing wake lock:', err);
-        });
-        if (timerRef.current) {
-          clearInterval(timerRef.current);
-        }
-      }
+  const handleSkipBackgroundCapture = async () => {
+    setAskBackgroundPermission(false);
+    if (!selectedVoice && availableVoices.length > 0) {
+      setSelectedVoice(availableVoices[0]);
+    }
+    const voiceToUse = selectedVoice ?? availableVoices[0];
+    if (voiceToUse) {
+      playbackModeRef.current = 'tts';
+      await startTTSPlayback(voiceToUse);
     }
   };
 
   // Stop playback
   const stop = () => {
-    console.log('🛑 Stopping audio playback');
+    if (blobControllerRef.current) {
+      blobControllerRef.current.stop();
+      blobControllerRef.current = null;
+    }
+    clearBlobProgressInterval();
     audioService.stop();
+    setUseBlobPlayback(false);
+    playbackModeRef.current = 'tts';
     setIsPlaying(false);
     isPlayingRef.current = false;
     setCurrentTime(0);
     setCurrentSegment(0);
-    
-    // Update Media Session and release wake lock
-    backgroundAudioManager.updatePlaybackState('paused');
-    backgroundAudioManager.releaseWakeLock().catch(err => {
-      console.warn('Error releasing wake lock:', err);
-    });
-    
     if (timerRef.current) {
       clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    if (typeof navigator !== 'undefined' && navigator.mediaSession) {
+      navigator.mediaSession.playbackState = 'none';
+      navigator.mediaSession.metadata = null;
     }
   };
 
@@ -518,26 +477,38 @@ export default function AudioPlayer({
 
   // Skip forward
   const skipForward = () => {
-    setCurrentTime(prev => Math.min(prev + 30, duration));
+    if (useBlobPlayback && blobControllerRef.current) {
+      const next = blobControllerRef.current.getCurrentSegmentIndex();
+      blobControllerRef.current.seekToSegment(next);
+    } else {
+      setCurrentTime(prev => Math.min(prev + 30, duration));
+    }
   };
 
   // Skip backward
   const skipBackward = () => {
-    setCurrentTime(prev => Math.max(prev - 15, 0));
+    if (useBlobPlayback && blobControllerRef.current) {
+      const prev = Math.max(0, blobControllerRef.current.getCurrentSegmentIndex() - 2);
+      blobControllerRef.current.seekToSegment(prev);
+    } else {
+      setCurrentTime(prev => Math.max(prev - 15, 0));
+    }
   };
 
-  // Change preset
+  // Change preset (volume/quality only; speed is separate)
   const handlePresetChange = (preset: AudioPreset) => {
     setCurrentPreset(preset);
     savePresetPreference(preset.id);
     setShowPresetSelector(false);
     setVolume(preset.volume);
-    
-    // Update rate in audio service for mid-playback changes
-    audioService.setCurrentRate(preset.rate);
-    
-    // If playing, the new rate will apply to the next segment automatically
-    // No need to restart - changes apply immediately to future segments
+  };
+
+  // Change playback speed (0.75x–2x)
+  const handleSpeedChange = (rate: number) => {
+    setPlaybackRate(rate);
+    localStorage.setItem('audio-speed-preference', String(rate));
+    audioService.setCurrentRate(rate);
+    blobControllerRef.current?.setPlaybackRate(rate);
   };
 
   // Change voice
@@ -644,6 +615,33 @@ export default function AudioPlayer({
         </div>
       )}
 
+      {/* Background playback: Allow tab audio or Skip */}
+      {askBackgroundPermission && !isPreparing && (
+        <div className="audio-background-permission">
+          <p className="audio-background-permission-text">
+            Enable background playback? Audio will continue when you minimize or lock the screen. You will be asked to share this tab&apos;s audio.
+          </p>
+          <div className="audio-background-permission-actions">
+            <button type="button" className="audio-control-btn audio-allow-btn" onClick={handleAllowBackgroundCapture}>
+              Allow tab audio
+            </button>
+            <button type="button" className="audio-control-btn audio-skip-background-btn" onClick={handleSkipBackgroundCapture}>
+              Skip
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Preparing: capturing segments */}
+      {isPreparing && (
+        <div className="audio-preparing">
+          <span className="audio-preparing-icon">⏳</span>
+          <span className="audio-preparing-text">
+            Preparing… Segment {preparingProgress.segment} of {preparingProgress.total || totalSegments}
+          </span>
+        </div>
+      )}
+
       {/* Keyboard Shortcuts Hint */}
       {!isPlaying && !error && (
         <div className="audio-keyboard-hint">
@@ -743,6 +741,17 @@ export default function AudioPlayer({
           </button>
         </div>
 
+        <div className="audio-setting">
+          <label className="audio-setting-label">Speed</label>
+          <button
+            className="audio-speed-btn"
+            onClick={() => setShowSpeedSelector(!showSpeedSelector)}
+            title="Playback speed"
+          >
+            {playbackRate}x
+          </button>
+        </div>
+
         <div className="audio-setting audio-voice-setting">
           <label className="audio-setting-label">Voice</label>
           <button
@@ -754,35 +763,6 @@ export default function AudioPlayer({
           </button>
         </div>
 
-        <div className="audio-setting audio-speed-setting">
-          <label className="audio-setting-label">Speed</label>
-          <div className="audio-speed-control">
-            <button
-              className="audio-speed-btn"
-              onClick={() => setShowSpeedSelector(!showSpeedSelector)}
-              title="Playback speed"
-            >
-              {playbackRate}x
-            </button>
-            {showSpeedSelector && (
-              <>
-                <div className="audio-preset-backdrop" onClick={() => setShowSpeedSelector(false)} />
-                <div className="audio-speed-selector">
-                  {speedOptions.map((speed) => (
-                    <button
-                      key={speed}
-                      className={`audio-speed-option ${playbackRate === speed ? 'active' : ''}`}
-                      onClick={() => handleSpeedChange(speed)}
-                    >
-                      {speed}x
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-
         <div className="audio-setting audio-volume-setting">
           <label className="audio-setting-label">🔊</label>
           <input
@@ -791,12 +771,7 @@ export default function AudioPlayer({
             max="1"
             step="0.1"
             value={volume}
-            onChange={(e) => {
-              const newVolume = parseFloat(e.target.value);
-              setVolume(newVolume);
-              // Update volume in audio service for mid-playback changes
-              audioService.setCurrentVolume(newVolume);
-            }}
+            onChange={(e) => setVolume(parseFloat(e.target.value))}
             className="audio-volume-slider"
             title={`Volume: ${Math.round(volume * 100)}%`}
           />
@@ -814,6 +789,37 @@ export default function AudioPlayer({
           </button>
         </div>
       </div>
+
+      {showSpeedSelector && (
+        <>
+          <div className="audio-preset-backdrop" onClick={() => setShowSpeedSelector(false)} />
+          <div className="audio-speed-selector">
+            <div className="audio-speed-selector-header">
+              <span>Playback Speed</span>
+              <button
+                className="audio-speed-close"
+                onClick={() => setShowSpeedSelector(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <div className="audio-speed-list">
+              {SPEED_OPTIONS.map((rate) => (
+                <button
+                  key={rate}
+                  className={`audio-speed-option ${playbackRate === rate ? 'active' : ''}`}
+                  onClick={() => {
+                    handleSpeedChange(rate);
+                    setShowSpeedSelector(false);
+                  }}
+                >
+                  {rate}x
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
 
       {showVoiceSelector && (
         <>

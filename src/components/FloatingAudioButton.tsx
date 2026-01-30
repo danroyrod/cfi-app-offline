@@ -23,19 +23,19 @@ export default function FloatingAudioButton() {
     <button
       className="floating-audio-button"
       onClick={() => setShowPlayer(true)}
-      title="Tap to restore audio player"
-      aria-label="Restore audio player"
+      title="Tap to open player"
+      aria-label="Tap to open audio player"
     >
       <span className="floating-audio-icon">🎧</span>
       <span className="floating-audio-text">
-        <span className="floating-audio-label">Tap to Restore Player</span>
+        <span className="floating-audio-label">Tap to open player</span>
         <span className="floating-audio-title">{currentLesson.title}</span>
       </span>
       <button
         className="floating-audio-close"
         onClick={handleStop}
         title="Stop audio completely"
-        aria-label="Stop audio"
+        aria-label="Close audio"
       >
         ✕
       </button>

@@ -59,27 +59,6 @@ const AudioLessonsIndex = () => {
             </div>
           </Link>
         </div>
-
-        <div className="audio-index-info">
-          <h3 className="audio-info-title">About Audio Lessons</h3>
-          <div className="audio-info-grid">
-            <div className="audio-info-card">
-              <div className="audio-info-icon">🎯</div>
-              <h4>Study Anywhere</h4>
-              <p>Listen while commuting, exercising, or reviewing during downtime.</p>
-            </div>
-            <div className="audio-info-card">
-              <div className="audio-info-icon">🔁</div>
-              <h4>Repeat Anytime</h4>
-              <p>Replay lessons as many times as needed to master the content.</p>
-            </div>
-            <div className="audio-info-card">
-              <div className="audio-info-icon">📱</div>
-              <h4>Mobile Friendly</h4>
-              <p>Works perfectly on your phone, tablet, or computer.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

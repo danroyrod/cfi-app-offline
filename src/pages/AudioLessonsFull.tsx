@@ -9,10 +9,13 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import { getBreadcrumbsForRoute } from '../utils/breadcrumbs';
 import './AudioLessons.css';
 
-const lessonPlansData = lessonPlansDataRaw as { lessonPlans: LessonPlan[] };
-const acsData = acsDataRaw as { areas: Array<{ number: string; name: string; tasks: any[] }> };
+const lessonPlansData = lessonPlansDataRaw as { lessonPlans?: LessonPlan[] };
+const acsData = acsDataRaw as { areas?: Array<{ number: string; name: string; tasks: { id?: string; name?: string }[] }> };
 
-export default function AudioLessons() {
+const safeLessonPlans = lessonPlansData?.lessonPlans ?? [];
+const safeAreas = acsData?.areas ?? [];
+
+export default function AudioLessonsFull() {
   const location = useLocation();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedArea, setSelectedArea] = useState('all');
@@ -20,7 +23,7 @@ export default function AudioLessons() {
   const [showPlaylistManager, setShowPlaylistManager] = useState(false);
   const { startPlaylist } = useAudio();
 
-  const allLessons: LessonPlan[] = lessonPlansData.lessonPlans;
+  const allLessons: LessonPlan[] = safeLessonPlans;
 
   // Get unique areas
   const areas = useMemo(() => {
@@ -35,7 +38,8 @@ export default function AudioLessons() {
   }, [allLessons]);
 
   // Helper to convert time string to minutes
-  const parseTime = (timeStr: string): number => {
+  const parseTime = (timeStr: string | undefined): number => {
+    if (!timeStr || typeof timeStr !== 'string') return 30;
     const match = timeStr.match(/(\d+\.?\d*)\s*(hour|min)/);
     if (!match) return 30; // default
     const value = parseFloat(match[1]);
@@ -47,7 +51,6 @@ export default function AudioLessons() {
   const filteredLessons = useMemo(() => {
     let filtered = allLessons;
 
-    // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(lesson =>
@@ -56,12 +59,10 @@ export default function AudioLessons() {
       );
     }
 
-    // Filter by area
     if (selectedArea !== 'all') {
       filtered = filtered.filter(lesson => lesson.id.startsWith(`LP-${selectedArea}`));
     }
 
-    // Sort
     filtered = [...filtered].sort((a, b) => {
       switch (sortBy) {
         case 'title':
@@ -77,40 +78,34 @@ export default function AudioLessons() {
     return filtered;
   }, [allLessons, searchQuery, selectedArea, sortBy]);
 
-  // Start playing a lesson
   const playLesson = (lesson: LessonPlan) => {
     const index = filteredLessons.findIndex(l => l.id === lesson.id);
-    startPlaylist(filteredLessons, index, 'full');
+    startPlaylist(filteredLessons, index >= 0 ? index : 0, 'full');
   };
 
-  // Play all lessons
   const playAll = () => {
     startPlaylist(filteredLessons, 0, 'full');
   };
 
-  // Play custom playlist
   const playCustomPlaylist = (lessonIds: string[]) => {
     const lessons = lessonIds
       .map(id => allLessons.find(l => l.id === id))
       .filter((l): l is LessonPlan => l !== undefined);
-    
+
     if (lessons.length > 0) {
       startPlaylist(lessons, 0, 'full');
       setShowPlaylistManager(false);
     }
   };
 
-  // Get area name for display
   const getAreaName = (lesson: LessonPlan): string => {
     const areaMatch = lesson.id.match(/LP-([IVX]+)/);
     if (!areaMatch) return 'Unknown';
-    
     const areaCode = areaMatch[1];
-    const area = acsData.areas.find(a => a.number === areaCode);
+    const area = safeAreas.find(a => a.number === areaCode);
     return area?.name || `Area ${areaCode}`;
   };
 
-  // Format duration
   const formatDuration = (timeStr: string): string => {
     const minutes = parseTime(timeStr);
     if (minutes < 60) return `${Math.round(minutes)} min`;
@@ -122,8 +117,7 @@ export default function AudioLessons() {
   return (
     <div className="audio-lessons-page">
       <div className="container">
-        <Breadcrumbs items={getBreadcrumbsForRoute(location.pathname)} />
-        {/* Header */}
+        <Breadcrumbs items={getBreadcrumbsForRoute(location.pathname) ?? []} />
         <div className="audio-header">
           <Link to="/audio-lessons" className="back-link">← Back to Audio Lessons</Link>
           <h1 className="audio-page-title">
@@ -135,7 +129,6 @@ export default function AudioLessons() {
           </p>
         </div>
 
-        {/* Stats */}
         <div className="audio-stats">
           <div className="audio-stat-card">
             <div className="audio-stat-number">{filteredLessons.length}</div>
@@ -153,7 +146,6 @@ export default function AudioLessons() {
           </div>
         </div>
 
-        {/* Controls */}
         <div className="audio-controls">
           <div className="audio-search-section">
             <input
@@ -173,7 +165,7 @@ export default function AudioLessons() {
             >
               <option value="all">All Areas</option>
               {areas.map(area => {
-                const areaData = acsData.areas.find(a => a.number === area);
+                const areaData = safeAreas.find(a => a.number === area);
                 return (
                   <option key={area} value={area}>
                     Area {area}: {areaData?.name || 'Unknown'}
@@ -196,8 +188,8 @@ export default function AudioLessons() {
               ▶️ Play All ({filteredLessons.length})
             </button>
 
-            <button 
-              className="audio-playlist-btn" 
+            <button
+              className="audio-playlist-btn"
               onClick={() => setShowPlaylistManager(!showPlaylistManager)}
             >
               🎵 My Playlists
@@ -205,7 +197,6 @@ export default function AudioLessons() {
           </div>
         </div>
 
-        {/* Playlist Manager */}
         {showPlaylistManager && (
           <PlaylistManager
             allLessons={allLessons}
@@ -214,7 +205,6 @@ export default function AudioLessons() {
           />
         )}
 
-        {/* Lesson List */}
         <div className="audio-lessons-grid">
           {filteredLessons.map((lesson) => (
             <div key={lesson.id} className="audio-lesson-card">
@@ -229,9 +219,10 @@ export default function AudioLessons() {
               </div>
 
               <h3 className="audio-lesson-title">{lesson.title}</h3>
-              
+
               <p className="audio-lesson-description">
-                {lesson.overview?.slice(0, 150)}...
+                {(lesson.overview ?? '').slice(0, 150)}
+                {(lesson.overview ?? '').length > 150 ? '...' : ''}
               </p>
 
               <div className="audio-lesson-actions">
@@ -263,4 +254,3 @@ export default function AudioLessons() {
     </div>
   );
 }
-
