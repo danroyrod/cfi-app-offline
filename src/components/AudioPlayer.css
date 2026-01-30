@@ -513,13 +513,15 @@
   padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
   max-height: min(500px, 80vh);
   width: min(90vw, 400px);
-  overflow-y: auto;
-  animation: slideUp 0.2s ease-out;
+  display: flex;
+  flex-direction: column;
+  animation: slideUpCentered 0.2s ease-out forwards;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1001;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .audio-voice-empty {
@@ -545,6 +547,18 @@
   }
 }
 
+/* Centered modal slide-up: keeps translate(-50%, -50%) so popup stays centered after animation */
+@keyframes slideUpCentered {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 12px));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
 .audio-voice-selector-header {
   display: flex;
   justify-content: space-between;
@@ -554,6 +568,7 @@
   border-bottom: 1px solid var(--border-color);
   font-weight: 600;
   color: var(--text-primary);
+  flex-shrink: 0;
 }
 
 .audio-voice-close {
@@ -576,6 +591,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: min(360px, 60vh);
+  -webkit-overflow-scrolling: touch;
+  padding-right: 0.25rem;
 }
 
 .audio-voice-option {
@@ -628,13 +648,15 @@
   padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
   max-height: min(500px, 80vh);
   width: min(90vw, 400px);
-  overflow-y: auto;
-  animation: slideUp 0.2s ease-out;
+  display: flex;
+  flex-direction: column;
+  animation: slideUpCentered 0.2s ease-out forwards;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1001;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 /* Speed selector popup */
@@ -646,13 +668,15 @@
   padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
   max-height: min(400px, 80vh);
   width: min(90vw, 320px);
-  overflow-y: auto;
-  animation: slideUp 0.2s ease-out;
+  display: flex;
+  flex-direction: column;
+  animation: slideUpCentered 0.2s ease-out forwards;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1001;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .audio-speed-selector-header {
@@ -664,6 +688,7 @@
   border-bottom: 1px solid var(--border-color);
   font-weight: 600;
   color: var(--text-primary);
+  flex-shrink: 0;
 }
 
 .audio-speed-close {
@@ -686,6 +711,11 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: min(280px, 50vh);
+  -webkit-overflow-scrolling: touch;
+  padding-right: 0.25rem;
 }
 
 .audio-speed-option {
@@ -730,6 +760,7 @@
   border-bottom: 1px solid var(--border-color);
   font-weight: 600;
   color: var(--text-primary);
+  flex-shrink: 0;
 }
 
 .audio-preset-close {
@@ -752,6 +783,11 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 0.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: min(360px, 60vh);
+  -webkit-overflow-scrolling: touch;
+  padding-right: 0.25rem;
 }
 
 .audio-preset-option {

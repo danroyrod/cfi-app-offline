@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { audioService } from '../services/audioService';
 import type { PodcastScript } from '../services/audioService';
 import type { LessonPlan } from '../lessonPlanTypes';
@@ -790,7 +791,7 @@ export default function AudioPlayer({
         </div>
       </div>
 
-      {showSpeedSelector && (
+      {showSpeedSelector && createPortal(
         <>
           <div className="audio-preset-backdrop" onClick={() => setShowSpeedSelector(false)} />
           <div className="audio-speed-selector">
@@ -818,10 +819,11 @@ export default function AudioPlayer({
               ))}
             </div>
           </div>
-        </>
+        </>,
+        document.body
       )}
 
-      {showVoiceSelector && (
+      {showVoiceSelector && createPortal(
         <>
           <div className="audio-preset-backdrop" onClick={() => setShowVoiceSelector(false)} />
           <div className="audio-voice-selector">
@@ -856,10 +858,11 @@ export default function AudioPlayer({
               )}
             </div>
           </div>
-        </>
+        </>,
+        document.body
       )}
 
-      {showPresetSelector && (
+      {showPresetSelector && createPortal(
         <>
           <div className="audio-preset-backdrop" onClick={() => setShowPresetSelector(false)} />
           <div className="audio-preset-selector">
@@ -891,7 +894,8 @@ export default function AudioPlayer({
               ))}
             </div>
           </div>
-        </>
+        </>,
+        document.body
       )}
 
       {showBookmarks && (
