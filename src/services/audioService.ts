@@ -24,6 +24,7 @@ export class AudioLessonService {
   private currentVoice: SpeechSynthesisVoice | null = null;
   private currentRate: number = 1.0;
   private currentVolume: number = 1;
+  private currentPitch: number = 1.0;
   private isPlaying: boolean = false;
   
   constructor() {
@@ -78,10 +79,19 @@ export class AudioLessonService {
   }
 
   /**
-   * Get all available voices, sorted: network first, then by preferred name order.
+   * Get all available voices, sorted: recommended first (network + preferred names), then the rest.
    */
   getAvailableVoices(): SpeechSynthesisVoice[] {
     return this.sortVoicesForQuality(this.synthesis.getVoices());
+  }
+
+  /**
+   * True if this voice is recommended (network voice or in PREFERRED_VOICE_NAMES). Use for "Recommended" label in UI.
+   */
+  isRecommendedVoice(voice: SpeechSynthesisVoice): boolean {
+    const v = voice as SpeechSynthesisVoice & { localService?: boolean };
+    if (v.localService === false) return true;
+    return AudioLessonService.PREFERRED_VOICE_NAMES.some(p => voice.name.includes(p));
   }
 
   /** In-memory cache for blob segments: key = lessonId-mode-voiceName-rate, value = entries + URLs to revoke on evict. Max 3 lessons. */
@@ -102,6 +112,7 @@ export class AudioLessonService {
       voice: SpeechSynthesisVoice | null;
       rate: number;
       volume: number;
+      pitch?: number;
       mode: 'full' | 'lite';
       stream: MediaStream;
       onSegmentProgress?: (segment: number, total: number) => void;
@@ -124,7 +135,8 @@ export class AudioLessonService {
       const blob = await captureSegmentToBlob(options.stream, seg.text, {
         voice: options.voice,
         rate: options.rate,
-        volume: options.volume
+        volume: options.volume,
+        pitch: options.pitch ?? this.currentPitch
       });
 
       if (blob) {
@@ -171,23 +183,23 @@ export class AudioLessonService {
   generatePodcastScript(lesson: LessonPlan, areaName: string, lessonNumber: number, totalLessons: number): PodcastScript {
     const segments: AudioSegment[] = [];
 
-    // INTRO
+    // INTRO (segment-type pauses: longer after intros/title/transitions)
     segments.push({
       text: 'Welcome to CFI Training Audio.',
       type: 'intro',
-      pauseAfter: 500
+      pauseAfter: this.pauseForSegmentType('intro', 600)
     });
 
     segments.push({
       text: `Today's lesson: ${lesson.title}.`,
       type: 'title',
-      pauseAfter: 700
+      pauseAfter: this.pauseForSegmentType('title', 800)
     });
 
     segments.push({
       text: `This is lesson ${lessonNumber} of ${totalLessons} in the ${areaName} series.`,
       type: 'intro',
-      pauseAfter: 1000
+      pauseAfter: this.pauseForSegmentType('intro', 1000)
     });
 
     // OVERVIEW
@@ -195,13 +207,12 @@ export class AudioLessonService {
       segments.push({
         text: 'Overview.',
         type: 'transition',
-        pauseAfter: 300
+        pauseAfter: this.pauseForSegmentType('transition', 500)
       });
-      
       segments.push({
         text: this.cleanTextForSpeech(lesson.overview),
         type: 'content',
-        pauseAfter: 1000
+        pauseAfter: 800
       });
     }
 
@@ -210,22 +221,16 @@ export class AudioLessonService {
       segments.push({
         text: 'Learning Objectives.',
         type: 'transition',
-        pauseAfter: 300
+        pauseAfter: this.pauseForSegmentType('transition', 500)
       });
-
       lesson.objectives.forEach((obj) => {
         segments.push({
           text: this.cleanTextForSpeech(obj),
           type: 'content',
-          pauseAfter: 500
+          pauseAfter: this.pauseForSegmentType('content', 500)
         });
       });
-
-      segments.push({
-        text: '',
-        type: 'content',
-        pauseAfter: 1000
-      });
+      segments.push({ text: '', type: 'content', pauseAfter: 1000 });
     }
 
     // TEACHING SCRIPT - Main Content
@@ -233,93 +238,68 @@ export class AudioLessonService {
       segments.push({
         text: 'Teaching Script.',
         type: 'transition',
-        pauseAfter: 500
+        pauseAfter: this.pauseForSegmentType('transition', 600)
       });
-
-      // Process each phase
       lesson.teachingScript.forEach(script => {
         segments.push({
           text: `${this.phaseTitleForSpeech(script.phase)}.`,
           type: 'transition',
-          pauseAfter: 500
+          pauseAfter: this.pauseForSegmentType('transition', 500)
         });
-
-        // Instructor actions
         if (script.instructorActions && script.instructorActions.length > 0) {
           segments.push({
             text: 'Instructor actions.',
             type: 'transition',
-            pauseAfter: 200
+            pauseAfter: this.pauseForSegmentType('transition', 300)
           });
-
           script.instructorActions.forEach(action => {
             segments.push({
               text: this.cleanTextForSpeech(action),
               type: 'content',
-              pauseAfter: 400
+              pauseAfter: this.pauseForSegmentType('content', 400)
             });
           });
         }
-
-        // Student actions - EXCLUDED from audio lessons per requirements
-        // Audio lessons focus on instructor content only
-
-        // Key points
         if (script.keyPoints && script.keyPoints.length > 0) {
           segments.push({
             text: 'Key teaching points.',
             type: 'transition',
-            pauseAfter: 200
+            pauseAfter: this.pauseForSegmentType('transition', 300)
           });
-
           script.keyPoints.forEach(point => {
             segments.push({
               text: this.cleanTextForSpeech(point),
               type: 'content',
-              pauseAfter: 400
+              pauseAfter: this.pauseForSegmentType('content', 400)
             });
           });
         }
-
-        segments.push({
-          text: '',
-          type: 'content',
-          pauseAfter: 1000
-        });
+        segments.push({ text: '', type: 'content', pauseAfter: 800 });
       });
     }
 
-    // KEY TEACHING POINTS (from improved lesson plans)
+    // KEY TEACHING POINTS
     if (lesson.keyTeachingPoints && lesson.keyTeachingPoints.length > 0) {
       segments.push({
         text: 'Key Teaching Points.',
         type: 'transition',
-        pauseAfter: 500
+        pauseAfter: this.pauseForSegmentType('transition', 600)
       });
-
       lesson.keyTeachingPoints.forEach((point) => {
         segments.push({
           text: `${this.cleanTextForSpeech(point)}`,
           type: 'content',
-          pauseAfter: 500
+          pauseAfter: this.pauseForSegmentType('content', 500)
         });
       });
-
-      segments.push({
-        text: '',
-        type: 'content',
-        pauseAfter: 1000
-      });
+      segments.push({ text: '', type: 'content', pauseAfter: 1000 });
     }
-
-    // COMMON ERRORS, SAFETY CONSIDERATIONS, and COMPLETION STANDARDS
-    // Excluded from audio lessons - focus on overview, objectives, teaching script, and key points only
 
     // OUTRO
     segments.push({
       text: `End of ${lesson.title}.`,
       type: 'outro',
-      pauseAfter: 500
+      pauseAfter: this.pauseForSegmentType('outro', 700)
     });
 
     const totalWords = segments.reduce((sum, seg) => sum + seg.text.split(' ').length, 0);
@@ -343,21 +323,20 @@ export class AudioLessonService {
     segments.push({
       text: `Lite lesson: ${lesson.title}.`,
       type: 'intro',
-      pauseAfter: 500
+      pauseAfter: this.pauseForSegmentType('intro', 600)
     });
 
     segments.push({
       text: `Lesson ${lessonNumber} of ${totalLessons} in the ${areaName} series.`,
       type: 'intro',
-      pauseAfter: 700
+      pauseAfter: this.pauseForSegmentType('intro', 700)
     });
 
-    // Brief objectives summary (first objective or short summary, not each read in full)
     if (lesson.objectives && lesson.objectives.length > 0) {
       segments.push({
         text: 'Objectives.',
         type: 'transition',
-        pauseAfter: 300
+        pauseAfter: this.pauseForSegmentType('transition', 400)
       });
       const summary = lesson.objectives.length === 1
         ? this.cleanTextForSpeech(lesson.objectives[0])
@@ -369,20 +348,19 @@ export class AudioLessonService {
       });
     }
 
-    // Teaching script: phase name + only key points (no instructor actions)
     if (lesson.teachingScript && lesson.teachingScript.length > 0) {
       lesson.teachingScript.forEach(script => {
         segments.push({
           text: `${this.phaseTitleForSpeech(script.phase)}.`,
           type: 'transition',
-          pauseAfter: 400
+          pauseAfter: this.pauseForSegmentType('transition', 400)
         });
         if (script.keyPoints && script.keyPoints.length > 0) {
           script.keyPoints.forEach(point => {
             segments.push({
               text: this.cleanTextForSpeech(point),
               type: 'content',
-              pauseAfter: 400
+              pauseAfter: this.pauseForSegmentType('content', 400)
             });
           });
         }
@@ -390,18 +368,17 @@ export class AudioLessonService {
       });
     }
 
-    // Key teaching points
     if (lesson.keyTeachingPoints && lesson.keyTeachingPoints.length > 0) {
       segments.push({
         text: 'Key Teaching Points.',
         type: 'transition',
-        pauseAfter: 400
+        pauseAfter: this.pauseForSegmentType('transition', 500)
       });
       lesson.keyTeachingPoints.forEach(point => {
         segments.push({
           text: this.cleanTextForSpeech(point),
           type: 'content',
-          pauseAfter: 400
+          pauseAfter: this.pauseForSegmentType('content', 400)
         });
       });
     }
@@ -409,7 +386,7 @@ export class AudioLessonService {
     segments.push({
       text: `End of ${lesson.title}.`,
       type: 'outro',
-      pauseAfter: 500
+      pauseAfter: this.pauseForSegmentType('outro', 600)
     });
 
     const totalWords = segments.reduce((sum, seg) => sum + seg.text.split(' ').length, 0);
@@ -421,6 +398,24 @@ export class AudioLessonService {
       lessonId: lesson.id,
       lessonTitle: lesson.title
     };
+  }
+
+  /**
+   * Pause duration (ms) by segment type for clearer pacing: longer after intros/transitions/outros, shorter in content.
+   */
+  private pauseForSegmentType(type: AudioSegment['type'], defaultMs: number): number {
+    switch (type) {
+      case 'intro':
+      case 'outro':
+        return Math.max(defaultMs, 700);
+      case 'title':
+        return Math.max(defaultMs, 800);
+      case 'transition':
+        return Math.max(defaultMs, 600);
+      case 'content':
+      default:
+        return Math.max(defaultMs, 400);
+    }
   }
 
   /**
@@ -467,42 +462,34 @@ export class AudioLessonService {
     volume?: number;
   }): Promise<void> {
     return new Promise((resolve, reject) => {
-      console.log('🎤 Creating utterance...');
       const utterance = new SpeechSynthesisUtterance(text);
-      
       utterance.voice = options?.voice || this.defaultVoice;
-      utterance.rate = options?.rate || 1.0;
-      utterance.pitch = options?.pitch || 1.0;
-      utterance.volume = options?.volume || 1.0;
+      utterance.rate = options?.rate ?? 1.0;
+      utterance.pitch = options?.pitch ?? 1.0;
+      utterance.volume = options?.volume ?? 1.0;
 
-      console.log('🎤 Utterance config:', {
-        voice: utterance.voice?.name,
-        rate: utterance.rate,
-        pitch: utterance.pitch,
-        volume: utterance.volume
-      });
-
-      utterance.onstart = () => {
-        console.log('🎤 Utterance started');
-      };
-
-      utterance.onend = () => {
-        console.log('🎤 Utterance ended');
+      let resolved = false;
+      let pauseCheckId: ReturnType<typeof setInterval> | null = null;
+      const done = () => {
+        if (resolved) return;
+        resolved = true;
+        if (pauseCheckId !== null) clearInterval(pauseCheckId);
         resolve();
       };
 
+      utterance.onend = () => done();
       utterance.onerror = (event) => {
-        console.error('🎤 Utterance error:', event);
+        if (resolved) return;
+        resolved = true;
+        if (pauseCheckId !== null) clearInterval(pauseCheckId);
         reject(event);
       };
 
-      console.log('🎤 Calling synthesis.speak()...');
       this.synthesis.speak(utterance);
-      console.log('🎤 synthesis.speak() called, synthesis state:', {
-        speaking: this.synthesis.speaking,
-        pending: this.synthesis.pending,
-        paused: this.synthesis.paused
-      });
+
+      pauseCheckId = setInterval(() => {
+        if (this.synthesis.paused) done();
+      }, 100);
     });
   }
 
@@ -528,6 +515,13 @@ export class AudioLessonService {
   }
 
   /**
+   * Set current pitch (for mid-playback changes). Typical range 0.5–2.
+   */
+  setCurrentPitch(pitch: number): void {
+    this.currentPitch = Math.max(0.5, Math.min(2, pitch));
+  }
+
+  /**
    * Get current voice
    */
   getCurrentVoice(): SpeechSynthesisVoice | null {
@@ -542,6 +536,13 @@ export class AudioLessonService {
   }
 
   /**
+   * Get current pitch
+   */
+  getCurrentPitch(): number {
+    return this.currentPitch;
+  }
+
+  /**
    * Speak an entire podcast script
    */
   async speakPodcastScript(
@@ -550,6 +551,7 @@ export class AudioLessonService {
       voice?: SpeechSynthesisVoice;
       rate?: number;
       volume?: number;
+      pitch?: number;
       onProgress?: (segment: number, total: number) => void;
       onPause?: () => void;
     }
@@ -559,7 +561,7 @@ export class AudioLessonService {
     // Cancel any existing speech to prevent queue issues
     this.synthesis.cancel();
     
-    // Initialize current voice and rate from options
+    // Initialize current voice, rate, volume, pitch from options
     if (options?.voice) {
       this.currentVoice = options.voice;
     } else if (!this.currentVoice) {
@@ -572,6 +574,10 @@ export class AudioLessonService {
 
     if (options?.volume !== undefined) {
       this.currentVolume = Math.max(0, Math.min(1, options.volume));
+    }
+
+    if (options?.pitch !== undefined) {
+      this.currentPitch = options.pitch;
     }
 
     this.isPlaying = true;
@@ -592,12 +598,18 @@ export class AudioLessonService {
       }
 
       if (segment.text) {
-        // Use current voice, rate, and volume (volume can be updated mid-playback via setCurrentVolume)
         await this.textToSpeech(segment.text, {
           voice: this.currentVoice || undefined,
           rate: this.currentRate,
-          volume: this.currentVolume
+          volume: this.currentVolume,
+          pitch: this.currentPitch
         });
+      }
+
+      // Check paused immediately so we don't wait segment pause after user paused
+      if (this.synthesis.paused) {
+        options?.onPause?.();
+        break;
       }
 
       if (segment.pauseAfter) {
@@ -605,16 +617,13 @@ export class AudioLessonService {
         await this.pause(segment.pauseAfter);
       }
 
-      // Check if paused
       if (this.synthesis.paused) {
-        console.log('⏸️ Synthesis paused, breaking');
         options?.onPause?.();
         break;
       }
     }
-    
+
     this.isPlaying = false;
-    console.log('📜 speakPodcastScript completed');
   }
 
   /**

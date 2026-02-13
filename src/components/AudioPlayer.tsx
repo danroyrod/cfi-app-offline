@@ -14,6 +14,7 @@ import { BlobPlaybackController } from '../services/blobPlayback';
 import './AudioPlayer.css';
 
 const SPEED_OPTIONS = [0.75, 1, 1.25, 1.5, 1.75, 2] as const;
+const PITCH_OPTIONS = [0.8, 1, 1.2] as const;
 
 interface AudioPlayerProps {
   currentLesson: LessonPlan;
@@ -63,6 +64,11 @@ export default function AudioPlayer({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [volume, setVolume] = useState(currentPreset.volume);
+  const [pitch, setPitch] = useState<number>(() => {
+    const saved = localStorage.getItem('audio-pitch-preference');
+    const num = saved ? parseFloat(saved) : 1;
+    return PITCH_OPTIONS.includes(num as typeof PITCH_OPTIONS[number]) ? num : 1;
+  });
   const [useBlobPlayback, setUseBlobPlayback] = useState(false);
   const [isPreparing, setIsPreparing] = useState(false);
   const [askBackgroundPermission, setAskBackgroundPermission] = useState(false);
@@ -121,11 +127,14 @@ export default function AudioPlayer({
     setVolume(currentPreset.volume);
   }, [currentPreset]);
 
-  // Sync volume to service and blob controller so mid-playback slider changes apply
+  // Sync volume and pitch to service and blob controller so mid-playback changes apply
   useEffect(() => {
     audioService.setCurrentVolume(volume);
     blobControllerRef.current?.setVolume(volume);
   }, [volume]);
+  useEffect(() => {
+    audioService.setCurrentPitch(pitch);
+  }, [pitch]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -307,6 +316,7 @@ export default function AudioPlayer({
         rate: playbackRate,
         voice: voiceToUse,
         volume,
+        pitch,
         onProgress: (segment, total) => {
           setCurrentSegment(segment);
           setTotalSegments(total);
@@ -314,11 +324,18 @@ export default function AudioPlayer({
         onPause: () => {
           setIsPlaying(false);
           isPlayingRef.current = false;
+          if (timerRef.current) {
+            clearInterval(timerRef.current);
+            timerRef.current = null;
+          }
         }
       });
       setIsPlaying(false);
       isPlayingRef.current = false;
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
       if (autoplayEnabled && onNext) setTimeout(() => onNext(), 2000);
     } catch (err) {
       console.error('Audio playback error:', err);
@@ -417,6 +434,7 @@ export default function AudioPlayer({
         voice: selectedVoice,
         rate: playbackRate,
         volume,
+        pitch,
         mode: playlistMode,
         stream,
         onSegmentProgress: (seg, total) => setPreparingProgress({ segment: seg, total })
@@ -753,6 +771,25 @@ export default function AudioPlayer({
           </button>
         </div>
 
+        <div className="audio-setting">
+          <label className="audio-setting-label">Pitch</label>
+          <select
+            className="audio-pitch-select"
+            value={pitch}
+            onChange={(e) => {
+              const v = parseFloat(e.target.value);
+              setPitch(v);
+              localStorage.setItem('audio-pitch-preference', String(v));
+              audioService.setCurrentPitch(v);
+            }}
+            title="Voice pitch (lower = deeper, higher = higher)"
+          >
+            {PITCH_OPTIONS.map((p) => (
+              <option key={p} value={p}>{p === 1 ? 'Normal' : p}</option>
+            ))}
+          </select>
+        </div>
+
         <div className="audio-setting audio-voice-setting">
           <label className="audio-setting-label">Voice</label>
           <button
@@ -848,7 +885,12 @@ export default function AudioPlayer({
                     className={`audio-voice-option ${selectedVoice?.name === voice.name ? 'active' : ''}`}
                     onClick={() => handleVoiceChange(voice.name)}
                   >
-                    <div className="voice-name">{voice.name}</div>
+                    <div className="audio-voice-option-label">
+                      <div className="voice-name">{voice.name}</div>
+                      {audioService.isRecommendedVoice(voice) && (
+                        <span className="voice-recommended-badge">Recommended</span>
+                      )}
+                    </div>
                     <div className="voice-lang">{voice.lang}</div>
                     {selectedVoice?.name === voice.name && (
                       <span className="voice-checkmark">✓</span>

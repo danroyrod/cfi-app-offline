@@ -39,6 +39,7 @@ export function captureSegmentToBlob(
     voice?: SpeechSynthesisVoice | null;
     rate?: number;
     volume?: number;
+    pitch?: number;
   }
 ): Promise<Blob | null> {
   if (!text || !text.trim()) {
@@ -50,6 +51,7 @@ export function captureSegmentToBlob(
   utterance.voice = options.voice || null;
   utterance.rate = options.rate ?? 1;
   utterance.volume = Math.max(0, Math.min(1, options.volume ?? 1));
+  utterance.pitch = Math.max(0.5, Math.min(2, options.pitch ?? 1));
   utterance.lang = 'en-US';
 
   return new Promise<Blob | null>((resolve, reject) => {
