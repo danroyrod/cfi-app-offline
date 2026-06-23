@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import acsData from '../acs_data.json';
 import type { ACSData } from '../types';
+import ACSVersionBadge from '../components/ACSVersionBadge';
 
 const data = acsData as ACSData;
 
@@ -19,6 +20,12 @@ export default function AreasIndex() {
       <div className="main-content">
         <div className="container">
           <h1 className="page-title">Areas of Operation</h1>
+
+          <ACSVersionBadge
+            versionInfo={data.version_info}
+            documentNumber={data.document_number}
+            date={data.date}
+          />
 
           <div className="areas-grid">
             {data.areas.map((area) => (

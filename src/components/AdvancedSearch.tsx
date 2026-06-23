@@ -75,7 +75,7 @@ export default function AdvancedSearch({ initialQuery = '', onSearch }: Advanced
     handleSearch(recent);
   };
 
-  const allAreas = Array.from({ length: 9 }, (_, i) => String.fromCharCode(73 + i)); // I through IX
+  const allAreas = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'];
   const allTags = [
     ...universalBookmarkService.getAllTags(),
     ...notesService.getAllTags()

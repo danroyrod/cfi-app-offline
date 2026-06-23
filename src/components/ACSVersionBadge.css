@@ -1,0 +1,126 @@
+.acs-version-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background: var(--bg-secondary, #f1f5f9);
+  border: 1px solid var(--border-color, #e2e8f0);
+  margin: 1.5rem auto 0;
+}
+
+.acs-version-status {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.acs-version-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.acs-version-status--current .acs-version-dot {
+  background-color: #22c55e;
+}
+.acs-version-status--current .acs-version-label {
+  color: #16a34a;
+}
+
+.acs-version-status--review .acs-version-dot {
+  background-color: #eab308;
+}
+.acs-version-status--review .acs-version-label {
+  color: #ca8a04;
+}
+
+.acs-version-status--outdated .acs-version-dot {
+  background-color: #ef4444;
+}
+.acs-version-status--outdated .acs-version-label {
+  color: #dc2626;
+}
+
+.acs-version-status--unknown .acs-version-dot {
+  background-color: #94a3b8;
+}
+.acs-version-status--unknown .acs-version-label {
+  color: #64748b;
+}
+
+.acs-version-details {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-secondary, #64748b);
+  font-size: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.acs-version-doc {
+  font-weight: 600;
+  color: var(--text-primary, #334155);
+}
+
+.acs-version-separator {
+  color: var(--text-tertiary, #94a3b8);
+}
+
+.acs-version-source-link {
+  font-size: 0.7rem;
+  color: var(--link-color, #2563eb);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.acs-version-source-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Newer version warning banner */
+.acs-version-warning {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #dc2626;
+  margin-top: 0.2rem;
+}
+
+.acs-version-warning a {
+  color: #dc2626;
+  text-decoration: underline;
+}
+
+/* Dark mode support */
+[data-theme="dark"] .acs-version-badge {
+  background: var(--bg-secondary, #1e293b);
+  border-color: var(--border-color, #334155);
+}
+
+[data-theme="dark"] .acs-version-doc {
+  color: var(--text-primary, #e2e8f0);
+}
+
+[data-theme="dark"] .acs-version-source-link {
+  color: var(--link-color, #60a5fa);
+}
+
+[data-theme="dark"] .acs-version-warning {
+  color: #f87171;
+}
+
+[data-theme="dark"] .acs-version-warning a {
+  color: #f87171;
+}

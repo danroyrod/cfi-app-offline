@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import acsData from '../acs_data.json';
 import type { ACSData } from '../types';
+import ACSVersionBadge from '../components/ACSVersionBadge';
+import StudyProgress from '../components/StudyProgress';
 
 const data = acsData as ACSData;
 
@@ -62,6 +64,14 @@ export default function LandingPage() {
             </span>
           </Link>
         </div>
+
+        <StudyProgress />
+
+        <ACSVersionBadge
+          versionInfo={data.version_info}
+          documentNumber={data.document_number}
+          date={data.date}
+        />
       </div>
     </div>
   );

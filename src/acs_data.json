@@ -3,6 +3,13 @@
   "title": "Flight Instructor for Airplane Category",
   "subtitle": "Airman Certification Standards",
   "date": "April 2024",
+  "version_info": {
+    "acs_revision": "April 2024",
+    "source_url": "https://www.faa.gov/training_testing/testing/acs",
+    "last_verified": "2026-06-18",
+    "app_data_version": "6.0.0",
+    "notes": "Based on FAA-S-ACS-25 effective May 31, 2024. Verify against FAA website for any interim changes."
+  },
   "areas": [
     {
       "number": "I",

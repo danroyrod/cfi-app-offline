@@ -42,11 +42,20 @@ export interface Appendix {
   sections: AppendixSection[];
 }
 
+export interface ACSVersionInfo {
+  acs_revision: string;
+  source_url: string;
+  last_verified: string;
+  app_data_version: string;
+  notes: string;
+}
+
 export interface ACSData {
   document_number: string;
   title: string;
   subtitle: string;
   date: string;
+  version_info?: ACSVersionInfo;
   areas: Area[];
   appendices: Appendix[];
 }

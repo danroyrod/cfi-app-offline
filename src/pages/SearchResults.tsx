@@ -300,6 +300,23 @@ export default function SearchResults() {
                 <span className="empty-icon">🔍</span>
                 <h2>Start searching</h2>
                 <p>Enter a search term above to find lesson plans, tasks, notes, and bookmarks</p>
+                <div className="search-suggestions-list">
+                  <p className="search-suggestions-title">Try searching for:</p>
+                  <div className="search-suggestion-chips">
+                    {['steep turns', 'stall recovery', 'Vmc', 'crosswind landing', 'engine failure', 'risk management', 'slow flight'].map(term => (
+                      <button
+                        key={term}
+                        className="suggestion-chip"
+                        onClick={() => {
+                          const params = new URLSearchParams({ q: term });
+                          window.location.href = `/cfi-app-offline/search?${params.toString()}`;
+                        }}
+                      >
+                        {term}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             )}
           </div>

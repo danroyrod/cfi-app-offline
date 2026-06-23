@@ -36,10 +36,14 @@ class OfflineService {
           }
         });
 
-        // Check for updates periodically
-        setInterval(() => {
-          registration.update();
-        }, 60000); // Check every minute
+        // Check for updates when user returns to the app (visibility change)
+        // This is more battery-friendly than polling every 60 seconds
+        const handleVisibilityChange = () => {
+          if (document.visibilityState === 'visible') {
+            registration.update();
+          }
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
 
         return registration;
       } catch (error) {

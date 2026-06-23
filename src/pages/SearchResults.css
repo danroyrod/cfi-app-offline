@@ -253,3 +253,38 @@
   color: #1e293b;
 }
 
+
+/* Search suggestion chips */
+.search-suggestions-list {
+  margin-top: 1.5rem;
+}
+
+.search-suggestions-title {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.search-suggestion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.suggestion-chip {
+  padding: 0.4rem 0.8rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-color, #e2e8f0);
+  background: var(--bg-secondary, #f8fafc);
+  color: var(--link-color, #2563eb);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.suggestion-chip:hover {
+  background: var(--link-color, #2563eb);
+  color: white;
+  border-color: var(--link-color, #2563eb);
+}
