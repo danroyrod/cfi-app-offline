@@ -5,7 +5,7 @@
  */
 
 import { flashcardService } from './flashcardService';
-import type { Flashcard, FlashcardStats } from '../types/flashcardTypes';
+import type { Flashcard } from '../types/flashcardTypes';
 
 export interface AreaMastery {
   areaNumber: string;
