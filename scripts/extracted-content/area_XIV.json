@@ -1,0 +1,1235 @@
+{
+  "area_number": "XIV",
+  "area_name": "14. Postflight Procedures",
+  "standard_lessons": [
+    {
+      "filename": "XIV.A. After Landing.docx",
+      "paragraphs": [
+        {
+          "text": "XIV.A. After Landing, Parking, & Securing",
+          "style": "LP Title",
+          "bold": false
+        },
+        {
+          "text": "Introduction",
+          "style": "Instructor Notes",
+          "bold": false
+        },
+        {
+          "text": "How",
+          "style": "Instructor Notes",
+          "bold": false
+        },
+        {
+          "text": "Parking",
+          "style": "Section Header",
+          "bold": false
+        },
+        {
+          "text": "Select a parking location and heading that avoids the propeller and jet blast from other planes",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Also ensure you are not parked in a way that will blast other aircraft",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Park heading into the wind, if possible",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Hand signals may be used if ramp personnel are available – be familiar",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "After stopping, roll forward slightly to straighten the nosewheel",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Engine Shutdown \t\t\t\t\t\t\t\t\t\tAI.XIV.A.K1",
+          "style": "Section Header",
+          "bold": false
+        },
+        {
+          "text": "A flight is not complete until the engine is shut down and the airplane is secured",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Once stopped, set the parking brake",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Common practice: With the engine running, move the ignition from BOTH to OFF and back to BOTH",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Ensures mags are properly grounded",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Follow the procedures outlined on the manufacturer’s checklist",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Read each item aloud and perform the task (Read and Do)",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "CE: Hazards resulting from failure to follow recommended procedures \t\t\tAI.XIV.A.K3",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "RM: Deplaning Passengers \t\t\t\t\t\t\t\t\tAI.XIV.A.R3",
+          "style": "Section Header",
+          "bold": false
+        },
+        {
+          "text": "Ensure passengers understand the safe procedures for exiting the airplane (after engine shutdown)",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Ensure passengers are aware of potential hazards nearby – other aircraft starting, taxiing, etc.",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Do not let the passengers disembark until required checklists are complete & safety precautions met",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Postflight Inspection \t\t\t\t\t\t\t\t\tAI.XIV.A.K1",
+          "style": "Section Header",
+          "bold": false
+        },
+        {
+          "text": "Postflight Inspection",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Check the general condition of the aircraft",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Inspect the outside for any damage that may have occurred",
+          "style": "Bullet",
+          "bold": false
+        },
+        {
+          "text": "Look for leaks, streaks, stains",
+          "style": "Bullet",
+          "bold": false
+        },
+        {
+          "text": "Check oil, and other required fluids and replenish as necessary",
+          "style": "Bullet",
+          "bold": false
+        },
+        {
+          "text": "Document all Discrepancies \t\t\t\t\t\t\t\tAI.XIV.A.K2",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Don’t leave the problem for someone else",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Allows maintenance to fix issues",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "If not fixed, it informs the next pilot of the issue so they can make an informed go/no go decision",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Allows pilots/maintenance to see trends/repeating problems",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Fuel the Airplane",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "If another flight is planned, the tanks should be filled based on that flight’s fuel requirements",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "If the aircraft is going to be inactive, fill the tanks to prevent water condensation from forming",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Securing the Aircraft \t\t\t\t\t\t\t\t\tAI.XIV.A.K1",
+          "style": "Section Header",
+          "bold": false
+        },
+        {
+          "text": "An essential part of every flight",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Remove personal belongings",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Verify the nosewheel is straight",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Parking Brake/Tiedown/Chocked, as necessary",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Flight controls secured, gust locks",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Covered (airframe, propeller, shades, inlet covers, pitot covers, etc.) and/or hangered",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Windows closed",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Locked",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Any other requirements for your aircraft",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "RM: Airport Specific Security Procedures \t\t\t\t\t\t\tAI.XIV.A.R2",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Address any specific procedures (hours of operation, gates, codes, other requirements)",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "CE: Poor planning/procedure or faulty judgment in postflight procedures \tAI.XIV.A.K3",
+          "style": "Section Header",
+          "bold": false
+        },
+        {
+          "text": "Be aware of the parking areas (ramps space, FBOs, etc.) at the destination",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "RM: Activities & Distractions \t\t\t\t\t\t\t\tAI.XIV.A.R1",
+          "style": "Sub Heading 1",
+          "bold": false
+        },
+        {
+          "text": "Taxiing and parking around buildings, people, etc. is no time to be distracted (sterile flight deck)",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Follow all checklist(s) step by step, and ensure the airplane is left in a safe condition for the next flight",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Do not skip the postflight inspection and assume the next pilot will catch any issues in their preflight",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "If a discrepancy is noted, attempt to have the issue inspected and fixed prior to the next flight",
+          "style": "Bullet",
+          "bold": false
+        },
+        {
+          "text": "If unsure about something, ask (avoid faulty judgment)",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Don’t assume “it will be OK”",
+          "style": "Bullet",
+          "bold": false
+        },
+        {
+          "text": "Don’t make a safety decision for the next pilot – inform them and let them make the decision",
+          "style": "Bullet",
+          "bold": false
+        },
+        {
+          "text": "Verify with the POH, a flight instructor, Chief Pilot, maintenance, etc.",
+          "style": "Bullet",
+          "bold": false
+        },
+        {
+          "text": "Leaving the airplane in an unsafe place, condition, or situation can result in damage and/or injuries",
+          "style": "Sub Heading",
+          "bold": false
+        },
+        {
+          "text": "Conclusion:",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Brief review of the main points",
+          "style": "Normal",
+          "bold": false
+        }
+      ],
+      "tables": [
+        [
+          [
+            "OBJECTIVE & COMPLETION STANDARDS\nTo develop an understanding of the after landing, parking, & securing procedures. The learner can apply these concepts in the plane.\nThe learner can postflight and secure the airplane based on the situation and at different airports as required in the ACS.",
+            "OBJECTIVE & COMPLETION STANDARDS\nTo develop an understanding of the after landing, parking, & securing procedures. The learner can apply these concepts in the plane.\nThe learner can postflight and secure the airplane based on the situation and at different airports as required in the ACS.",
+            "OBJECTIVE & COMPLETION STANDARDS\nTo develop an understanding of the after landing, parking, & securing procedures. The learner can apply these concepts in the plane.\nThe learner can postflight and secure the airplane based on the situation and at different airports as required in the ACS.",
+            "KEY POINTS\nShutdown Checklist\nPostflight Inspection & Write-Ups\nSecuring the Airplane",
+            "KEY POINTS\nShutdown Checklist\nPostflight Inspection & Write-Ups\nSecuring the Airplane"
+          ],
+          [
+            "ELEMENTS\nParking\nEngine Shutdown\nDeplaning passengers\nPostflight Inspection\nSecuring the Aircraft\nCommon Errors",
+            "ELEMENTS\nParking\nEngine Shutdown\nDeplaning passengers\nPostflight Inspection\nSecuring the Aircraft\nCommon Errors",
+            "",
+            "",
+            ""
+          ],
+          [
+            "REFERENCES\nAirplane Flying Handbook\nPOH",
+            "REFERENCES\nAirplane Flying Handbook\nPOH",
+            "",
+            "",
+            ""
+          ],
+          [
+            "SCHEDULE\nIntroduction\nDevelopment\nConclusion",
+            "EQUIPMENT\nBoard & Markers\nReferences\nModel airplane",
+            "INSTRUCTOR\nPresent Content\nAsk/Answer Questions\nAssign Homework",
+            "INSTRUCTOR\nPresent Content\nAsk/Answer Questions\nAssign Homework",
+            "STUDENT\nParticipate in learning\nTake notes\nAsk/Answer Questions"
+          ],
+          [
+            "NOTES",
+            "NOTES",
+            "NOTES",
+            "NOTES",
+            "NOTES"
+          ]
+        ],
+        [
+          [
+            "ATTENTION\nInteresting fact or attention-grabbing story\nHave you ever forgotten to turn something off after a flight? Leaving certain things running can be dangerous or costly. Properly securing an airplane isn’t important just to save on costs though, weather, and other situations can cause damage and/or injuries.",
+            "ATTENTION\nInteresting fact or attention-grabbing story\nHave you ever forgotten to turn something off after a flight? Leaving certain things running can be dangerous or costly. Properly securing an airplane isn’t important just to save on costs though, weather, and other situations can cause damage and/or injuries."
+          ],
+          [
+            "OVERVIEW\nReview Objectives, Elements, and Key Points",
+            "OVERVIEW\nReview Objectives, Elements, and Key Points"
+          ],
+          [
+            "WHAT\nPostflight procedures are completed at the end of the flight when the airplane is parked, shut down, and properly secured.",
+            "WHY\nThe postflight is just as important as the preflight in maintaining the aircraft and keeping it in safe condition for the next flight."
+          ]
+        ]
+      ],
+      "headings": [
+        "Select a parking location and heading that avoids the propeller and jet blast from other planes",
+        "Also ensure you are not parked in a way that will blast other aircraft",
+        "Park heading into the wind, if possible",
+        "Hand signals may be used if ramp personnel are available – be familiar",
+        "After stopping, roll forward slightly to straighten the nosewheel",
+        "A flight is not complete until the engine is shut down and the airplane is secured",
+        "Once stopped, set the parking brake",
+        "Common practice: With the engine running, move the ignition from BOTH to OFF and back to BOTH",
+        "Ensures mags are properly grounded",
+        "Follow the procedures outlined on the manufacturer’s checklist",
+        "Read each item aloud and perform the task (Read and Do)",
+        "CE: Hazards resulting from failure to follow recommended procedures \t\t\tAI.XIV.A.K3",
+        "Ensure passengers understand the safe procedures for exiting the airplane (after engine shutdown)",
+        "Ensure passengers are aware of potential hazards nearby – other aircraft starting, taxiing, etc.",
+        "Do not let the passengers disembark until required checklists are complete & safety precautions met",
+        "Postflight Inspection",
+        "Check the general condition of the aircraft",
+        "Document all Discrepancies \t\t\t\t\t\t\t\tAI.XIV.A.K2",
+        "Don’t leave the problem for someone else",
+        "Allows maintenance to fix issues",
+        "If not fixed, it informs the next pilot of the issue so they can make an informed go/no go decision",
+        "Allows pilots/maintenance to see trends/repeating problems",
+        "Fuel the Airplane",
+        "If another flight is planned, the tanks should be filled based on that flight’s fuel requirements",
+        "If the aircraft is going to be inactive, fill the tanks to prevent water condensation from forming",
+        "An essential part of every flight",
+        "Remove personal belongings",
+        "Verify the nosewheel is straight",
+        "Parking Brake/Tiedown/Chocked, as necessary",
+        "Flight controls secured, gust locks",
+        "Covered (airframe, propeller, shades, inlet covers, pitot covers, etc.) and/or hangered",
+        "Windows closed",
+        "Locked",
+        "Any other requirements for your aircraft",
+        "RM: Airport Specific Security Procedures \t\t\t\t\t\t\tAI.XIV.A.R2",
+        "Address any specific procedures (hours of operation, gates, codes, other requirements)",
+        "Be aware of the parking areas (ramps space, FBOs, etc.) at the destination",
+        "RM: Activities & Distractions \t\t\t\t\t\t\t\tAI.XIV.A.R1",
+        "Taxiing and parking around buildings, people, etc. is no time to be distracted (sterile flight deck)",
+        "Follow all checklist(s) step by step, and ensure the airplane is left in a safe condition for the next flight",
+        "Do not skip the postflight inspection and assume the next pilot will catch any issues in their preflight",
+        "If unsure about something, ask (avoid faulty judgment)",
+        "Leaving the airplane in an unsafe place, condition, or situation can result in damage and/or injuries"
+      ],
+      "full_text": "XIV.A. After Landing, Parking, & Securing\nIntroduction\nHow\nParking\nSelect a parking location and heading that avoids the propeller and jet blast from other planes\nAlso ensure you are not parked in a way that will blast other aircraft\nPark heading into the wind, if possible\nHand signals may be used if ramp personnel are available – be familiar\nAfter stopping, roll forward slightly to straighten the nosewheel\nEngine Shutdown \t\t\t\t\t\t\t\t\t\tAI.XIV.A.K1\nA flight is not complete until the engine is shut down and the airplane is secured\nOnce stopped, set the parking brake\nCommon practice: With the engine running, move the ignition from BOTH to OFF and back to BOTH\nEnsures mags are properly grounded\nFollow the procedures outlined on the manufacturer’s checklist\nRead each item aloud and perform the task (Read and Do)\nCE: Hazards resulting from failure to follow recommended procedures \t\t\tAI.XIV.A.K3\nRM: Deplaning Passengers \t\t\t\t\t\t\t\t\tAI.XIV.A.R3\nEnsure passengers understand the safe procedures for exiting the airplane (after engine shutdown)\nEnsure passengers are aware of potential hazards nearby – other aircraft starting, taxiing, etc.\nDo not let the passengers disembark until required checklists are complete & safety precautions met\nPostflight Inspection \t\t\t\t\t\t\t\t\tAI.XIV.A.K1\nPostflight Inspection\nCheck the general condition of the aircraft\nInspect the outside for any damage that may have occurred\nLook for leaks, streaks, stains\nCheck oil, and other required fluids and replenish as necessary\nDocument all Discrepancies \t\t\t\t\t\t\t\tAI.XIV.A.K2\nDon’t leave the problem for someone else\nAllows maintenance to fix issues\nIf not fixed, it informs the next pilot of the issue so they can make an informed go/no go decision\nAllows pilots/maintenance to see trends/repeating problems\nFuel the Airplane\nIf another flight is planned, the tanks should be filled based on that flight’s fuel requirements\nIf the aircraft is going to be inactive, fill the tanks to prevent water condensation from forming\nSecuring the Aircraft \t\t\t\t\t\t\t\t\tAI.XIV.A.K1\nAn essential part of every flight\nRemove personal belongings\nVerify the nosewheel is straight\nParking Brake/Tiedown/Chocked, as necessary\nFlight controls secured, gust locks\nCovered (airframe, propeller, shades, inlet covers, pitot covers, etc.) and/or hangered\nWindows closed\nLocked\nAny other requirements for your aircraft\nRM: Airport Specific Security Procedures \t\t\t\t\t\t\tAI.XIV.A.R2\nAddress any specific procedures (hours of operation, gates, codes, other requirements)\nCE: Poor planning/procedure or faulty judgment in postflight procedures \tAI.XIV.A.K3\nBe aware of the parking areas (ramps space, FBOs, etc.) at the destination\nRM: Activities & Distractions \t\t\t\t\t\t\t\tAI.XIV.A.R1\nTaxiing and parking around buildings, people, etc. is no time to be distracted (sterile flight deck)\nFollow all checklist(s) step by step, and ensure the airplane is left in a safe condition for the next flight\nDo not skip the postflight inspection and assume the next pilot will catch any issues in their preflight\nIf a discrepancy is noted, attempt to have the issue inspected and fixed prior to the next flight\nIf unsure about something, ask (avoid faulty judgment)\nDon’t assume “it will be OK”\nDon’t make a safety decision for the next pilot – inform them and let them make the decision\nVerify with the POH, a flight instructor, Chief Pilot, maintenance, etc.\nLeaving the airplane in an unsafe place, condition, or situation can result in damage and/or injuries\nConclusion:\nBrief review of the main points"
+    }
+  ],
+  "extra_detail_lessons": [
+    {
+      "filename": "XIV.A. After Landing.docx",
+      "paragraphs": [
+        {
+          "text": "XIV.A. After Landing, Parking, & Securing",
+          "style": "LP Title",
+          "bold": false
+        },
+        {
+          "text": "References: Airplane Flying Handbook (FAA-H-8083-3), POH/AFM",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Instructor Notes:",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Introduction:",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Attention",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Interesting fact or attention-grabbing story",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Have you ever forgotten to turn something off after a flight? Leaving certain things running can be dangerous or costly. Properly securing an airplane isn’t important just to save on costs though, weather, and other situations can cause damage and/or injuries.",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Overview",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Review Objectives and Elements/Key ideas",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "What",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Postflight procedures are completed at the end of the flight when the airplane is parked, shut down, and properly secured.",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Why",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "The postflight is just as important as preflight in maintaining the aircraft and keeping it in a safe condition for the next flight.",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "How:",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Parking",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Select a parking location and heading that avoids the propeller/jet blast of other planes",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Also ensure you are not parked in a way that will blast other aircraft",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Be considerate of others",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Whenever possible, park heading into the wind",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Often, your choice is limited to designated parking spots and tie downs - work with what you have",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Hand signals may be used if ramp personnel are available – be familiar",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "After stopping, allow the airplane to roll forward to straighten the nosewheel",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Engine Shutdown \t\t\tAI.XIV.A.K1",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Follow the procedures in the manufacturer’s checklist for shutting down and securing",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Read each item aloud and perform the task",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "CE: Hazards resulting from failure to follow recommended procedures",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Like always, it is very important to follow the manufacturer’s checklist",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Follow the published procedures to avoid missing important steps/creating an unsafe situation",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Set the parking brake to keep the plane from moving",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "*Checklist:",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "*While the engine is running, move the ignition switch from BOTH to OFF and back to BOTH",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "This ensures the magnetos are properly grounded at every engine shutdown",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Once the engine is shutdown, secure the flight deck",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Gather belongings and complete any securing checklist items (control lock, windows, shades, etc.)",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "*Double check that the master is off, the magnetos are off and the key has been removed, electrical equipment is off, the trim is neutral, flaps are up, and the mixture and throttle are idle",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "RM: Deplaning Passengers \t\t\t\t\t\t\t\t\t\tAI.XIV.A.R3",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Ensure passengers understand the safe procedures for exiting the airplane (after engine shutdown)",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Inform them when it is safe to unbuckle and exit",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Be aware of potential hazards nearby – other aircraft starting, taxiing in/out, etc.",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Ensure the passengers know where to go to prevent wandering into an unsafe situation",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "The aircraft should be shutdown/configured to allow for safe movement of passengers",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Chock to prevent movement",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Do not let the passengers disembark until required checklists are complete and safety precautions met",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Postflight Inspection \t\t\t\t\t\t\t\t\t\tAI.XIV.A.K1",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Postflight Inspection",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Check the general condition of the aircraft",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Inspect the outside for any damage that may have occurred",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Look for leaks, streaks, stains",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Check oil, and other required fluids and replenish as necessary",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Document all Discrepancies \t\t\t\t\t\t\t\t\tAI.XIV.A.K2",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Don’t leave the problem for someone else",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Not only dangerous, but just rude",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Allows maintenance to fix issues",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "If not fixed, informs the next pilot of the discrepancies",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "They can make an informed go/no go decision",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Can see trends/repeating problems",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Fuel the Airplane",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "If another flight is planned, the tanks should be filled based on that flight’s fuel requirements",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "If the aircraft is going to be inactive, fill the tanks to prevent water condensation from forming",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Refueling Procedures",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Ensure the ramp personnel use the proper type/grade of fuel",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "If possible, be there when the fueling takes place to ensure the proper grade",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Always check/drain the fuel prior to the next flight to be sure the proper fuel was used, and water/sediment hasn’t accumulated since the last flight",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Securing the Aircraft \t\t\t\t\t\t\t\t\t\tAI.XIV.A.K1",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "An essential part of every flight",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Remove personal belongings",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Verify the nosewheel is straight",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Tiedown/chocked",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Tie downs may vary significantly between chains and well-worn ropes",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Chains are not flexible and therefore should not be made taught to prevent structural damage",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Ropes are flexible and may be reasonably cinched to the tie down rings",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Brakes should be set based on local procedures – some request the brakes set, some don’t",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Flight controls secured, gust locks",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Covered (airframe, propeller, shades, inlet covers, pitot covers, etc.) and/or hangered",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Windows closed",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Locked",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Any other requirements for your aircraft",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "RM: Airport Specific Security Procedures \t\t\t\t\t\t\tAI.XIV.A.R2",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Address any specific procedures (hours of operation, gates, codes, other requirements)",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "CE: Poor planning, improper procedure, or faulty judgment in performance of postflight procedures",
+          "style": "List Paragraph",
+          "bold": true
+        },
+        {
+          "text": "Be aware of the parking areas (ramps space, FBOs, etc.) at the destination",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "If necessary, contact the FBO or parking management to verify the location and any procedures",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "RM: Activities & Distractions \t\t\t\t\t\t\t\t\tAI.XIV.A.R1",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Taxiing and parking around buildings, people, etc. is no time to be distracted (sterile flight deck)",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Follow all checklist(s) step by step, and ensure the airplane is left in a safe condition for the next flight",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Don’t operate by memory",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "If distracted, restart the checklist to ensure completion",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Activities other than those associated with landing, parking & securing should be delayed",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Do not skip the postflight inspection, assuming the next pilot will catch any issues in their preflight",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "They might not catch the issue which could be very hazardous",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "The issue could have been found and possibly fixed prior to them showing up (be considerate)",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "If a discrepancy is noted, attempt to have the issue inspected/fixed prior to the next flight",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "If unsure about something, ask (avoid faulty judgement)",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Don’t assume “it will be OK”",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Don’t make a safety decision for the next pilot – inform them and let them make the decision",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Verify with the POH, an instructor, Chief Pilot, maintenance, etc.",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Leaving the airplane in an unsafe place, condition, or situation can result in damage and/or injuries",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Common Errors: \t\t\t\t\t\t\t\t\t\t\tAI.XIV.A.K3",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Hazards resulting from failure to follow recommended procedures",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Poor planning, improper procedure, or faulty judgment in performance of postflight procedures",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Conclusion:",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "Brief review of the main points",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "When parking and shutting down the airplane it is very important to follow the manufacturer’s established guidelines to ensure everything is properly shut down and secured.",
+          "style": "Normal",
+          "bold": false
+        }
+      ],
+      "tables": [
+        [
+          [
+            "Objectives",
+            "The learner should develop knowledge of postflight procedures and be able to perform them as required in the ACS.",
+            "The learner should develop knowledge of postflight procedures and be able to perform them as required in the ACS."
+          ],
+          [
+            "Key Elements\n\n\n\nElements",
+            "Shutdown Checklist\nPostflight Inspection\nSecuring the Airplane\n\nParking\nEngine Shutdown\nDeplaning passengers\nPostflight Inspection\nSecuring the Aircraft\nCommon Error",
+            "Shutdown Checklist\nPostflight Inspection\nSecuring the Airplane\n\nParking\nEngine Shutdown\nDeplaning passengers\nPostflight Inspection\nSecuring the Aircraft\nCommon Error"
+          ],
+          [
+            "Schedule",
+            "Discuss Objectives\nReview material\nDevelopment\nConclusion",
+            ""
+          ],
+          [
+            "Equipment",
+            "White board and markers\nReferences",
+            "White board and markers\nReferences"
+          ],
+          [
+            "IP’s Actions",
+            "Discuss lesson objectives\nPresent Lecture\nAsk and Answer Questions\nAssign homework",
+            "Discuss lesson objectives\nPresent Lecture\nAsk and Answer Questions\nAssign homework"
+          ],
+          [
+            "SP’s Actions",
+            "Participate in discussion\nTake notes\nAsk and respond to questions",
+            "Participate in discussion\nTake notes\nAsk and respond to questions"
+          ],
+          [
+            "Completion Standards",
+            "The learner can safely postflight the airplane based on different situations and at different airports.",
+            "The learner can safely postflight the airplane based on different situations and at different airports."
+          ]
+        ],
+        [
+          [
+            "Throttle Idle",
+            "Mixture Idle Cut-Off"
+          ],
+          [
+            "Fuel Pump Off",
+            "Magnetos Off"
+          ],
+          [
+            "Avionics Master Off",
+            "Master Switch Off"
+          ],
+          [
+            "Electrical Equipment Off",
+            ""
+          ]
+        ]
+      ],
+      "headings": [],
+      "full_text": "XIV.A. After Landing, Parking, & Securing\nReferences: Airplane Flying Handbook (FAA-H-8083-3), POH/AFM\nInstructor Notes:\nIntroduction:\nAttention\nInteresting fact or attention-grabbing story\nHave you ever forgotten to turn something off after a flight? Leaving certain things running can be dangerous or costly. Properly securing an airplane isn’t important just to save on costs though, weather, and other situations can cause damage and/or injuries.\nOverview\nReview Objectives and Elements/Key ideas\nWhat\nPostflight procedures are completed at the end of the flight when the airplane is parked, shut down, and properly secured.\nWhy\nThe postflight is just as important as preflight in maintaining the aircraft and keeping it in a safe condition for the next flight.\nHow:\nParking\nSelect a parking location and heading that avoids the propeller/jet blast of other planes\nAlso ensure you are not parked in a way that will blast other aircraft\nBe considerate of others\nWhenever possible, park heading into the wind\nOften, your choice is limited to designated parking spots and tie downs - work with what you have\nHand signals may be used if ramp personnel are available – be familiar\nAfter stopping, allow the airplane to roll forward to straighten the nosewheel\nEngine Shutdown \t\t\tAI.XIV.A.K1\nFollow the procedures in the manufacturer’s checklist for shutting down and securing\nRead each item aloud and perform the task\nCE: Hazards resulting from failure to follow recommended procedures\nLike always, it is very important to follow the manufacturer’s checklist\nFollow the published procedures to avoid missing important steps/creating an unsafe situation\nSet the parking brake to keep the plane from moving\n*Checklist:\n*While the engine is running, move the ignition switch from BOTH to OFF and back to BOTH\nThis ensures the magnetos are properly grounded at every engine shutdown\nOnce the engine is shutdown, secure the flight deck\nGather belongings and complete any securing checklist items (control lock, windows, shades, etc.)\n*Double check that the master is off, the magnetos are off and the key has been removed, electrical equipment is off, the trim is neutral, flaps are up, and the mixture and throttle are idle\nRM: Deplaning Passengers \t\t\t\t\t\t\t\t\t\tAI.XIV.A.R3\nEnsure passengers understand the safe procedures for exiting the airplane (after engine shutdown)\nInform them when it is safe to unbuckle and exit\nBe aware of potential hazards nearby – other aircraft starting, taxiing in/out, etc.\nEnsure the passengers know where to go to prevent wandering into an unsafe situation\nThe aircraft should be shutdown/configured to allow for safe movement of passengers\nChock to prevent movement\nDo not let the passengers disembark until required checklists are complete and safety precautions met\nPostflight Inspection \t\t\t\t\t\t\t\t\t\tAI.XIV.A.K1\nPostflight Inspection\nCheck the general condition of the aircraft\nInspect the outside for any damage that may have occurred\nLook for leaks, streaks, stains\nCheck oil, and other required fluids and replenish as necessary\nDocument all Discrepancies \t\t\t\t\t\t\t\t\tAI.XIV.A.K2\nDon’t leave the problem for someone else\nNot only dangerous, but just rude\nAllows maintenance to fix issues\nIf not fixed, informs the next pilot of the discrepancies\nThey can make an informed go/no go decision\nCan see trends/repeating problems\nFuel the Airplane\nIf another flight is planned, the tanks should be filled based on that flight’s fuel requirements\nIf the aircraft is going to be inactive, fill the tanks to prevent water condensation from forming\nRefueling Procedures\nEnsure the ramp personnel use the proper type/grade of fuel\nIf possible, be there when the fueling takes place to ensure the proper grade\nAlways check/drain the fuel prior to the next flight to be sure the proper fuel was used, and water/sediment hasn’t accumulated since the last flight\nSecuring the Aircraft \t\t\t\t\t\t\t\t\t\tAI.XIV.A.K1\nAn essential part of every flight\nRemove personal belongings\nVerify the nosewheel is straight\nTiedown/chocked\nTie downs may vary significantly between chains and well-worn ropes\nChains are not flexible and therefore should not be made taught to prevent structural damage\nRopes are flexible and may be reasonably cinched to the tie down rings\nBrakes should be set based on local procedures – some request the brakes set, some don’t\nFlight controls secured, gust locks\nCovered (airframe, propeller, shades, inlet covers, pitot covers, etc.) and/or hangered\nWindows closed\nLocked\nAny other requirements for your aircraft\nRM: Airport Specific Security Procedures \t\t\t\t\t\t\tAI.XIV.A.R2\nAddress any specific procedures (hours of operation, gates, codes, other requirements)\nCE: Poor planning, improper procedure, or faulty judgment in performance of postflight procedures\nBe aware of the parking areas (ramps space, FBOs, etc.) at the destination\nIf necessary, contact the FBO or parking management to verify the location and any procedures\nRM: Activities & Distractions \t\t\t\t\t\t\t\t\tAI.XIV.A.R1\nTaxiing and parking around buildings, people, etc. is no time to be distracted (sterile flight deck)\nFollow all checklist(s) step by step, and ensure the airplane is left in a safe condition for the next flight\nDon’t operate by memory\nIf distracted, restart the checklist to ensure completion\nActivities other than those associated with landing, parking & securing should be delayed\nDo not skip the postflight inspection, assuming the next pilot will catch any issues in their preflight\nThey might not catch the issue which could be very hazardous\nThe issue could have been found and possibly fixed prior to them showing up (be considerate)\nIf a discrepancy is noted, attempt to have the issue inspected/fixed prior to the next flight\nIf unsure about something, ask (avoid faulty judgement)\nDon’t assume “it will be OK”\nDon’t make a safety decision for the next pilot – inform them and let them make the decision\nVerify with the POH, an instructor, Chief Pilot, maintenance, etc.\nLeaving the airplane in an unsafe place, condition, or situation can result in damage and/or injuries\nCommon Errors: \t\t\t\t\t\t\t\t\t\t\tAI.XIV.A.K3\nHazards resulting from failure to follow recommended procedures\nPoor planning, improper procedure, or faulty judgment in performance of postflight procedures\nConclusion:\nBrief review of the main points\nWhen parking and shutting down the airplane it is very important to follow the manufacturer’s established guidelines to ensure everything is properly shut down and secured."
+    }
+  ],
+  "powerpoint_content": [
+    {
+      "filename": "XIV.A. After Landing.pptx",
+      "slides": [
+        {
+          "slide_number": 1,
+          "title": "",
+          "text_content": [
+            "After Landing, \u000bParking & Securing",
+            "1"
+          ],
+          "notes": "",
+          "has_images": true,
+          "has_shapes": true
+        },
+        {
+          "slide_number": 2,
+          "title": "",
+          "text_content": [
+            "After Landing, Parking & Securing",
+            "OVERVIEW",
+            "WHAT",
+            "Procedures completed at the end of the flight when the airplane is parked, shut down, and properly secured",
+            "CONTENT",
+            "Parking",
+            "Engine Shutdown",
+            "Deplaning Passengers",
+            "Postflight Inspection",
+            "Securing the Aircraft",
+            "Common Errors",
+            "WHY",
+            "The postflight is just as important as the preflight in maintaining the aircraft, and keeping it in a safe condition for the next flight"
+          ],
+          "notes": "",
+          "has_images": true,
+          "has_shapes": true
+        },
+        {
+          "slide_number": 3,
+          "title": "",
+          "text_content": [
+            "Parking",
+            "3",
+            "Be aware of aircraft, people, hangars & equipment",
+            "Especially propeller/jet blast",
+            "When possible, park into the wind",
+            "Pre-marked spaces & tie downs may not allow this",
+            "Be familiar with hand signals",
+            "Stop, then roll slightly forward to straighten the nose",
+            "After Landing, Parking & Securing"
+          ],
+          "notes": "",
+          "has_images": true,
+          "has_shapes": true
+        },
+        {
+          "slide_number": 4,
+          "title": "",
+          "text_content": [
+            "Engine Shutdown",
+            "4",
+            "Set the parking brake to prevent movement during checklists",
+            "Follow the manufacturer’s procedures",
+            "Read & Do",
+            "Generally, includes turning off all equipment (such as pumps, mags, electrical), followed by the engine(s)",
+            "Ensure magnetos are properly grounded",
+            "Move Ignition from Both to Off and back to Both",
+            "After Landing, Parking & Securing"
+          ],
+          "notes": "",
+          "has_images": true,
+          "has_shapes": true
+        },
+        {
+          "slide_number": 5,
+          "title": "",
+          "text_content": [
+            "Deplaning Passengers",
+            "5",
+            "Ensure understanding of safe exiting procedures",
+            "When it’s safe to unbuckle, get up, and open the door(s)",
+            "What doors they should and should not use",
+            "Where to go",
+            "Where not to go",
+            "Be aware of hazards",
+            "Other aircraft",
+            "Trucks",
+            "Equipment",
+            "Any other hazards",
+            "Do not let passengers disembark until required checklist & safety precautions are complete",
+            "After Landing, Parking & Securing"
+          ],
+          "notes": "",
+          "has_images": true,
+          "has_shapes": true
+        },
+        {
+          "slide_number": 6,
+          "title": "",
+          "text_content": [
+            "Postflight Inspection",
+            "6",
+            "Condition",
+            "Postflight walkaround (like the preflight walkaround)",
+            "Oil should be checked when the engine is cold",
+            "Follow the POH checklist",
+            "Document Discrepancies",
+            "Very important potential issues are recorded",
+            "Allows maintenance to fix the issues & can see trends",
+            "Informs the next pilot so they can make an educated go/no go decision",
+            "Fuel, as required",
+            "Add fuel based on the immediate/next use of the airplane",
+            "Otherwise, fill the tanks to prevent water condensation from forming",
+            "After Landing, Parking & Securing"
+          ],
+          "notes": "",
+          "has_images": true,
+          "has_shapes": true
+        },
+        {
+          "slide_number": 7,
+          "title": "",
+          "text_content": [
+            "Securing the Aircraft",
+            "7",
+            "Remove personal belongings",
+            "Verify the nosewheel is straight",
+            "Set the brake, tiedown, chock, as necessary",
+            "Secure flight controls",
+            "Cover/hangar, as appropriate",
+            "Windows closed",
+            "Doors locked",
+            "Airport specific security procedures",
+            "After Landing, Parking & Securing"
+          ],
+          "notes": "",
+          "has_images": true,
+          "has_shapes": true
+        },
+        {
+          "slide_number": 8,
+          "title": "",
+          "text_content": [
+            "Common Errors",
+            "After Landing, Parking & Securing",
+            "Be aware of the parking areas at the destination",
+            "Ramp space, FBO, hangar, etc.",
+            "Contact the FBO, or airport, if necessary",
+            "Activities & Distractions",
+            "Sterile cockpit – avoid distractions while taxiing around building, people, planes, etc."
+          ],
+          "notes": "",
+          "has_images": true,
+          "has_shapes": true
+        },
+        {
+          "slide_number": 9,
+          "title": "",
+          "text_content": [
+            "Common Errors",
+            "After Landing, Parking & Securing",
+            "Improper Procedures",
+            "Follow all checklists & ensure the airplane is in a safe condition for the next flight",
+            "Document any issues found in the postflight",
+            "Faulty Judgement",
+            "If unsure about something, ask",
+            "Always pass along issues found in the postflight inspection"
+          ],
+          "notes": "",
+          "has_images": true,
+          "has_shapes": true
+        },
+        {
+          "slide_number": 10,
+          "title": "",
+          "text_content": [
+            "Questions?",
+            "After Landing, Parking & Securing"
+          ],
+          "notes": "",
+          "has_images": true,
+          "has_shapes": true
+        }
+      ],
+      "full_text": "After Landing, \u000bParking & Securing\n1\nAfter Landing, Parking & Securing\nOVERVIEW\nWHAT\nProcedures completed at the end of the flight when the airplane is parked, shut down, and properly secured\nCONTENT\nParking\nEngine Shutdown\nDeplaning Passengers\nPostflight Inspection\nSecuring the Aircraft\nCommon Errors\nWHY\nThe postflight is just as important as the preflight in maintaining the aircraft, and keeping it in a safe condition for the next flight\nParking\n3\nBe aware of aircraft, people, hangars & equipment\nEspecially propeller/jet blast\nWhen possible, park into the wind\nPre-marked spaces & tie downs may not allow this\nBe familiar with hand signals\nStop, then roll slightly forward to straighten the nose\nAfter Landing, Parking & Securing\nEngine Shutdown\n4\nSet the parking brake to prevent movement during checklists\nFollow the manufacturer’s procedures\nRead & Do\nGenerally, includes turning off all equipment (such as pumps, mags, electrical), followed by the engine(s)\nEnsure magnetos are properly grounded\nMove Ignition from Both to Off and back to Both\nAfter Landing, Parking & Securing\nDeplaning Passengers\n5\nEnsure understanding of safe exiting procedures\nWhen it’s safe to unbuckle, get up, and open the door(s)\nWhat doors they should and should not use\nWhere to go\nWhere not to go\nBe aware of hazards\nOther aircraft\nTrucks\nEquipment\nAny other hazards\nDo not let passengers disembark until required checklist & safety precautions are complete\nAfter Landing, Parking & Securing\nPostflight Inspection\n6\nCondition\nPostflight walkaround (like the preflight walkaround)\nOil should be checked when the engine is cold\nFollow the POH checklist\nDocument Discrepancies\nVery important potential issues are recorded\nAllows maintenance to fix the issues & can see trends\nInforms the next pilot so they can make an educated go/no go decision\nFuel, as required\nAdd fuel based on the immediate/next use of the airplane\nOtherwise, fill the tanks to prevent water condensation from forming\nAfter Landing, Parking & Securing\nSecuring the Aircraft\n7\nRemove personal belongings\nVerify the nosewheel is straight\nSet the brake, tiedown, chock, as necessary\nSecure flight controls\nCover/hangar, as appropriate\nWindows closed\nDoors locked\nAirport specific security procedures\nAfter Landing, Parking & Securing\nCommon Errors\nAfter Landing, Parking & Securing\nBe aware of the parking areas at the destination\nRamp space, FBO, hangar, etc.\nContact the FBO, or airport, if necessary\nActivities & Distractions\nSterile cockpit – avoid distractions while taxiing around building, people, planes, etc.\nCommon Errors\nAfter Landing, Parking & Securing\nImproper Procedures\nFollow all checklists & ensure the airplane is in a safe condition for the next flight\nDocument any issues found in the postflight\nFaulty Judgement\nIf unsure about something, ask\nAlways pass along issues found in the postflight inspection\nQuestions?\nAfter Landing, Parking & Securing",
+      "diagram_descriptions": [
+        {
+          "slide_number": 1,
+          "title": "",
+          "context": "After Landing, \u000bParking & Securing | 1"
+        },
+        {
+          "slide_number": 2,
+          "title": "",
+          "context": "After Landing, Parking & Securing | OVERVIEW | WHAT"
+        },
+        {
+          "slide_number": 3,
+          "title": "",
+          "context": "Parking | 3 | Be aware of aircraft, people, hangars & equipment"
+        },
+        {
+          "slide_number": 4,
+          "title": "",
+          "context": "Engine Shutdown | 4 | Set the parking brake to prevent movement during checklists"
+        },
+        {
+          "slide_number": 5,
+          "title": "",
+          "context": "Deplaning Passengers | 5 | Ensure understanding of safe exiting procedures"
+        },
+        {
+          "slide_number": 6,
+          "title": "",
+          "context": "Postflight Inspection | 6 | Condition"
+        },
+        {
+          "slide_number": 7,
+          "title": "",
+          "context": "Securing the Aircraft | 7 | Remove personal belongings"
+        },
+        {
+          "slide_number": 8,
+          "title": "",
+          "context": "Common Errors | After Landing, Parking & Securing | Be aware of the parking areas at the destination"
+        },
+        {
+          "slide_number": 9,
+          "title": "",
+          "context": "Common Errors | After Landing, Parking & Securing | Improper Procedures"
+        },
+        {
+          "slide_number": 10,
+          "title": "",
+          "context": "Questions? | After Landing, Parking & Securing"
+        }
+      ]
+    }
+  ]
+}

@@ -115,15 +115,16 @@ export default defineConfig({
         manualChunks: {
           // Separate vendor chunks for better caching
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          // Large data files in separate chunks
-          'data': ['./src/acs_data.json', './src/lessonPlansData.json'],
+          // Split data into separate chunks for better caching and parallel loading
+          'acs-data': ['./src/acs_data.json'],
+          'lesson-plans': ['./src/lessonPlansData.json'],
         },
       },
     },
     // Enable source maps for debugging (disable in production if needed)
     sourcemap: false,
-    // Optimize chunk size
-    chunkSizeWarningLimit: 1000,
+    // Optimize chunk size warning (data chunks are large but acceptable for offline app)
+    chunkSizeWarningLimit: 4500,
   },
   // Optimize dependencies
   optimizeDeps: {

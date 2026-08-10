@@ -1,0 +1,32 @@
+# Cursor AI Rules - Memory Optimization
+
+## Memory Optimization Rules
+
+1. NEVER index or analyze JSON data files:
+   - src/lessonPlansData.json
+   - src/acs_data.json
+   - public/enhancedFlashcards.json
+   - Any file matching *.json in src/ or public/
+
+2. NEVER load entire JSON files into memory for analysis
+
+3. When working with large files, work in small chunks
+
+4. Prefer using terminal scripts for large file operations
+
+5. Do not attempt to parse or analyze files in archive/ directory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

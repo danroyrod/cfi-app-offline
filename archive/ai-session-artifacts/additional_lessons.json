@@ -1,0 +1,438 @@
+[
+  {
+    "id": "LP-VII-E",
+    "areaNumber": "VII",
+    "taskLetter": "E",
+    "title": "Short-Field Takeoff and Maximum Performance Climb",
+    "estimatedTime": "0.8 hours",
+    "objectives": [
+      "Demonstrate short-field takeoff technique for obstacle clearance",
+      "Achieve VX for maximum angle of climb",
+      "Clear obstacles with minimum margin",
+      "Transition to VY after obstacle clearance",
+      "Identify and correct common short-field errors"
+    ],
+    "references": ["FAA-H-8083-3 Chapter 5", "POH/AFM"],
+    "prerequisites": ["Normal takeoff proficiency", "Understanding of VX vs VY"],
+    "overview": "Short-field takeoffs are critical for operations from confined areas. This lesson teaches maximum performance technique: full power before brake release, rotation at minimum speed, and VX climb for obstacle clearance.",
+    "teachingScript": [
+      {"phase": "Ground Brief", "duration": "10 min", "instructorActions": ["Explain VX vs VY", "Show short-field technique", "Calculate obstacle clearance"], "studentActions": ["Review POH VX speed", "Understand obstacle clearance requirements"], "keyPoints": ["VX provides steepest climb angle", "Every knot counts in obstacle clearance"]},
+      {"phase": "Demonstration", "duration": "10 min", "instructorActions": ["Position at runway start", "Hold brakes, full power", "Release brakes, rotate at VX -5kt", "Establish VX precisely"], "studentActions": ["Observe full-power application", "Note rotation speed", "Watch VX maintenance"], "keyPoints": ["Use all available runway", "Precise airspeed control critical"]},
+      {"phase": "Student Practice", "duration": "30 min", "instructorActions": ["Coach student through 3-5 takeoffs", "Emphasize VX precision", "Monitor obstacle clearance"], "studentActions": ["Perform short-field takeoffs", "Maintain VX ±5 kts", "Transition to VY after obstacle"], "keyPoints": ["Smooth, decisive actions", "Pitch for VX, not feel"]}
+    ],
+    "keyTeachingPoints": ["VX is for angle (obstacle clearance), VY is for rate", "Full power before brake release", "Use all available runway", "Rotate at VX -5 knots for ground acceleration", "Hold VX until obstacle cleared, then VY"],
+    "commonErrors": ["Rotating too early - excessive drag", "Not using full runway", "Climbing at VY instead of VX", "Relaxing after liftoff - speed bleeds off"],
+    "diagrams": [{"title": "VX vs VY", "description": "VX = steepest climb angle (obstacle clearance), VY = best rate of climb (altitude gain)", "asciiArt": "VX: Steep angle, slower\n ↗↗↗\nVY: Shallower angle, faster\n  ↗↗"}],
+    "completionStandards": [
+      {"standard": "Clear obstacle by 50 feet", "acsReference": "AI.VII.E.S9"},
+      {"standard": "Maintain VX +5/-0 knots", "acsReference": "AI.VII.E.S8", "tolerance": "+5/-0 knots"}
+    ],
+    "equipment": ["Airplane", "POH/AFM", "Obstacle to clear (real or simulated)"],
+    "notes": ["Hot days significantly reduce performance", "Use 10° flaps if POH recommends"],
+    "suggestedHomework": ["Calculate takeoff distance for various conditions", "Chair fly short-field procedure"],
+    "instructorNotes": ["Safety: Ensure adequate runway length", "Watch for student over-rotation"],
+    "safetyConsiderations": ["Verify performance calculations before attempting", "Stall speed increases with bank - no turns low", "Be ready to take controls if airspeed decays"]
+  },
+  {
+    "id": "LP-VII-F",
+    "areaNumber": "VII",
+    "taskLetter": "F",
+    "title": "Short-Field Approach and Landing",
+    "estimatedTime": "0.8 hours",
+    "objectives": [
+      "Demonstrate precise short-field approach technique",
+      "Touch down at minimum controllable airspeed",
+      "Land within first 200 feet of target",
+      "Apply maximum braking safely",
+      "Execute go-around if target point cannot be made"
+    ],
+    "references": ["FAA-H-8083-3 Chapter 9", "POH/AFM"],
+    "prerequisites": ["Normal landing proficiency", "Understanding of approach angles"],
+    "overview": "Short-field landings require precision and technique. Students learn obstacle clearance approaches, precise airspeed control, minimum float landings, and maximum braking.",
+    "teachingScript": [
+      {"phase": "Ground Brief", "duration": "10 min", "instructorActions": ["Explain short-field technique", "Discuss approach angle vs speed", "Brief maximum braking"], "studentActions": ["Calculate approach speed (1.3 Vso)", "Review short-field checklist"], "keyPoints": ["Steeper approach clears obstacles", "Slower speed = shorter landing"]},
+      {"phase": "Demonstration", "duration": "15 min", "instructorActions": ["Demonstrate steep approach", "Precise power/pitch control", "Touchdown on target", "Immediate braking"], "studentActions": ["Observe sight picture", "Note power adjustments", "Watch braking technique"], "keyPoints": ["Power controls descent, pitch controls speed", "Aim for landing zone, not before"]},
+      {"phase": "Student Practice", "duration": "25 min", "instructorActions": ["Coach approaches", "Call out deviations", "Emphasize go-around option"], "studentActions": ["Perform 3-4 short-field landings", "Hit target ±200 feet", "Apply maximum braking"], "keyPoints": ["Consistent technique develops precision", "Go around if in doubt"]}
+    ],
+    "keyTeachingPoints": ["Approach speed 1.3 Vso (typically 10 kts slower than normal)", "Steeper approach clears obstacles better", "Touch down on target, not before", "Immediate heavy braking after nose wheel down", "Full flaps for steeper descent", "Go-around if target will be missed"],
+    "commonErrors": ["Approaching too fast - long float and landing", "Touching down before target point", "Late braking application", "Not using full flaps", "Attempting to salvage bad approach instead of going around"],
+    "diagrams": [{"title": "Short-Field Approach", "description": "Steeper approach angle with obstacle clearance", "asciiArt": "Obstacle →  ↗\n            ↘↘↘ (steeper descent)\n          Target →  ████ (runway)"}],
+    "completionStandards": [
+      {"standard": "Touch down within 200 feet beyond target", "acsReference": "AI.VII.F.S7", "tolerance": "+200/-0 feet"},
+      {"standard": "Maintain approach speed +5/-0 knots", "acsReference": "AI.VII.F.S5", "tolerance": "+5/-0 knots"}
+    ],
+    "equipment": ["Airplane", "POH/AFM", "Target markers (cones or runway markings)"],
+    "notes": ["Practice with runway markers before real short fields", "Weight and wind dramatically affect landing distance"],
+    "suggestedHomework": ["Calculate landing distance for conditions", "Practice approach visualization"],
+    "instructorNotes": ["Emphasize go-around decision-making", "Watch for student landing short of target"],
+    "safetyConsiderations": ["Never land short to hit target", "Obstacle clearance is paramount", "Brief maximum braking technique", "Monitor for nose wheel damage with hard braking"]
+  },
+  {
+    "id": "LP-VII-N",
+    "areaNumber": "VII",
+    "taskLetter": "N",
+    "title": "Go-Around / Rejected Landing",
+    "estimatedTime": "0.7 hours",
+    "objectives": [
+      "Execute immediate go-around decision",
+      "Apply proper go-around procedure",
+      "Maintain directional control during power application",
+      "Establish positive rate of climb",
+      "Teach that go-arounds are normal, not failures"
+    ],
+    "references": ["FAA-H-8083-3 Chapter 9", "POH/AFM", "AIM"],
+    "prerequisites": ["Landing proficiency", "Understanding of power effects"],
+    "overview": "The go-around is a critical safety maneuver that students must execute without hesitation. This lesson covers decision-making, technique, and overcoming the psychological barrier to rejecting a landing.",
+    "teachingScript": [
+      {"phase": "Ground Brief", "duration": "10 min", "instructorActions": ["Explain go-around procedure", "Discuss decision triggers", "Emphasize it's normal"], "studentActions": ["Memorize CCCC: Carb heat, Cram throttle, Climb attitude, Clean up"], "keyPoints": ["Early go-around is always safer", "Never force a bad landing"]},
+      {"phase": "Demonstration", "duration": "10 min", "instructorActions": ["Call 'Go around'", "Full power smoothly", "Right rudder immediately", "Pitch for VY", "Retract flaps incrementally"], "studentActions": ["Observe control sequence", "Note rudder pressure needed", "Watch flap retraction timing"], "keyPoints": ["Smooth, positive actions", "Trim away pressure"]},
+      {"phase": "Student Practice", "duration": "30 min", "instructorActions": ["Call go-arounds at various points", "From flare, from short final, from base", "Simulate unstable approach"], "studentActions": ["Execute go-arounds", "Maintain directional control", "Establish positive climb"], "keyPoints": ["Go-around is automatic response to unstable approach", "Practice removes hesitation"]}
+    ],
+    "keyTeachingPoints": ["Go-around is a normal procedure, not a failure", "Decision to go-around must be immediate and positive", "Full power smoothly - right rudder immediately", "Pitch for VY to avoid settling", "Retract flaps incrementally to avoid sink", "Announce 'Going around' on radio", "Don't try to salvage bad approaches"],
+    "commonErrors": ["Hesitating on go-around decision", "Inadequate right rudder - left yaw", "Pitching up before adding power - settling", "Retracting flaps all at once - sinking", "Not announcing go-around", "Attempting to salvage unstabilized approach"],
+    "diagrams": [{"title": "Go-Around Sequence", "description": "CCCC procedure", "asciiArt": "1. CARB HEAT cold\n2. CRAM throttle (full power)\n3. CLIMB attitude (VY)\n4. CLEAN UP (flaps incrementally)"}],
+    "completionStandards": [
+      {"standard": "Make timely decision to discontinue approach", "acsReference": "AI.VII.N.S1"},
+      {"standard": "Apply full power and establish pitch for VY", "acsReference": "AI.VII.N.S2"},
+      {"standard": "Retract flaps and maintain VY +10/-5 knots", "acsReference": "AI.VII.N.S4", "tolerance": "+10/-5 knots"}
+    ],
+    "equipment": ["Airplane", "POH/AFM"],
+    "notes": ["First solo go-around often surprises students", "Practice from all points in approach"],
+    "suggestedHomework": ["Memorize go-around procedure", "Chair fly go-around sequence"],
+    "instructorNotes": ["Create realistic scenarios for go-arounds", "Praise decisive go-around decisions"],
+    "safetyConsiderations": ["Monitor for settling with power application", "Ensure adequate right rudder", "Watch flap retraction - don't sink", "Brief that low-altitude go-arounds are high-risk - need smooth technique"]
+  },
+  {
+    "id": "LP-X-A",
+    "areaNumber": "X",
+    "taskLetter": "A",
+    "title": "Maneuvering During Slow Flight",
+    "estimatedTime": "1.0 hours",
+    "objectives": [
+      "Establish and maintain slow flight configuration",
+      "Perform turns, climbs, and descents in slow flight",
+      "Recognize aerodynamic buffet and control feel",
+      "Maintain altitude ±100 feet and heading ±10°",
+      "Recover to cruise flight smoothly"
+    ],
+    "references": ["FAA-H-8083-3 Chapter 4", "POH/AFM"],
+    "prerequisites": ["Basic airplane control", "Understanding of stall speeds"],
+    "overview": "Slow flight teaches students to recognize and operate near the stall, develop fine touch, and understand low-speed aerodynamics. This is foundational for stall training and landing pattern work.",
+    "teachingScript": [
+      {"phase": "Ground Brief", "duration": "15 min", "instructorActions": ["Explain slow flight region", "Discuss increased drag", "Show power required curve"], "studentActions": ["Understand 1.5 Vs to stall warning", "Review slow flight entry procedure"], "keyPoints": ["Slow flight is not minimum controllable airspeed", "High angle of attack, high power required"]},
+      {"phase": "Demonstration - Entry", "duration": "10 min", "instructorActions": ["Clear area", "Reduce power, maintain altitude", "Add back pressure as speed decreases", "Full power, trim, configure"], "studentActions": ["Observe pitch attitude increase", "Note power required", "Feel control responsiveness"], "keyPoints": ["Pitch up gradually", "High power needed to maintain altitude"]},
+      {"phase": "Maneuvering Practice", "duration": "25 min", "instructorActions": ["Coach turns, climbs, descents", "Emphasize coordination", "Call out altitude/heading deviations"], "studentActions": ["Perform 30° bank turns", "Climb 200 feet", "Descend 200 feet", "All in slow flight"], "keyPoints": ["Coordination critical - adverse yaw extreme", "Altitude control requires power"]},
+      {"phase": "Recovery", "duration": "10 min", "instructorActions": ["Demonstrate recovery", "Lower nose, add power, accelerate, clean up"], "studentActions": ["Practice smooth recoveries", "Avoid secondary stalls"], "keyPoints": ["Lower nose first", "Gradual acceleration"]}
+    ],
+    "keyTeachingPoints": ["Slow flight is fully controllable flight just above stall", "High angle of attack requires high power", "Controls are 'mushy' but still effective", "Adverse yaw is pronounced - extra rudder needed", "Altitude control is almost entirely power", "Pitch for airspeed, power for altitude (reversed from cruise)", "Stall horn may sound - this is normal"],
+    "commonErrors": ["Fixating on airspeed indicator", "Inadequate rudder in turns - skidding/slipping", "Chasing altitude with pitch instead of power", "Rough, jerky control inputs", "Not clearing area before entry", "Secondary stall during recovery"],
+    "diagrams": [{"title": "Power Required Curve", "description": "Shows high power needed at slow speeds", "asciiArt": "Power\nRequired\n     |  \\\n     |   \\\n     |    \\\n     |_____\\_____ Speed\n          ^slow flight (high power)"}],
+    "completionStandards": [
+      {"standard": "Establish slow flight at 1.5 Vs to stall warning", "acsReference": "AI.X.A.S4"},
+      {"standard": "Maintain altitude ±100 feet", "acsReference": "AI.X.A.S5", "tolerance": "±100 feet"},
+      {"standard": "Maintain heading ±10°", "acsReference": "AI.X.A.S5", "tolerance": "±10°"},
+      {"standard": "Maintain specified bank angle ±10° in turns", "acsReference": "AI.X.A.S6", "tolerance": "±10°"}
+    ],
+    "equipment": ["Airplane", "POH/AFM", "Adequate altitude (3000 AGL minimum)"],
+    "notes": ["This maneuver builds finesse and confidence", "Essential for understanding landing pattern speeds"],
+    "suggestedHomework": ["Read about coefficient of lift and drag", "Review POH stall speeds"],
+    "instructorNotes": ["Watch for student discomfort - encourage relaxation", "Expect large altitude excursions initially"],
+    "safetyConsiderations": ["Maintain 3000 AGL minimum", "Clear area thoroughly before entry", "Monitor for approaching stall", "Be ready for secondary stall on recovery", "Ensure carburetor heat as appropriate"]
+  },
+  {
+    "id": "LP-X-C",
+    "areaNumber": "X",
+    "taskLetter": "C",
+    "title": "Power-Off Stalls",
+    "estimatedTime": "1.0 hours",
+    "objectives": [
+      "Recognize approach-to-landing stall conditions",
+      "Demonstrate proper stall recovery technique",
+      "Minimize altitude loss during recovery",
+      "Maintain coordinated flight throughout",
+      "Teach stall awareness and prevention"
+    ],
+    "references": ["FAA-H-8083-3 Chapter 5", "POH/AFM"],
+    "prerequisites": ["Slow flight proficiency", "Understanding of aerodynamic stall"],
+    "overview": "Power-off stalls simulate approach-to-landing configuration stalls. Students learn to recognize imminent stalls and execute prompt recovery: lower nose, add power, roll wings level, return to straight and level.",
+    "teachingScript": [
+      {"phase": "Ground Brief", "duration": "15 min", "instructorActions": ["Explain stall aerodynamics", "Discuss approach-to-landing scenario", "Brief recovery procedure"], "studentActions": ["Understand angle of attack concept", "Memorize recovery: Lower nose, power, level wings, climb"], "keyPoints": ["Stall is about angle of attack, not airspeed", "Prompt recovery minimizes altitude loss"]},
+      {"phase": "Demonstration", "duration": "15 min", "instructorActions": ["Clear area", "Configure for landing (flaps, power idle)", "Slow to approach speed", "Raise nose until stall", "Recover: nose down, power, level, climb"], "studentActions": ["Observe stall warning signs", "Note break characteristics", "Watch recovery technique"], "keyPoints": ["Stall warner activates 5-10 kts before stall", "Recovery is instinctive after practice"]},
+      {"phase": "Student Practice", "duration": "20 min", "instructorActions": ["Coach student through 3-4 stalls", "Emphasize immediate recovery", "Watch for coordination"], "studentActions": ["Perform power-off stalls", "Recover at first indication or full stall", "Minimize altitude loss"], "keyPoints": ["Consistent technique builds muscle memory", "Stalls are routine, not emergencies"]},
+      {"phase": "Debrief", "duration": "10 min", "instructorActions": ["Review performance", "Relate to landing scenarios", "Emphasize prevention"], "studentActions": ["Discuss sensations felt", "Ask questions"], "keyPoints": ["In real life: prevent stall, don't practice recovery"]}
+    ],
+    "keyTeachingPoints": ["Power-off stall simulates approach-to-landing stall", "Proper recovery: reduce angle of attack immediately", "Prompt recovery minimizes altitude loss", "Add power to accelerate recovery", "Level wings if in turn", "Return to straight-and-level flight", "Altitude loss is acceptable - preventing secondary stall is priority"],
+    "commonErrors": ["Excessive back pressure before stall - abrupt break", "Not releasing back pressure enough in recovery", "Adding power before reducing angle of attack", "Secondary stall - pulling out of dive too aggressively", "Not maintaining coordination - spin entry"],
+    "diagrams": [{"title": "Stall Recovery", "description": "4-step recovery procedure", "asciiArt": "1. PUSH (reduce angle of attack)\n2. POWER (full throttle)\n3. ROLL (wings level)\n4. RECOVER (return to level flight)"}],
+    "completionStandards": [
+      {"standard": "Establish landing configuration and approach attitude", "acsReference": "AI.X.C.S3"},
+      {"standard": "Recognize and announce first indication of stall", "acsReference": "AI.X.C.S5"},
+      {"standard": "Recover with minimal altitude loss", "acsReference": "AI.X.C.S6"}
+    ],
+    "equipment": ["Airplane", "POH/AFM", "Adequate altitude (4000 AGL minimum)"],
+    "notes": ["Student anxiety is normal - normalize stalls", "First stall may surprise student"],
+    "suggestedHomework": ["Read about aerodynamic stalls", "Understand critical angle of attack"],
+    "instructorNotes": ["Watch for student tension - encourage breathing", "Ensure clearing turns before each stall"],
+    "safetyConsiderations": ["Minimum 4000 AGL for training", "Clear area with 90° clearing turns", "Monitor for uncoordinated entry - spin risk", "Ensure carburetor heat applied", "Watch for traffic - lookout critical"]
+  },
+  {
+    "id": "LP-X-D",
+    "areaNumber": "X",
+    "taskLetter": "D",
+    "title": "Power-On Stalls",
+    "estimatedTime": "1.0 hours",
+    "objectives": [
+      "Recognize departure stall conditions",
+      "Demonstrate proper stall recovery",
+      "Control yaw with rudder throughout",
+      "Maintain heading ±10° if specified",
+      "Understand departure stall scenarios"
+    ],
+    "references": ["FAA-H-8083-3 Chapter 5", "POH/AFM"],
+    "prerequisites": ["Power-off stall proficiency", "Understanding of torque effects"],
+    "overview": "Power-on stalls simulate takeoff and departure configuration stalls. Students learn to manage high power, high angle of attack situations and recognize departure stall risks.",
+    "teachingScript": [
+      {"phase": "Ground Brief", "duration": "15 min", "instructorActions": ["Explain departure stall scenario", "Discuss torque and P-factor effects", "Brief recovery procedure"], "studentActions": ["Understand takeoff stall risk", "Review recovery steps"], "keyPoints": ["High power amplifies left-turning tendencies", "Right rudder essential for coordination"]},
+      {"phase": "Demonstration", "duration": "15 min", "instructorActions": ["Clear area", "Configure for takeoff (no flaps typical)", "Full power, pitch up to stall", "Strong right rudder throughout", "Recover: release back pressure, level wings"], "studentActions": ["Observe pitch attitude", "Note rudder needed", "Watch wing drop tendency"], "keyPoints": ["Nose very high at stall", "Wing drop common if uncoordinated"]},
+      {"phase": "Student Practice", "duration": "20 min", "instructorActions": ["Coach 3-4 power-on stalls", "Call for more right rudder", "Monitor coordination"], "studentActions": ["Perform power-on stalls", "Maintain coordination", "Recover promptly"], "keyPoints": ["Coordination prevents spin entry", "Right rudder, right rudder, right rudder"]},
+      {"phase": "Debrief", "duration": "10 min", "instructorActions": ["Review rudder coordination", "Discuss departure scenarios"], "studentActions": ["Reflect on rudder use"], "keyPoints": ["Departure stalls are preventable with awareness"]}
+    ],
+    "keyTeachingPoints": ["Power-on stall simulates departure/go-around stall", "High power creates strong left-turning tendencies", "Right rudder essential for coordination", "Nose attitude is very high at stall", "Wing drop indicates uncoordinated flight", "Recovery: release back pressure, level wings, maintain power unless specified", "In real life: avoid by proper pitch attitude on climbout"],
+    "commonErrors": ["Inadequate right rudder - uncoordinated stall", "Allowing wing drop to develop", "Reducing power during recovery (not required)", "Excessive nose-high attitude before stall", "Secondary stall on recovery"],
+    "diagrams": [{"title": "Left-Turning Tendencies", "description": "High power effects requiring right rudder", "asciiArt": "← Torque\n← P-factor (descending blade)\n← Slipstream\nResult: Need RIGHT RUDDER →→"}],
+    "completionStandards": [
+      {"standard": "Establish takeoff/departure configuration", "acsReference": "AI.X.D.S3"},
+      {"standard": "Maintain coordinated flight", "acsReference": "AI.X.D.S4"},
+      {"standard": "Recognize and announce stall indications", "acsReference": "AI.X.D.S6"},
+      {"standard": "Recover with minimal altitude loss", "acsReference": "AI.X.D.S7"}
+    ],
+    "equipment": ["Airplane", "POH/AFM", "Adequate altitude (4000 AGL minimum)"],
+    "notes": ["More dynamic than power-off stalls", "Reinforces importance of coordination"],
+    "suggestedHomework": ["Review left-turning tendencies", "Practice rudder visualization"],
+    "instructorNotes": ["Emphasize rudder coordination throughout", "Watch for student surprise at high nose attitude"],
+    "safetyConsiderations": ["Minimum 4000 AGL", "Clear area thoroughly", "Monitor ball - coordination critical to prevent spin", "Watch for traffic", "Carburetor heat as appropriate"]
+  },
+  {
+    "id": "LP-IX-A",
+    "areaNumber": "IX",
+    "taskLetter": "A",
+    "title": "Steep Turns",
+    "estimatedTime": "0.8 hours",
+    "objectives": [
+      "Establish and maintain 45° bank",
+      "Maintain altitude ±100 feet throughout turn",
+      "Maintain airspeed ±10 knots",
+      "Roll out on entry heading ±10°",
+      "Perform both left and right steep turns"
+    ],
+    "references": ["FAA-H-8083-3 Chapter 10", "POH/AFM"],
+    "prerequisites": ["Level turn proficiency", "Understanding of load factor"],
+    "overview": "Steep turns develop precise airplane control at increased load factors. Students learn to manage pitch, power, and bank while understanding aerodynamic principles of turning flight.",
+    "teachingScript": [
+      {"phase": "Ground Brief", "duration": "10 min", "instructorActions": ["Explain 45° bank requires back pressure", "Discuss load factor (1.4 G)", "Brief pitch, power, bank"], "studentActions": ["Understand stall speed increases in turns", "Review entry/exit technique"], "keyPoints": ["45° bank doubles stall speed squared (1.4x)", "Lead rollout by half bank angle (22°)"]},
+      {"phase": "Demonstration", "duration": "15 min", "instructorActions": ["Clear area", "Pick reference point", "Roll to 45°, add back pressure and power", "Hold altitude, airspeed, bank", "Lead rollout by 20-22°"], "studentActions": ["Observe outside references", "Note back pressure needed", "Watch rollout technique"], "keyPoints": ["Smooth entry and exit", "Constant visual scan"]},
+      {"phase": "Student Practice", "duration": "25 min", "instructorActions": ["Coach left and right turns", "Call out deviations", "Emphasize coordination"], "studentActions": ["Perform steep turns both directions", "Maintain standards", "Complete 360° turns"], "keyPoints": ["Practice builds precision", "Left turn different from right (torque effects)"]}
+    ],
+    "keyTeachingPoints": ["45° bank angle ±5° required", "Altitude control requires increased back pressure", "Power increase (100-200 RPM) needed to maintain airspeed", "Load factor increases to 1.4 G at 45° bank", "Stall speed increases by 20%", "Lead rollout by 20-22° to avoid overshooting", "Clearing turns before entry required", "Constant visual scan prevents spatial disorientation"],
+    "commonErrors": ["Not enough back pressure - altitude loss", "Letting bank angle shallower/steeper", "Forgetting power increase - airspeed loss", "Rolling out late - overshooting heading", "Fixating inside - spatial disorientation", "Not clearing area before entry"],
+    "diagrams": [{"title": "Load Factor in Turns", "description": "45° bank creates 1.4 G load", "asciiArt": "Level: 1.0 G\n30° bank: 1.15 G\n45° bank: 1.41 G ← Steep turns\n60° bank: 2.0 G"}],
+    "completionStandards": [
+      {"standard": "Maintain bank angle 45° ±5°", "acsReference": "AI.IX.A.S4", "tolerance": "±5°"},
+      {"standard": "Maintain altitude ±100 feet", "acsReference": "AI.IX.A.S5", "tolerance": "±100 feet"},
+      {"standard": "Maintain airspeed ±10 knots", "acsReference": "AI.IX.A.S5", "tolerance": "±10 knots"},
+      {"standard": "Roll out on entry heading ±10°", "acsReference": "AI.IX.A.S6", "tolerance": "±10°"}
+    ],
+    "equipment": ["Airplane", "POH/AFM", "Adequate altitude (3000 AGL minimum)"],
+    "notes": ["Confidence-building maneuver", "Teaches precise control coordination"],
+    "suggestedHomework": ["Study load factor vs bank angle", "Visualize steep turn sequence"],
+    "instructorNotes": ["Watch for student spatial disorientation", "Encourage looking outside, not at instruments"],
+    "safetyConsiderations": ["Minimum 3000 AGL", "Clear area with 90° clearing turns", "Monitor for stall at increased load factor", "Ensure adequate power available", "Watch for traffic continuously"]
+  },
+  {
+    "id": "LP-VIII-A",
+    "areaNumber": "VIII",
+    "taskLetter": "A",
+    "title": "Straight-and-Level Flight",
+    "estimatedTime": "0.7 hours",
+    "objectives": [
+      "Maintain constant altitude ±100 feet",
+      "Maintain constant heading ±10°",
+      "Maintain constant airspeed ±10 knots",
+      "Use proper trim technique",
+      "Develop instrument cross-check while teaching"
+    ],
+    "references": ["FAA-H-8083-3 Chapter 4", "FAA-H-8083-25"],
+    "prerequisites": ["Basic control familiarity", "Understanding of aircraft attitudes"],
+    "overview": "Straight-and-level is the foundation of all flight. Students learn pitch, power, and trim relationships while developing the visual and instrument scan patterns essential for all flying.",
+    "teachingScript": [
+      {"phase": "Ground Brief", "duration": "10 min", "instructorActions": ["Explain pitch-power-trim relationship", "Discuss visual references", "Brief instrument cross-check"], "studentActions": ["Understand power settings for cruise", "Review trim usage"], "keyPoints": ["Pitch + Power + Trim = Hands-off flight", "Visual attitude more important than instruments"]},
+      {"phase": "Demonstration", "duration": "10 min", "instructorActions": ["Establish cruise power", "Set pitch for level flight", "Trim off all pressure", "Demonstrate hands-off flight"], "studentActions": ["Observe outside references", "Note instrument indications", "Watch trimming technique"], "keyPoints": ["Trim is not optional", "Small corrections prevent large deviations"]},
+      {"phase": "Student Practice", "duration": "30 min", "instructorActions": ["Have student establish straight-and-level", "Coach small corrections", "Introduce teaching dialogue"], "studentActions": ["Maintain altitude/heading/airspeed", "Use trim properly", "Explain technique to instructor-as-student"], "keyPoints": ["Consistency improves with practice", "Smooth is fast"]}
+    ],
+    "keyTeachingPoints": ["Pitch controls altitude (primarily), power controls airspeed (primarily)", "Trim removes control pressures - critical for precision", "Visual attitude reference is primary, instruments confirm", "Scan: attitude, altitude, heading, airspeed, engine instruments", "Small corrections early prevent large deviations", "If altitude drifts: pitch first, then trim", "Cruise power setting from POH (typically 65-75%)"],
+    "commonErrors": ["Chasing altitude with excessive control inputs", "Not using trim - fighting controls", "Fixating on one instrument", "Over-controlling - pilot-induced oscillations", "Not scanning outside references"],
+    "diagrams": [{"title": "Pitch-Power-Trim Triangle", "description": "Relationship between three primary controls", "asciiArt": "    PITCH\n     / \\\n    /   \\\nPOWER - TRIM\nAll three must work together"}],
+    "completionStandards": [
+      {"standard": "Maintain altitude ±100 feet", "acsReference": "AI.VIII.A.S1", "tolerance": "±100 feet"},
+      {"standard": "Maintain heading ±10°", "acsReference": "AI.VIII.A.S1", "tolerance": "±10°"},
+      {"standard": "Maintain airspeed ±10 knots", "acsReference": "AI.VIII.A.S1", "tolerance": "±10 knots"}
+    ],
+    "equipment": ["Airplane", "POH/AFM"],
+    "notes": ["Seems simple but requires constant practice", "Foundation for instrument flying"],
+    "suggestedHomework": ["Practice visual attitude flying", "Study trim systems"],
+    "instructorNotes": ["Be patient - this takes time to master", "Encourage relaxed grip on controls"],
+    "safetyConsiderations": ["Ensure student scanning for traffic", "Monitor for fixation on instruments", "Maintain situational awareness of position"]
+  },
+  {
+    "id": "LP-VIII-B",
+    "areaNumber": "VIII",
+    "taskLetter": "B",
+    "title": "Level Turns",
+    "estimatedTime": "0.7 hours",
+    "objectives": [
+      "Enter and exit turns smoothly",
+      "Maintain altitude ±100 feet in turns",
+      "Maintain standard rate or specified bank angle",
+      "Demonstrate coordination throughout",
+      "Roll out on specified headings ±10°"
+    ],
+    "references": ["FAA-H-8083-3 Chapter 4", "POH/AFM"],
+    "prerequisites": ["Straight-and-level proficiency", "Understanding of turn coordination"],
+    "overview": "Level turns teach coordination, altitude control during maneuvering, and the use of aileron-rudder coordination. Students learn shallow, medium, and steep turns while maintaining precise altitude.",
+    "teachingScript": [
+      {"phase": "Ground Brief", "duration": "10 min", "instructorActions": ["Explain turn entry: bank, back pressure, trim", "Discuss adverse yaw and coordination", "Brief standard rate turns"], "studentActions": ["Understand coordinated flight", "Review turn coordination ball"], "keyPoints": ["Coordinate = ball centered", "Altitude requires back pressure in turns"]},
+      {"phase": "Demonstration", "duration": "15 min", "instructorActions": ["Demonstrate 15°, 30°, 45° banks", "Show coordination technique", "Demonstrate rollout lead"], "studentActions": ["Observe coordination", "Note back pressure in each bank angle", "Watch rollout timing"], "keyPoints": ["Steeper bank = more back pressure", "Lead rollout by half bank angle"]},
+      {"phase": "Student Practice", "duration": "25 min", "instructorActions": ["Coach turns to headings", "Call out altitude/coordination", "Vary bank angles requested"], "studentActions": ["Perform level turns", "Maintain altitude ±100 feet", "Roll out on headings ±10°"], "keyPoints": ["Smooth, coordinated inputs", "Anticipate rollout"]}
+    ],
+    "keyTeachingPoints": ["Coordinated flight: ball centered, no slipping or skidding", "Bank angle determines turn rate", "Back pressure needed in turns to maintain altitude", "Steeper bank = more back pressure", "Lead rollout by approximately half the bank angle", "Trim off control pressures in prolonged turns", "Standard rate = 3° per second (360° in 2 minutes)"],
+    "commonErrors": ["Uncoordinated flight - ball not centered", "Altitude loss in turns", "Rolling in without rudder - adverse yaw", "Over-banking or under-banking", "Late rollout - overshooting heading", "Not adding back pressure - descending turn"],
+    "diagrams": [{"title": "Coordinated vs Uncoordinated Flight", "description": "Ball position indicates coordination", "asciiArt": "Coordinated:  ( O )  ← Ball centered\nSkid:        (O  )   ← Too much rudder\nSlip:        (  O)   ← Not enough rudder"}],
+    "completionStandards": [
+      {"standard": "Maintain altitude ±100 feet", "acsReference": "AI.VIII.B.S1", "tolerance": "±100 feet"},
+      {"standard": "Maintain specified bank angle ±10°", "acsReference": "AI.VIII.B.S2", "tolerance": "±10°"},
+      {"standard": "Roll out on specified heading ±10°", "acsReference": "AI.VIII.B.S3", "tolerance": "±10°"}
+    ],
+    "equipment": ["Airplane", "POH/AFM"],
+    "notes": ["Builds coordination fundamentals", "Essential for all future maneuvers"],
+    "suggestedHomework": ["Study turn coordination", "Visualize coordinated turns"],
+    "instructorNotes": ["Watch for student cross-controlling", "Emphasize smooth, coordinated inputs"],
+    "safetyConsiderations": ["Monitor for uncoordinated flight at low altitude", "Ensure adequate lookout during turns", "Watch for stall in steep turns"]
+  },
+  {
+    "id": "LP-I-B",
+    "areaNumber": "I",
+    "taskLetter": "B",
+    "title": "Learning Process",
+    "estimatedTime": "1.5 hours",
+    "objectives": [
+      "Understand how people learn",
+      "Apply learning theories to flight instruction",
+      "Recognize the domains of learning (cognitive, affective, psychomotor)",
+      "Use the laws of learning in lesson planning",
+      "Assess learning plateaus and strategies to overcome them"
+    ],
+    "references": ["FAA-H-8083-9 Chapter 3", "FAA-H-8083-2"],
+    "prerequisites": ["None - foundational lesson"],
+    "overview": "Understanding how learning occurs is fundamental to effective instruction. This lesson covers learning theories, domains of learning, characteristics of learning, and practical applications for flight instruction.",
+    "teachingScript": [
+      {"phase": "Introduction", "duration": "10 min", "instructorActions": ["Ask: How did you learn to ride a bike?", "Introduce learning theories", "Present lesson objectives"], "studentActions": ["Share learning experiences", "Relate to aviation learning"], "keyPoints": ["Learning is change in behavior through experience", "Everyone learns differently"]},
+      {"phase": "Learning Theories", "duration": "20 min", "instructorActions": ["Explain Behaviorism (stimulus-response)", "Discuss Cognitive Theory (understanding)", "Compare with aviation examples"], "studentActions": ["Take notes on theories", "Provide examples from flight training"], "keyPoints": ["Behaviorism: repetition builds habit", "Cognitive: understanding enables transfer"]},
+      {"phase": "Domains of Learning", "duration": "20 min", "instructorActions": ["Teach Cognitive (knowledge), Affective (attitude), Psychomotor (skill)", "Show how flight training uses all three", "Give examples of each"], "studentActions": ["Identify domain for various tasks", "Understand interconnections"], "keyPoints": ["Cognitive: learning regulations", "Affective: developing ADM", "Psychomotor: flying the airplane"]},
+      {"phase": "Laws of Learning", "duration": "15 min", "instructorActions": ["Present REEPIR: Readiness, Exercise, Effect, Primacy, Intensity, Recency", "Provide aviation examples for each"], "studentActions": ["Understand each law", "Apply to instruction scenarios"], "keyPoints": ["Primacy: first learning is strongest", "Recency: review before evaluation"]},
+      {"phase": "Practical Application", "duration": "20 min", "instructorActions": ["Discuss learning plateaus", "Teach skill acquisition stages", "Practice scenario analysis"], "studentActions": ["Analyze case studies", "Identify learning barriers"], "keyPoints": ["Plateaus are normal", "Varied practice prevents boredom"]},
+      {"phase": "Summary", "duration": "5 min", "instructorActions": ["Review key concepts", "Assign homework"], "studentActions": ["Ask questions", "Note key takeaways"], "keyPoints": ["Understanding learning improves teaching"]}
+    ],
+    "keyTeachingPoints": ["Learning is change in behavior from experience", "Three domains: Cognitive (know), Affective (feel), Psychomotor (do)", "Laws of Learning (REEPIR): Readiness, Exercise, Effect, Primacy, Intensity, Recency", "Stages of skill: Cognitive → Associative → Automatic", "Learning plateaus are normal - vary practice to overcome", "Positive reinforcement more effective than punishment", "Spaced practice better than massed practice"],
+    "commonErrors": ["Treating all students the same", "Ignoring affective domain", "Not recognizing learning plateaus", "Violating primacy - teaching incorrectly first time"],
+    "diagrams": [{"title": "Domains of Learning", "description": "Three interconnected domains", "asciiArt": "COGNITIVE (thinking)\n     /|\\\n    / | \\\n   /  |  \\\nAFFECTIVE - PSYCHOMOTOR\n(feeling)    (doing)"}],
+    "completionStandards": [
+      {"standard": "Explain at least three learning theories", "acsReference": "FI.I.B.K2"},
+      {"standard": "Describe all three domains of learning", "acsReference": "FI.I.B.K6"},
+      {"standard": "Apply laws of learning to instruction", "acsReference": "FI.I.B.K5"}
+    ],
+    "equipment": ["Whiteboard", "Markers", "FAA-H-8083-9"],
+    "notes": ["Requires active discussion", "Best taught interactively"],
+    "suggestedHomework": ["Read FAA-H-8083-9 Chapter 3", "Reflect on own learning experiences", "Identify examples of each domain"],
+    "instructorNotes": ["Encourage student participation", "Share personal teaching failures and successes"],
+    "safetyConsiderations": ["None - ground lesson"]
+  },
+  {
+    "id": "LP-II-D",
+    "areaNumber": "II",
+    "taskLetter": "D",
+    "title": "Principles of Flight",
+    "estimatedTime": "2.0 hours",
+    "objectives": [
+      "Explain the four forces of flight",
+      "Describe lift generation and Bernoulli's principle",
+      "Understand stalls and critical angle of attack",
+      "Explain load factor and its effects",
+      "Teach aerodynamic principles clearly and accurately"
+    ],
+    "references": ["FAA-H-8083-25 Chapter 5", "FAA-H-8083-3", "POH/AFM"],
+    "prerequisites": ["Basic physics understanding"],
+    "overview": "Principles of Flight is the foundation of aeronautical knowledge. CFI candidates must be able to explain complex aerodynamic concepts simply and accurately. This lesson covers the four forces, lift generation, drag types, stability, and performance.",
+    "teachingScript": [
+      {"phase": "Four Forces", "duration": "20 min", "instructorActions": ["Draw airplane with force vectors", "Explain Lift, Weight, Thrust, Drag", "Discuss equilibrium in flight"], "studentActions": ["Sketch four forces diagram", "Understand force balance"], "keyPoints": ["Level flight: Lift = Weight, Thrust = Drag", "Climb: Thrust > Drag", "Descent: Weight component > Lift"]},
+      {"phase": "Lift Generation", "duration": "30 min", "instructorActions": ["Explain Bernoulli's principle", "Discuss Newton's third law", "Show angle of attack concept", "Draw pressure distribution on airfoil"], "studentActions": ["Understand dual explanations of lift", "Identify angle of attack"], "keyPoints": ["Lift is 2/3 Newton, 1/3 Bernoulli", "Angle of attack is critical, not airspeed"]},
+      {"phase": "Drag", "duration": "20 min", "instructorActions": ["Explain parasite drag (form, interference, skin friction)", "Discuss induced drag and vortices", "Show total drag curve", "Identify L/D max"], "studentActions": ["Understand drag types", "Identify best glide speed"], "keyPoints": ["Parasite drag ∝ speed²", "Induced drag ∝ 1/speed²", "Total drag minimized at L/D max"]},
+      {"phase": "Stalls", "duration": "20 min", "instructorActions": ["Explain critical angle of attack (16-18°)", "Demonstrate stall is not speed-dependent", "Discuss stall in turns, slow flight"], "studentActions": ["Understand AOA concept", "Grasp that stalls occur at any speed"], "keyPoints": ["Stall occurs at critical AOA, always", "Increased load factor increases stall speed"]},
+      {"phase": "Load Factor", "duration": "15 min", "instructorActions": ["Explain G-forces in turns", "Show load factor vs bank angle chart", "Discuss maneuvering speed Va"], "studentActions": ["Calculate load factor for banks", "Understand Va importance"], "keyPoints": ["45° bank = 1.4 G", "60° bank = 2.0 G", "Load factor affects stall speed"]},
+      {"phase": "Summary", "duration": "15 min", "instructorActions": ["Review all concepts", "Connect to actual flight", "Assign homework"], "studentActions": ["Ask clarifying questions", "Relate to upcoming flight lessons"], "keyPoints": ["Theory explains what students feel in flight"]}
+    ],
+    "keyTeachingPoints": ["Four forces: Lift, Weight, Thrust, Drag - must balance for equilibrium", "Lift generated by pressure differential and Newton's 3rd law", "Angle of attack determines lift coefficient", "Critical angle of attack (16-18°) causes stall, regardless of airspeed", "Parasite drag increases with speed², induced drag decreases with speed²", "Load factor increases in turns - affects stall speed and structural limits", "Region of reverse command: below L/D max, more power needed to fly slower"],
+    "commonErrors": ["Confusing angle of attack with pitch attitude", "Stating stall occurs at specific airspeed", "Not understanding lift is primarily Newton's 3rd law", "Confusing ground effect with increased lift"],
+    "diagrams": [
+      {"title": "Four Forces", "description": "Force balance in steady flight", "asciiArt": "        LIFT ↑\n          |\nTHRUST → [AIRPLANE] ← DRAG\n          |\n       WEIGHT ↓"},
+      {"title": "Total Drag Curve", "description": "Parasite + Induced = Total drag", "asciiArt": "Drag\n  |  \\     /  Total\n  |   \\   /\n  |    \\ /\n  |_____X_____ Speed\n     L/D max"}
+    ],
+    "completionStandards": [
+      {"standard": "Explain relationship between angle of attack and lift", "acsReference": "AI.II.D.K1"},
+      {"standard": "Describe how stalls occur and critical angle of attack", "acsReference": "AI.II.D.K2"},
+      {"standard": "Explain load factor effects on stall speed", "acsReference": "AI.II.D.K3"}
+    ],
+    "equipment": ["Whiteboard", "Markers (colors)", "Airfoil model if available", "FAA-H-8083-25"],
+    "notes": ["Complex topic - allow time for questions", "Use analogies for clarity"],
+    "suggestedHomework": ["Read FAA-H-8083-25 Chapter 5", "Draw and label airfoil with pressure distribution", "Calculate stall speeds at various bank angles"],
+    "instructorNotes": ["Make theory relatable to actual flight", "Avoid getting too technical - practical application matters"],
+    "safetyConsiderations": ["None - ground lesson", "Ensure student understands stall recovery before flight training"]
+  },
+  {
+    "id": "LP-XII-A",
+    "areaNumber": "XII",
+    "taskLetter": "A",
+    "title": "Emergency Descent",
+    "estimatedTime": "0.6 hours",
+    "objectives": [
+      "Recognize situations requiring emergency descent",
+      "Establish emergency descent configuration",
+      "Achieve maximum descent rate safely",
+      "Maintain control throughout descent",
+      "Level off at specified altitude"
+    ],
+    "references": ["FAA-H-8083-3 Chapter 17", "POH/AFM"],
+    "prerequisites": ["Normal descent proficiency", "Understanding of VNE and VNO"],
+    "overview": "Emergency descents are needed for cabin fire, depressurization, or other urgent situations requiring rapid altitude loss. Students learn to descend at maximum safe rate while maintaining aircraft control.",
+    "teachingScript": [
+      {"phase": "Ground Brief", "duration": "10 min", "instructorActions": ["Explain emergency scenarios", "Discuss technique: power idle, pitch down, spiral if needed", "Brief airspeed limits"], "studentActions": ["Understand when emergency descent needed", "Review descent airspeeds"], "keyPoints": ["Speed = rate of descent", "Don't exceed VNO or flap speeds"]},
+      {"phase": "Demonstration", "duration": "10 min", "instructorActions": ["Simulate emergency: 'Cabin fire, emergency descent'", "Power idle, pitch down for descent speed", "Clear area, spiral descent", "Level off smoothly at target altitude"], "studentActions": ["Observe descent rate", "Note airspeed used", "Watch spiral technique"], "keyPoints": ["Fast but controlled", "Lookout critical in spiral"]},
+      {"phase": "Student Practice", "duration": "20 min", "instructorActions": ["Call emergency scenarios", "Coach student through 2-3 descents", "Monitor airspeed limits"], "studentActions": ["Perform emergency descents", "Maintain control", "Level off at assigned altitude ±100 ft"], "keyPoints": ["Smooth transition to descent", "Anticipate level-off"]},
+      {"phase": "Debrief", "duration": "10 min", "instructorActions": ["Review performance", "Discuss real emergency scenarios"], "studentActions": ["Ask questions"], "keyPoints": ["Hope you never need it, but be ready"]}
+    ],
+    "keyTeachingPoints": ["Emergency descent for: cabin fire, depressurization, engine fire", "Configuration: power idle, pitch down, flaps as appropriate (check POH)", "Airspeed: Below VNO, respect flap speed limits", "Spiral descent increases rate and allows lookout below", "Clear area before and during descent", "Monitor for traffic continuously", "Level off smoothly to avoid excessive G-load"],
+    "commonErrors": ["Exceeding VNO or VNE", "Not clearing area before spiral", "Fixating on airspeed - losing situational awareness", "Forgetting to extend flaps within speed limits", "Rough level-off - excessive G-load"],
+    "diagrams": [{"title": "Emergency Descent Spiral", "description": "Spiraling descent maintains visual contact with intended landing area", "asciiArt": "    Start altitude\n        ↓\n       ◯◯◯  ← Spiral\n      ◯   ◯     (lookout below)\n     ◯     ◯\n    Target altitude"}],
+    "completionStandards": [
+      {"standard": "Establish appropriate descent configuration and airspeed", "acsReference": "AI.XII.A.S3"},
+      {"standard": "Maintain positive aircraft control", "acsReference": "AI.XII.A.S4"},
+      {"standard": "Level off at specified altitude ±100 feet", "acsReference": "AI.XII.A.S5", "tolerance": "±100 feet"}
+    ],
+    "equipment": ["Airplane", "POH/AFM", "Adequate altitude (5000 AGL minimum)"],
+    "notes": ["Rarely needed but critical when required", "Practice builds confidence"],
+    "suggestedHomework": ["Review POH emergency procedures", "Identify scenarios requiring emergency descent"],
+    "instructorNotes": ["Student may feel uncomfortable with steep descent - reassure", "Emphasize this is controlled emergency, not panic"],
+    "safetyConsiderations": ["Ensure adequate altitude before entry", "Monitor airspeed - don't exceed limits", "Clear area continuously", "Avoid overstressing airframe during level-off", "Be aware of traffic - descending into their altitude"]
+  }
+]
+
+

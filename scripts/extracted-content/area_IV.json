@@ -1,0 +1,67 @@
+{
+  "area_number": "IV",
+  "area_name": "4. Preflight Lesson on a Maneuver",
+  "standard_lessons": [
+    {
+      "filename": "IV.A. Maneuver Lesson.docx",
+      "paragraphs": [
+        {
+          "text": "IV.A. Maneuver Lesson",
+          "style": "LP Title",
+          "bold": false
+        },
+        {
+          "text": "The evaluator asks the applicant to present a preflight lesson on the selected maneuver as the lesson would be taught to a student and determines the outcome of this Task before the flight portion of the practical test. Previously developed lesson plans from the instructor applicant's library may be used.",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "All necessary information for this lesson is found in sections VII through XII",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "ACS Requirements:",
+          "style": "Normal",
+          "bold": true
+        },
+        {
+          "text": "The applicant demonstrates instructional knowledge by describing and explaining:",
+          "style": "Normal",
+          "bold": false
+        },
+        {
+          "text": "Purpose of the maneuver.",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Elements of the maneuvers and the associated common errors.",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Desired outcome(s), including completion standards.",
+          "style": "List Paragraph",
+          "bold": false
+        },
+        {
+          "text": "Deliver instruction on the selected maneuver using a lesson plan, teaching methods, and teaching aids, as appropriate.",
+          "style": "Normal",
+          "bold": false
+        }
+      ],
+      "tables": [],
+      "headings": [],
+      "full_text": "IV.A. Maneuver Lesson\nThe evaluator asks the applicant to present a preflight lesson on the selected maneuver as the lesson would be taught to a student and determines the outcome of this Task before the flight portion of the practical test. Previously developed lesson plans from the instructor applicant's library may be used.\nAll necessary information for this lesson is found in sections VII through XII\nACS Requirements:\nThe applicant demonstrates instructional knowledge by describing and explaining:\nPurpose of the maneuver.\nElements of the maneuvers and the associated common errors.\nDesired outcome(s), including completion standards.\nDeliver instruction on the selected maneuver using a lesson plan, teaching methods, and teaching aids, as appropriate."
+    }
+  ],
+  "extra_detail_lessons": [
+    {
+      "filename": "IV.A. Maneuver Lesson.docx",
+      "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\danrr\\\\OneDrive - amazon.com\\\\Desktop\\\\CFI\\\\_-_CFI_Lesson_Pack_from_George\\\\Download All (PC) - CFI Lesson Pack\\\\1. CFI Lessons & PPTs\\\\3. CFI Extra Detail Lessons\\\\CFI Extra Detail Individual Files - Nov25\\\\4. Preflight Lesson on a Maneuver\\\\IV.A. Maneuver Lesson.docx'",
+      "full_text": ""
+    }
+  ],
+  "powerpoint_content": []
+}

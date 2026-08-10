@@ -1,145 +1,79 @@
-# CFI Airplane ACS Reference Application
+# CFI Airplane ACS Study App
 
-A modern, mobile-friendly web application for the **Flight Instructor for Airplane Category Airman Certification Standards (FAA-S-ACS-25)**.
+A comprehensive, offline-capable study application for the **Flight Instructor for Airplane Category Airman Certification Standards (FAA-S-ACS-25, April 2024)**.
 
-## Overview
-
-This application provides an intuitive, user-friendly way to navigate and reference the official FAA CFI Airplane ACS document. Built with React and TypeScript, it's designed with future iOS app conversion in mind.
+Live: [danroyrod.github.io/cfi-app-offline](https://danroyrod.github.io/cfi-app-offline/)
 
 ## Features
 
-- **Landing Page**: Clean introduction with document title and FAA document number
-- **Areas Index**: Browse all 14 Areas of Operation with task counts
-- **Area Details**: View all tasks within a specific area of operation
-- **Task Details**: Complete task information including:
-  - References
-  - Objectives
-  - Notes
-  - Knowledge requirements
-  - Risk Management considerations
-  - Skills with highlighted tolerances (e.g., ±5 knots, ±100 feet)
+- **ACS Standards** — Browse all 14 Areas of Operation (97 tasks) with Knowledge, Risk Management, and Skills breakdowns
+- **Lesson Plans** — Complete teaching guides with scripts organized by area
+- **Audio Lessons** — Text-to-speech narration (Full & Lite modes) with background playback
+- **Flashcards** — Spaced repetition study with 2,000+ cards
+- **Quizzes** — Test knowledge with timed, scored assessments
+- **Bookmarks & Notes** — Personal annotations saved locally
+- **Search** — Full-text search across all content
+- **Dark Mode** — System-aware theme toggle
+- **Offline/PWA** — Install as app, works without internet
+- **iOS-ready** — Capacitor configured for native deployment
 
-## Technology Stack
+## Tech Stack
 
-- **React 18** - UI framework
-- **TypeScript** - Type safety
-- **Vite** - Build tool and dev server
-- **React Router** - Navigation
-- **CSS3** - Modern, responsive styling
+- React 19 + TypeScript 5.9 (strict mode)
+- Vite 7 with PWA plugin
+- React Router 7
+- Capacitor 7 (iOS)
+- CSS3 with variables (no framework)
+- GitHub Actions CI/CD
+
+## Getting Started
+
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run build      # Production build → dist/
+npm run preview    # Preview production build
+```
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server |
+| `npm run build` | TypeScript check + Vite build |
+| `npm run lint` | ESLint |
+| `npm run validate:acs` | Verify ACS data coverage |
+| `npm run audit:quality` | Score lesson plan quality |
+| `npm run audit:flashcards` | Check flashcard coverage |
+| `npm run cap:build` | Build + sync for iOS |
 
 ## Project Structure
 
 ```
 src/
-├── pages/
-│   ├── LandingPage.tsx      # Home page
-│   ├── AreasIndex.tsx        # All areas of operation
-│   ├── AreaDetail.tsx        # Tasks within an area
-│   └── TaskDetail.tsx        # Full task details
-├── types.ts                  # TypeScript interfaces
-├── acs_data.json            # Parsed ACS data
-├── App.tsx                  # Main app with routing
-└── App.css                  # Global styles
+├── components/     # Reusable UI (AudioPlayer, Flashcards, Quiz, etc.)
+├── contexts/       # React contexts (Audio, Auth)
+├── hooks/          # Custom hooks (useTheme, useDebounce, useLocalStorage)
+├── pages/          # Route-level components
+├── services/       # Business logic (audio, search, quiz, flashcards, etc.)
+├── types/          # TypeScript type definitions
+├── utils/          # Utilities (Capacitor, performance, data loading)
+├── acs_data.json   # FAA ACS structured data
+├── lessonPlansData.json  # Lesson plan content
+├── App.tsx         # Root component with routing
+└── App.css         # Global styles
 ```
 
-## Getting Started
+## Deployment
 
-### Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn
-
-### Installation
-
-```bash
-# Navigate to project directory
-cd cfi-acs-app
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
-
-The app will be available at `http://localhost:5173`
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-The production build will be in the `dist/` directory.
-
-## Design Principles
-
-### Mobile-First
-- Responsive design that works on all screen sizes
-- Touch-friendly interface
-- Optimized for iOS Safari
-
-### User Experience
-- Clear navigation hierarchy
-- Consistent visual language
-- Quick access to any task
-- Highlighted tolerances for easy reference
-
-### iOS App Readiness
-- Component-based architecture compatible with React Native
-- Simple routing structure
-- Minimal external dependencies
-- Clean separation of data and presentation
+Pushes to `main` automatically deploy via GitHub Actions to GitHub Pages.
 
 ## Data Source
 
-The application uses data parsed from the official FAA document:
-- **Document**: FAA-S-ACS-25
-- **Title**: Flight Instructor for Airplane Category Airman Certification Standards
-- **Date**: November 2023
-
-## Future Enhancements
-
-Potential features for future development:
-- Search functionality across all tasks
-- Bookmarking favorite tasks
-- Notes and annotations
-- Progress tracking for checkride preparation
-- Offline mode
-- iOS native app using React Native
-
-## Development Notes
-
-### Converting to iOS App
-
-When ready to convert to iOS:
-1. Use React Native with React Navigation
-2. Replace `react-router-dom` with `@react-navigation/native`
-3. Convert CSS to React Native StyleSheet
-4. Store `acs_data.json` locally in the app bundle
-5. Add native iOS features (e.g., haptic feedback, share functionality)
-
-### Key Dependencies for iOS Conversion
-
-```bash
-# React Native essentials
-react-native
-@react-navigation/native
-@react-navigation/stack
-
-# Additional utilities
-react-native-safe-area-context
-react-native-screens
-```
+- **Document**: FAA-S-ACS-25 (April 2024)
+- **Verified**: June 2026
+- **Source**: [faa.gov](https://www.faa.gov/training_testing/testing/acs)
 
 ## License
 
-This is a reference tool based on public FAA documents. The official FAA-S-ACS-25 document is available at [www.faa.gov](https://www.faa.gov).
-
-## Contributing
-
-This is a personal reference tool. Feel free to fork and customize for your own use.
-
----
-
-**Note**: Always refer to the official FAA publications for authoritative information during flight training and checkrides.
+Reference tool based on public FAA documents.

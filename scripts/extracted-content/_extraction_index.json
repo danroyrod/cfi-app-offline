@@ -1,0 +1,76 @@
+{
+  "total_areas_processed": 14,
+  "errors": 0,
+  "areas": {
+    "I": {
+      "standard_lessons": 6,
+      "extra_detail_lessons": 6,
+      "powerpoints": 6
+    },
+    "II": {
+      "standard_lessons": 14,
+      "extra_detail_lessons": 15,
+      "powerpoints": 15
+    },
+    "III": {
+      "standard_lessons": 4,
+      "extra_detail_lessons": 4,
+      "powerpoints": 4
+    },
+    "IV": {
+      "standard_lessons": 1,
+      "extra_detail_lessons": 1,
+      "powerpoints": 0
+    },
+    "V": {
+      "standard_lessons": 5,
+      "extra_detail_lessons": 5,
+      "powerpoints": 5
+    },
+    "VI": {
+      "standard_lessons": 2,
+      "extra_detail_lessons": 2,
+      "powerpoints": 2
+    },
+    "VII": {
+      "standard_lessons": 9,
+      "extra_detail_lessons": 9,
+      "powerpoints": 9
+    },
+    "VIII": {
+      "standard_lessons": 4,
+      "extra_detail_lessons": 4,
+      "powerpoints": 4
+    },
+    "IX": {
+      "standard_lessons": 8,
+      "extra_detail_lessons": 8,
+      "powerpoints": 8
+    },
+    "X": {
+      "standard_lessons": 9,
+      "extra_detail_lessons": 9,
+      "powerpoints": 9
+    },
+    "XI": {
+      "standard_lessons": 2,
+      "extra_detail_lessons": 2,
+      "powerpoints": 2
+    },
+    "XII": {
+      "standard_lessons": 4,
+      "extra_detail_lessons": 4,
+      "powerpoints": 4
+    },
+    "XIV": {
+      "standard_lessons": 1,
+      "extra_detail_lessons": 1,
+      "powerpoints": 1
+    },
+    "APP": {
+      "standard_lessons": 5,
+      "extra_detail_lessons": 5,
+      "powerpoints": 1
+    }
+  }
+}
