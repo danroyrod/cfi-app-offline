@@ -1,7 +1,10 @@
 import { useState, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import lessonPlansData from '../lessonPlansData.json';
+import deepDiveData from '../deepDiveLessonsData.json';
 import type { LessonPlan } from '../lessonPlanTypes';
+import DeepDive from '../components/DeepDive';
+import type { DeepDiveData } from '../components/DeepDive';
 import DiagramViewer from '../components/DiagramViewer';
 import BookmarkButton from '../components/BookmarkButton';
 import NotesPanel from '../components/NotesPanel';
@@ -11,6 +14,7 @@ import { getLessonPlanBreadcrumbs } from '../utils/breadcrumbs';
 import './LessonPlanDetail.css';
 
 const data = lessonPlansData as { lessonPlans: LessonPlan[] };
+const deepDives = (deepDiveData as { deepDiveLessons: DeepDiveData[] }).deepDiveLessons;
 
 export default function LessonPlanDetail() {
   const { lessonPlanId } = useParams<{ lessonPlanId: string }>();
@@ -59,6 +63,11 @@ export default function LessonPlanDetail() {
 
     if (lessonPlan.notes.length > 0) {
       sections.push({ id: 'additional-notes', title: 'Additional Notes', level: 1 });
+    }
+
+    // Deep dive section if available
+    if (deepDives.some(dd => dd.lessonPlanId === lessonPlan.id)) {
+      sections.push({ id: 'deep-dive', title: '🔬 Deep Dive', level: 1 });
     }
 
     return sections;
@@ -346,6 +355,15 @@ export default function LessonPlanDetail() {
                     </div>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {/* Deep Dive Section */}
+            {deepDives.filter(dd => dd.lessonPlanId === lessonPlan.id).length > 0 && (
+              <div id="deep-dive">
+                {deepDives.filter(dd => dd.lessonPlanId === lessonPlan.id).map((dd, index) => (
+                  <DeepDive key={index} data={dd} />
+                ))}
               </div>
             )}
 
